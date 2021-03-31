@@ -33,6 +33,25 @@ nav li a:hover{
     content: '';
 }
 
+.top-bar-1{
+    border-width: 64px 0px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: url('../img/bar.png') 100% 0% 0% 0%;
+    position: relative;
+}
+
+.top-bar-1::before{
+    position: absolute;
+    top: -64px;
+    left: 50%;
+    margin-left: -32px;
+    background-image: url('../img/star.png');
+    width: 64px;
+    height: 64px;
+    content: '';
+}
+
 section.hero{
     background: #f8f8f8
 }
