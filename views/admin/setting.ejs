@@ -1,41 +1,49 @@
-<section class="order px-12 py-12">
-    <div class="container">
-      <h1 class="font-bold mb-4 text-lg">All Orders</h1>
-        <!-- <div id="success-alert" class="flex items-center text-white text-sm font-bold px-4 py-3 bg-green-500"
+<!-- <section class="">
+    <div class="container"> -->
+<!-- <h1 class="font-bold mb-4 text-lg">All Orders</h1> -->
+<!-- <div id="success-alert" class="flex items-center text-white text-sm font-bold px-4 py-3 bg-green-500"
           role="alert">
           <p><i class="fas fa-info mr-4"></i>
           </p>
         </div> -->
-        <table class="w-full table-auto bg-white">
-          <thead>
-            <tr>
-              <th class="border px-4 py-2 text-left">Orders</th>
-              <th class="border px-4 py-2 text-left">Customer</th>
-              <th class="border px-4 py-2 text-left">Address</th>
-              <th class="border px-4 py-2 text-left">Status</th>
-              <th class="border px-4 py-2 text-left">Placed At</th>
-              <th class="border px-4 py-2 text-left">Payment Status</th>
-            </tr>
-          </thead>
-          <tbody>
+<!-- <table class="w-full table-auto bg-white">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2 text-left">Orders</th>
+                    <th class="border px-4 py-2 text-left">Customer</th>
+                    <th class="border px-4 py-2 text-left">Address</th>
+                    <th class="border px-4 py-2 text-left">Status</th>
+                    <th class="border px-4 py-2 text-left">Placed At</th>
+                    <th class="border px-4 py-2 text-left">Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
                 <% orders.forEach((order)=>{ %>
                     <tr>
                         <td class="border px-4 py-2">
                             <ul style="list-style-type:none;">
-                                <li><%= order._id %></li>
+                                <li>
+                                    <%= order._id %>
+                                </li>
                                 <% for(let pizza of Object.values(order.items)){ %>
-                                   <li><%= pizza.item.name %> - <%= pizza.qty %></li>
-                                <% } %>
+                                    <li>
+                                        <%= pizza.item.name %> -
+                                            <%= pizza.qty %>
+                                    </li>
+                                    <% } %>
                             </ul>
                         </td>
-                        <td class="border px-4 py-2"><%= order.customerId.name %></td>
-                        <td class="border px-4 py-2"><%= order.address %></td>
                         <td class="border px-4 py-2">
-                          <div class="inline-block relative w-64">
-                              <form action="/admin/setting/status" method="POST">
-                                  <input type="hidden" name="orderId" value="<%= order._id %>">
-                                  <select name="status" onchange="this.form.submit()"
-                                      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                            <%= order.customerId.name %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= order.address %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <div class="inline-block relative w-64">
+                                <form action="/admin/setting/status" method="POST">
+                                    <input type="hidden" name="orderId" value="<%= order._id %>">
+                                    <select name="status" onchange="this.form.submit()" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                       
                                       <% if(order.status=='order_placed'){ %>
                                         <option value="order_placed" selected>Placed</option>
@@ -74,26 +82,205 @@
                                       <% } %>
                           
                                   </select>
-                              </form>
-                              <div
-                                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 20 20">
+                                </form>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                       <path
                                           d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                   </svg>
-                              </div>
-                          </div>
-                      </td>
-                        <td class="border px-4 py-2"><%= moment(order.createdAt).format('hh:mm A') %></td>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= moment(order.createdAt).format('hh:mm A') %>
+                        </td>
                         <% if(order.paymentStatus){ %>
-                          <td class="border px-4 py-2">Paid</td>
-                        <% }else{ %>
-                          <td class="border px-4 py-2">Not Paid</td>
-                        <% } %>
-                      </tr>
-                <% }) %>
-          </tbody>
-        </table>
+                            <td class="border px-4 py-2">Paid</td>
+                            <% }else{ %>
+                                <td class="border px-4 py-2">Not Paid</td>
+                                <% } %>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table> -->
+<section id="features order px-12 py-12" class="features">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Features</h2>
+            <p>Check our Features</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav nav-tabs flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link show active" data-toggle="tab" href="#tab-1">Resource Urls</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-2">Current Race</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-3">Next Race</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-4">Betting Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-5">Feedback Info</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 mt-4 mt-lg-0">
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="tab-1">
+                        <div class="row">
+                            <div class="col-lg-12 details order-2 order-lg-1">
+                                <h3>Architecto ut aperiam autem id</h3>
+                                <table class="w-full table-auto bg-white">
+                                    <thead>
+                                        <tr>
+                                            <th class="border px-4 py-2 text-left">Orders</th>
+                                            <th class="border px-4 py-2 text-left">Customer</th>
+                                            <th class="border px-4 py-2 text-left">Address</th>
+                                            <th class="border px-4 py-2 text-left">Status</th>
+                                            <th class="border px-4 py-2 text-left">Placed At</th>
+                                            <th class="border px-4 py-2 text-left">Payment Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% orders.forEach((order)=>{ %>
+                                            <tr>
+                                                <td class="border px-4 py-2">
+                                                    <ul style="list-style-type:none;">
+                                                        <li>
+                                                            <%= order._id %>
+                                                        </li>
+                                                        <% for(let pizza of Object.values(order.items)){ %>
+                                                            <li>
+                                                                <%= pizza.item.name %> -
+                                                                    <%= pizza.qty %>
+                                                            </li>
+                                                            <% } %>
+                                                    </ul>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <%= order.customerId.name %>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <%= order.address %>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <div class="inline-block relative w-64">
+                                                        <form action="/admin/setting/status" method="POST">
+                                                            <input type="hidden" name="orderId" value="<%= order._id %>">
+                                                            <select name="status" onchange="this.form.submit()" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                                      
+                                                                      <% if(order.status=='order_placed'){ %>
+                                                                        <option value="order_placed" selected>Placed</option>
+                                                                      <% }else{ %>
+                                                                        <option value="order_placed">Placed</option>
+                                                                      <% } %>
+                                
+                                                                      <% if(order.status=='confirmed'){ %>
+                                                                        <option value="confirmed" selected>
+                                                                          Confirmed</option>
+                                                                      <% }else{ %>
+                                                                        <option value="confirmed">
+                                                                          Confirmed</option>
+                                                                      <% } %>
+                                
+                                                                      <% if(order.status=='prepared'){ %>
+                                                                        <option value="prepared" selected>Prepared</option>
+                                                                      <% }else{ %>
+                                                                        <option value="prepared">Prepared</option>
+                                                                      <% } %>
+                                
+                                                                      <% if(order.status=='delivered'){ %>
+                                                                        <option value="delivered" selected>Delivered</option>
+                                                                      <% }else{ %>
+                                                                        <option value="delivered">Delivered</option>
+                                                                      <% } %>
+                                                                      
+                                                                      <% if(order.status=='completed'){ %>
+                                                                        <option value="completed" selected>
+                                                                          Completed
+                                                                        </option>
+                                                                      <% }else{ %>
+                                                                        <option value="completed">
+                                                                          Completed
+                                                                      </option>
+                                                                      <% } %>
+                                                          
+                                                                  </select>
+                                                        </form>
+                                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                      <path
+                                                                          d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                                                  </svg>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <%= moment(order.createdAt).format('hh:mm A') %>
+                                                </td>
+                                                <% if(order.paymentStatus){ %>
+                                                    <td class="border px-4 py-2">Paid</td>
+                                                    <% }else{ %>
+                                                        <td class="border px-4 py-2">Not Paid</td>
+                                                        <% } %>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <div class="row">
+                            <div class="col-lg-12 details order-2 order-lg-1">
+                                <h3>Et blanditiis nemo veritatis excepturi</h3>
+                                <!-- <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
+                                        <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode
+                                            pakto madirna desera vafle de nideran pal</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-3">
+                        <div class="row">
+                            <div class="col-lg-12 details order-2 order-lg-1">
+                                <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                                <!-- <p class="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
+                                        <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit
+                                            ullam. Soluta et harum voluptatem optio quae</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-4">
+                        <div class="row">
+                            <div class="col-lg-12 details order-2 order-lg-1">
+                                <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                                <!-- <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                                <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam
+                                    quia a laborum inventore</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-5">
+                        <div class="row">
+                            <div class="col-lg-12 details order-2 order-lg-1">
+                                <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                                <!-- <p class="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
+                                <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </section>
+</section>
+<!-- </div>
+</section> -->
