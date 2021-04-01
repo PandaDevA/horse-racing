@@ -11,7 +11,7 @@ const auth = require('../app/http/middlewares/auth');
 const admin = require('../app/http/middlewares/admin');
 
 
-function initRoute(app){
+function initRoute(app) {
     app.get('/', guest, authController().login)
     app.get('/home', homeController().index)
 
@@ -19,8 +19,8 @@ function initRoute(app){
 
     app.post('/login', authController().postLogin)
 
-    // app.get('/register', guest, authController().register)
-    
+    app.get('/register', guest, authController().login)
+
     app.post('/register', authController().postRegister)
 
     app.post('/logout', authController().logout)
@@ -28,7 +28,7 @@ function initRoute(app){
     app.get('/cart', cartController().index)
 
     app.post('/update-cart', cartController().update)
-    
+
     //Customer Routes
     app.post('/order', auth, orderController().store)
     app.get('/customer/orders', auth, orderController().index)

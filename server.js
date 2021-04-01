@@ -4,23 +4,11 @@ const app = express();
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
 const MongoDBStore = require('connect-mongo')(session); // It will store our session id in database.
 const passport = require('passport');
-
-//Database Connection
-
-const url = 'mongodb://192.168.104.56:8001/horse-racing';
-// const url = 'mongodb://localhost:8001/horse-racing';
-mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('Database connected..');
-}).catch(err => {
-    console.log('Connection failed..');
-})
+const connection = require('./app/config/dbConnection');
 
 //Session Store
 let mongoStore = new MongoDBStore({
