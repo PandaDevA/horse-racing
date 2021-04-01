@@ -83,3 +83,9 @@ button[type="submit"]{
     bottom:0px;
     background-color: blue;
 }
+
+.register_panel{
+    padding-top:3rem;
+    width:30rem;
+    margin:auto;
+}
