@@ -1,21 +1,5 @@
-body{
-    font-family: 'Lato', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    color: #232323;
-}
-nav li:last-child a {
-    background: #FE5F1E;
-}
-nav li:last-child a:hover{
-    background: #b23301;
-}
-nav li a:hover{
-        transition: all .3s ease-in-out;
-        color: #FE5F1E
-}
-
 .bottom-bar-1{
-    border-width: 64px 0px;
+    border-width: 32px 0px 64px;
     border-style: solid;
     border-color: transparent;
     border-image: url('../img/bar.png') 0% 0% 100% 0%;
@@ -34,7 +18,7 @@ nav li a:hover{
 }
 
 .top-bar-1{
-    border-width: 64px 0px;
+    border-width: 64px 0px 32px;
     border-style: solid;
     border-color: transparent;
     border-image: url('../img/bar.png') 100% 0% 0% 0%;
@@ -52,194 +36,21 @@ nav li a:hover{
     content: '';
 }
 
-section.hero{
-    background: #f8f8f8
-}
-.size{
-    background: #f8f8f8
-}
-.add-to-cart{
-    border: 2px solid #fe5f1e;
-    color: #fe5f1e;
-}
-.add-to-cart:hover{
-    background: #fe5f1e;
-    border-color: #fff;
+button[type="submit"]{
+    background: #d9232d;
+    border: 0;
     color: #fff;
-    transition: all .3s ease-in-out;
-}
-.add-to-cart:focus{
-    outline: none;
-}
-.btn-primary{
-    background: #fe5f1e
-}
-.btn-primary:hover{
-    background: #b23301;
-    transition: all .3s ease-in-out;
-}
-.cart, .pizza, .order{
-    background: #f8f8f8;
-    min-height: calc(100vh - 86px); 
-}
-.amount-total{
-    color: #fe5f1e;
-}
-.login{
-    background: #f8f8f8;
-    min-height: calc(100vh - 86px);
-}
-.login a{
-    color: #fe5f1e;
-}
-.login a:hover{
-    color: #b23301;
-}
-.noty_theme_mint{
-    border-radius: 50px!important;
-    padding-left: 8px!important;
-}
-.success-alert{
-    background: green;
-}
-a.link{
-    color: #fe5f1e
-}
-
-section.status {
-    background: #F8F8F8;
-    min-height: calc(100vh - 86px);
-}
-.status-box {
-    padding: 60px 0 0;
-}
-.status-box ul {
-    margin-left: 84px;
-}
-.status-box ul li span {
-    position: relative;
-    padding-left: 20px;
-}
-
-
-
-.status-box ul li span:after {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top:50%;
-    background: #232323;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    box-shadow:0 0 1px 10px #F8F8F8;
-}
-
-
-.status-box ul li span:before{
-    font-family: "Line Awesome Free";
-    font-size: 46px;
-    font-weight: 600;
-    position: absolute;
-    left: -90px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: inherit;
-}
-.status-box ul li:nth-child(1) span:before {
-    content: '\f46c';
-}
-
-.status-box ul li:nth-child(2) span:before {
-    content: '\f560';
-}
-
-.status-box ul li:nth-child(3) span:before {
-    content: '\f818';
-}
-
-.status-box ul li:nth-child(4) span:before {
-    content: '\f0d1';
-}
-
-.status-box ul li:nth-child(5) span:before {
-    content: '\f582';
-}
-.status-box ul li {
-    position: relative;
-}
-
-
-.status-box ul li:before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: -6px;
-   width: 2px;
-   height: 100%;
-   background: #232323;
-   margin-top: 10px;
-}
-
-
-.status-box ul li:nth-child(5) span:after {
-    box-shadow:0 20px 1px 20px #F8F8F8;
-}
-
-.status-box ul li.step-completed:before {
-    background: #ccc;
-}
-
-
-.status-box ul li.step-completed span:after {
-    background: #ccc;
-}
-
-
-.status-box ul li.step-completed span {
-    color: #ccc;
-}
-
-
-.status-box ul li.current span {
-    color: #FE5F1E;
-}
-
-.status-box ul li.current span:after {
-    background: #FE5F1E;
-}
-
-.status-box ul li small {
-    float: right;
-    font-size: 14px;
-    margin-top: 8px;
-}
-
-.StripeElement {
-    box-sizing: border-box;
-    width: 50%;
-    margin-left: auto;
-    height: 40px;
-    padding: 10px 12px;
-
-    border: 1px solid transparent;
+    transition: 0.4s;
     border-radius: 4px;
-    background-color: white;
+}
 
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-  }
+#footer{
+    background-color: #ffffff;
+    padding: 0px;
+    color:#000;
+}
 
-  .StripeElement--focus {
-    box-shadow: 0 1px 3px 0 #cfd7df;
-  }
-
-  .StripeElement--invalid {
-    border-color: #fa755a;
-  }
-
-  .StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
-  }
+#footer .footer-top {
+    background: #ffffff;
+    padding: 0px;
+}
