@@ -7,7 +7,7 @@ function orderController(){
            Order.find({status: {$ne: 'completed'}}, null, {sort: {'createdAt': -1}}) // here we used populated to finduser details using his customerId in user database;
               .populate('customerId', '-password').exec((err, orders)=>{
                   console.log(orders);
-                  res.render('admin/order', {orders: orders, moment: moment});
+                  res.render('admin/setting', {orders: orders, moment: moment});
               })
         }
     }

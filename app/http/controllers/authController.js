@@ -27,7 +27,7 @@ function authController() {
                         return next(err);
                     }
                     if (req.user.role == 'admin')
-                        return res.redirect('/admin/orders');
+                        return res.redirect('/admin/setting');
                     else {
                         return res.redirect('/home');
                     }
