@@ -36,10 +36,6 @@ function authController(){
             })(req, res, next)
         },
 
-        register(req, res){
-            res.render('auth/register');
-        },
-
         async postRegister(req, res){
             const {name, email, password} = req.body;
             
@@ -48,7 +44,7 @@ function authController(){
                 req.flash('error', 'All fields are required');
                 req.flash('name', name);
                 req.flash('email', email);
-               res.redirect('/register');
+               res.redirect('/login');
             }
 
             //Check if user email already exists
@@ -57,7 +53,7 @@ function authController(){
                     req.flash('error', 'Email already exists, Try another!')
                     req.flash('name', name);
                     req.flash('email', email);
-                  res.redirect('/register');
+                  res.redirect('/login');
                 }
             })
 
@@ -77,14 +73,14 @@ function authController(){
 
             }).catch((err)=>{
                 req.flash('error', 'Something went wrong');
-                res.redirect('/register');
+                res.redirect('/login');
             })
         },
 
         logout(req, res){
             req.logout();
             delete req.session.cart;
-            return res.redirect('/');
+            return res.redirect('/login');
         }
     }
 }
