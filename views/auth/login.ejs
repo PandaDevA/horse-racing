@@ -1,3 +1,8 @@
+<% if(messages.error){ %>
+  <div class="container error">
+      <%= messages.error%>
+  </div>
+<% } %>
 <section id = "clients" class="clients section-bg">
   <div class="container">
     <div class="row">
@@ -52,9 +57,6 @@
   <div class="container">
     <div class="register_panel">
       <h2>Register</h2>
-      <% if(messages.error){ %>
-        <span class="font-bold justify-text"><%= messages.error%></span>
-      <% } %>
       <form action="/register" method="POST">
         <input type="hidden" name="remember" value="true">
         <label for="user-name">Full Name:</label>
