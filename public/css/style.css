@@ -47,6 +47,7 @@ button[type="submit"]{
 #footer{
     background-color: #ffffff;
     padding: 0px;
+    margin: 3rem 0 0;
     color:#000;
 }
 
@@ -103,4 +104,45 @@ button[type="submit"]{
 .clients{
     margin-top: 3rem;
 
+}
+
+.panel_title{
+    text-align: center;
+    margin:auto;
+    width: 50%;
+    border-width: 16px 0px 32px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: url('../img/bar.png') 0% 0% 100% 0%;
+    position: relative;
+}
+
+.panel_title::after{
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    margin-left: -16px;
+    background-image: url('../img/star.png');
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    content: '';
+}
+
+.panel_content{
+    margin-top:1rem;    
+    margin-left:10rem;
+    margin-right:10rem;
+    height:5rem;
+    overflow:auto;
+}
+
+.bet_info_item{
+    margin: 2rem 1rem;
+}
+
+.live_result_item{
+    margin: 2rem 1rem;
+    border: #eaeef1 2px solid;
+    padding: 0.5rem 1rem;
 }
