@@ -12,29 +12,29 @@ const passport = require('passport');
 
 //Database Connection
 
-const url = 'mongodb://192.168.104.56:27017/pizza';
-// const url = 'mongodb://localhost:27017/pizza';
-mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true});
+const url = 'mongodb://192.168.104.56:8001/horse-racing';
+// const url = 'mongodb://localhost:8001/horse-racing';
+mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
 const connection = mongoose.connection;
-connection.once('open', ()=>{
+connection.once('open', () => {
     console.log('Database connected..');
-}).catch(err =>{
+}).catch(err => {
     console.log('Connection failed..');
 })
 
 //Session Store
 let mongoStore = new MongoDBStore({
-                      mongooseConnection: connection,
-                      collection: 'sessions'
-              });
+    mongooseConnection: connection,
+    collection: 'sessions'
+});
 
 //Session Config
 app.use(session({
-    secret: "123",
+    secret: "horse-racing",
     resave: false,
     store: mongoStore,
     saveUninitialized: false,
-    cookie: {maxAge: 1000*60*60*24}  // 24 hours
+    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hours
 }))
 
 //Passport config
@@ -50,7 +50,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 //Global Middleware to use session and user(if logged in) in client side
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     res.locals.session = req.session;
     res.locals.user = req.user
     next();
@@ -58,12 +58,12 @@ app.use((req, res, next)=>{
 
 //Set Template Engine
 app.use(expressLayouts);
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 //Set Route
 require('./routes/web.js')(app);
 
-app.listen(process.env.PORT || 3000, ()=>{
+app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on port 3000');
 })
