@@ -54,3 +54,32 @@ button[type="submit"]{
     background: #ffffff;
     padding: 0px;
 }
+
+.service_item{
+    text-align: center!important;
+    margin: auto;
+    position: relative;
+    padding-top:2rem;
+}
+
+.row.content:nth-child(odd) .service_item::after{
+    position:absolute;
+    content: '';
+    width:8rem;
+    height:0.3rem;
+    margin-left:-4rem;
+    left:50%;
+    bottom:0px;
+    background-color: red;
+}
+
+.row.content:nth-child(even) .service_item::after{
+    position:absolute;
+    content: '';
+    width:16rem;
+    height:0.3rem;
+    margin-left:-8rem;
+    left:50%;
+    bottom:0px;
+    background-color: blue;
+}
