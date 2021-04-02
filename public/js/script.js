@@ -1,3 +1,7 @@
+$( '#view_stream' ).click(function() {
+    $('#stream_preview').attr('src',$('#stream_url').val());
+});
+
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
 
