@@ -146,3 +146,7 @@ button[type="submit"]{
     border: #eaeef1 2px solid;
     padding: 0.5rem 1rem;
 }
+
+#stream_preview{
+    margin: 1rem;
+}
