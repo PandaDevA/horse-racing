@@ -1,7 +1,8 @@
 //Database Connection
 const mongoose = require('mongoose');
 const { registerUser, getUserList, getUserByName, updateUserDataByName, removeUserByName } = require('./app/methods/users');
-
+const { editResource, getResource } = require('./app/methods/resource');
+const { editCurRaceInfo, getCurRaceInfo } = require('./app/methods/curraceinfo');
 const url = 'mongodb://192.168.104.56:8001/horse-racing';
 // const url = 'mongodb://localhost:8001/horse-racing';
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
@@ -39,17 +40,34 @@ const userData = [{
     }
 ];
 
+const raceData = [{
+        id: '606721630fbb42f3c420d54',
+        name: 'LAJUSARI NOA',
+        sp: '13/1',
+    },
+    {
+        id: '606721630b0b42f3c420d53',
+        name: 'LAJUSARI NOA',
+        sp: '5/1',
+    },
+];
+
 async function main() {
     // let result = await connection.dropDatabase();
     // console.log('database droped : ', result);
     // await registerUser(userData[0]);
-    await registerUser(userData[2]);
-    console.log(await removeUserByName('user3'));
+    // await registerUser(userData[2]);
+    // console.log(await removeUserByName('user3'));
     // console.log(await getUserList());
     // console.log(await getUserByName('user2'));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
+    // console.log(await editResource({stream_url: 'https://rudo.video/live/sportinghd'}));
+    // console.log(await getResource());
+    console.log(await editCurRaceInfo(raceData[0]));
+    console.log(await editCurRaceInfo(raceData[1]));
+    console.log(await getCurRaceInfo());
 
     await connection.close();
 };
