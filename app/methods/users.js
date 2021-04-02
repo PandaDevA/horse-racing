@@ -36,12 +36,15 @@ const registerUser = async(data) => {
         const hashedPass = await bcrypt.hash(password, 10)
 
         //Create a user
-        const user = new User({
+        const userInf = {
             name: name,
             email: email,
             username: username,
-            password: hashedPass
-        })
+            password: hashedPass,
+        };
+        if(data.company) userInf.company = data.company;
+        if(data.ipaddress) userInf.ipaddress = data.ipaddress;
+        const user = new User(userInf);
         const returnInfo = await user.save();
         if (returnInfo) {
             console.log(`register success: ${name}`);
@@ -62,4 +65,70 @@ const registerUser = async(data) => {
     }
 }
 
-module.exports = { registerUser };
+const getUserByName = async(username) => {
+    let result = {};
+    await User.findOne({ username: username }, (err, data) => {
+        if(err) console.log('Error while getUserByName: ', err);
+        result = { result: data, error: err };
+    });
+    return result;
+}
+
+const getUserById = async(id) => {
+    let result = {};
+    await User.findById(id, (err, data) => {
+        if(err) console.log(`Error while getUserById: `, err);
+        result = { result: data, error: err };        
+    });
+    return result;
+}
+
+const getUserList = async() => {
+    let result = {};
+    await User.find((err, data) => {
+        if(err) console.log(`Error while getUserList: ${err}`);
+        result = { result: data, error: err };        
+    });
+    return result;
+}
+
+const updateUserDataByName = async(oldusername, data) => {
+    user = await getUserByName(oldusername);
+    if(!user.result) {
+        console.log(`Could not update ${oldusername}'s Data`);
+        return { result: false, error: `User is not exist in DB` };
+    }
+
+    try {
+        result = await User.updateOne({username: oldusername}, {able_pages: data.able_pages});
+        return { result: result, error: ''}
+    } catch(e) {
+        console.log(`Error while updateUserDataByName: ${e.message}`);
+        return { result: false, error: e.message};
+    }
+}
+
+const removeUserByName = async(username) => {
+    user = await getUserByName(username);
+    if(!user.result) {
+        console.log(`${username} is not exist`);
+        return { result: false, error: `User is not exist in DB` };
+    }
+
+    try {
+        result = await User.deleteOne({username: username});
+        return { result: result, error: ''}
+    } catch(e) {
+        console.log(`Error while removeUserByName: ${e.message}`);
+        return { result: false, error: e.message};
+    }
+}
+
+module.exports = {
+    registerUser,
+    getUserByName,
+    getUserById,
+    getUserList,
+    updateUserDataByName,
+    removeUserByName,
+};

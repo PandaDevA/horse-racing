@@ -1,18 +1,18 @@
 const LocalStrategy = require('passport-local').Strategy
-const User = require('../models/users');
+const User = require('../methods/users');
 const bcrypt = require('bcrypt');
 
 function passportInit(passport) {
     passport.use(new LocalStrategy({ usernameField: 'username' }, async(username, password, done) => {
         //Login
         //Check if user exists or not
-        const user = await User.findOne({ username: username });
-        if (!user) {
-            return done(null, false, { message: 'No user with this username' });
+        const user = await User.getUserByName(username);
+        if (!user.result) {
+            return done(null, false, { message: user.error });
         }
-        bcrypt.compare(password, user.password).then((match) => { // here match returns true or false
+        bcrypt.compare(password, user.result.password).then((match) => { // here match returns true or false
             if (match)
-                return done(null, user, { message: 'Logged in successfully' });
+                return done(null, user.result, { message: 'Logged in successfully' });
 
             return done(null, false, { message: 'Username or password is incorrect' });
         }).catch((err) => {
@@ -28,10 +28,9 @@ function passportInit(passport) {
 
     //to receive whatever we have stored in session using passport.serializeUser, here we have stored user._id so we will receive that
     // we deserialize so that we can use req.user to know who is current user in our backend;
-    passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) => {
-            done(err, user);
-        })
+    passport.deserializeUser(async (id, done) => {
+        const user = await User.getUserById(id);
+        done(user.error, user.result);
     })
 
 }
