@@ -1,6 +1,5 @@
 const Resource = require('../../../methods/resource')
 const CurRaceInfo = require('../../../methods/curraceinfo')
-const moment = require('moment'); //time formater in javascript
 
 function raceController(){
     return {
@@ -8,9 +7,15 @@ function raceController(){
            CurRaceInfo.getCurRaceInfo().then((races)=>{
                 if(races.result) {
                     console.log(races);
-                    res.render('admin/setting', {race_info: races.result, moment: moment});
+                    Resource.getResource().then((result)=>{
+                        if(result.result) {
+                            res.render('admin/setting', {race_info: races.result, race_time: result.result.race_time, race_name: result.result.race_name});
+                        } else {
+                            res.render('admin/setting', {race_info: races.result, race_time: undefined, race_name: '', error: result.error});
+                        }
+                    });
                 } else {
-                    res.render('admin/setting', {race_info: [], moment: moment, error: races.error})
+                    res.render('admin/setting', {race_info: [], error: races.error})
                 }
             })
         }

@@ -8,6 +8,7 @@ function authController() {
         },
 
         postLogin(req, res, next) {
+            console.log(req.body);
 
             // here err, user, info is coming from passport.js where in done() function we have provided null, false/user , message
             passport.authenticate('local', (err, user, info) => {
@@ -19,7 +20,6 @@ function authController() {
                     req.flash('error', info.message);
                     return res.redirect('/login');
                 }
-
                 // when user exists and password matches then login the user using login method;
                 req.logIn(user, (err) => {
                     if (err) {

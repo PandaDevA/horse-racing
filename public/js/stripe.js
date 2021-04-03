@@ -19,7 +19,7 @@ export function initStripe() {
         for (let [key, value] of formData.entries()) {
             formObject[key] = value;
         }
-        axios.post('/order', formObject).then((res) => {
+        axios.post('/setting', formObject).then((res) => {
             console.log(res.data);
             new Noty({
                 type: 'success',
