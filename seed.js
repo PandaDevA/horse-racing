@@ -41,12 +41,12 @@ const userData = [{
 ];
 
 const raceData = [{
-        id: '606721630fbb42f3c420d54',
+        id: '606721630fb0b42f3c420d53',
         name: 'LAJUSARI NOA',
         sp: '13/1',
     },
     {
-        id: '606721630b0b42f3c420d53',
+        id: '606721630fb0b42f3c420d53',
         name: 'LAJUSARI NOA',
         sp: '5/1',
     },

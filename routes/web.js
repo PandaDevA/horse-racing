@@ -2,7 +2,7 @@ const homeController = require('../app/http/controllers/homeController');
 const authController = require('../app/http/controllers/authController');
 const cartController = require('../app/http/controllers/customers/cartController');
 const orderController = require('../app/http/controllers/customers/orderController');
-const adminOrderController = require('../app/http/controllers/admin/settingController');
+const adminRaceController = require('../app/http/controllers/admin/settingController');
 const statusController = require('../app/http/controllers/admin/statusController');
 
 //Middelwares
@@ -37,7 +37,7 @@ function initRoute(app) {
 
 
     //Admin Routes
-    app.get('/admin/setting', admin, adminOrderController().index);
+    app.get('/admin/setting', admin, adminRaceController().index);
     app.post('/admin/setting/status', admin, statusController().update);
 }
 

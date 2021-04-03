@@ -1,16 +1,20 @@
-const Order = require('../../../models/order')
+const Resource = require('../../../methods/resource')
+const CurRaceInfo = require('../../../methods/curraceinfo')
 const moment = require('moment'); //time formater in javascript
 
-function orderController(){
+function raceController(){
     return {
         index(req, res){
-           Order.find({status: {$ne: 'completed'}}, null, {sort: {'createdAt': -1}}) // here we used populated to finduser details using his customerId in user database;
-              .populate('customerId', '-password').exec((err, orders)=>{
-                  console.log(orders);
-                  res.render('admin/setting', {orders: orders, moment: moment});
-              })
+           CurRaceInfo.getCurRaceInfo().then((races)=>{
+                if(races.result) {
+                    console.log(races);
+                    res.render('admin/setting', {race_info: races.result, moment: moment});
+                } else {
+                    res.render('admin/setting', {race_info: [], moment: moment, error: races.error})
+                }
+            })
         }
     }
 }
 
-module.exports = orderController;
+module.exports = raceController;
