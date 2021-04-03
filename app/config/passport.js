@@ -3,6 +3,7 @@ const User = require('../methods/users');
 const bcrypt = require('bcrypt');
 
 function passportInit(passport){
+     passport.use(new LocalStrategy({usernameField: 'username'}, async(username, password, done)=>{
         //Login
         //Check if user exists or not
         let user = await User.getUserByName(username);
