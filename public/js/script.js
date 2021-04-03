@@ -2,6 +2,22 @@ $( '#view_stream' ).click(function() {
     $('#stream_preview').attr('src',$('#stream_url').val());
 });
 
+$('.Cur-Race-Delete').click(function(){
+    $(this).closest('.tr').remove();
+    update_row_num('cur_race_info_table');
+})
+
+$('#cur_race_info_add').click(function(){
+    $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td><td class='border px-4 py-2'><input name='name' type='text' val='' placeholder='Name'/></td><td class='border px-4 py-2'><input name='sp' type='text' val='' placeholder='SP'/></td><td class='border px-4 py-2'><button type='delete' class='Cur-Race-Delete'>Delete</button></td></tr>");
+    update_row_num('cur_race_info_table');
+})
+
+function update_row_num(tbl_class){
+    $(tbl_class + " > tr > td.row_num").each(function( index ) {
+        $( this ).html(index+1);
+    });
+}
+
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
 
