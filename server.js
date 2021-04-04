@@ -3,12 +3,16 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
+const sharedsession = require('express-socket.io-session');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const MongoDBStore = require('connect-mongo')(session); // It will store our session id in database.
 const passport = require('passport');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const connection = require('./app/config/dbConnection');
+const socketSrc = require('./app/socket');
 
 //Session Store
 let mongoStore = new MongoDBStore({
@@ -17,13 +21,15 @@ let mongoStore = new MongoDBStore({
 });
 
 //Session Config
-app.use(session({
+const appsession = session({
     secret: "horse-racing",
     resave: false,
     store: mongoStore,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hours
-}))
+});
+app.use(appsession);
+io.use(sharedsession(appsession));
 
 //Assets
 app.use(express.static('public'));
@@ -52,7 +58,8 @@ app.set('view engine', 'ejs');
 
 //Set Route
 require('./routes/web.js')(app);
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Listening on port 3000');
-})
+socketSrc.useSocket(io).then(() => {
+    server.listen(process.env.PORT || 3000, () => {
+        console.log('Listening on port 3000');
+    })
+});
