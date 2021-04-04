@@ -80,30 +80,31 @@
                                                 <th class="border px-4 py-2 text-left">No</th>
                                                 <th class="border px-4 py-2 text-left">Name</th>
                                                 <th class="border px-4 py-2 text-left">SP</th>
+                                                <th class="border px-4 py-2 text-left">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="cur_race_info_table">
                                             <% for(var i=0; i<race_info.length; i++) { %>
                                                 <tr>
                                                     <td class="border px-4 py-2 row_num">
-                                                        <%= i %>
+                                                        <%= i+1 %>
                                                     </td>
                                                     <td class="border px-4 py-2">
-                                                        <input name="name" type="text" val="<%= race_info[i].name %>" placeholder="Name"/>
+                                                        <input class="info_name" name="name" type="text" val="<%= race_info[i].name %>" placeholder="Name"/>
                                                     </td>
                                                     <td class="border px-4 py-2">
-                                                        <input name="sp" type="text" val="<%= race_info[i].sp %>" placeholder="SP"/>
+                                                        <input class="info_sp" name="sp" type="text" val="<%= race_info[i].sp %>" placeholder="SP"/>
                                                     </td>
                                                     <td class="border px-4 py-2">
-                                                        <button type="delete" class="Cur-Race-Delete">Delete</button>
+                                                        <button type="button" class="Cur-Race-Delete">Delete</button>
                                                     </td>
                                                 </tr>
                                             <% } %>
                                         </tbody>
                                     </table>
                                     <div class="row">
-                                        <button class="col-md-offset-6 col-md-3" id="cur_race_info_add">Add</button>
-                                        <button class="col-md-offset-6 col-md-3" type="submit">Save</button>
+                                        <button class="col-md-offset-6 col-md-3" type="button" id="cur_race_info_add">Add</button>
+                                        <button class="col-md-offset-6 col-md-3" type="submit" id="cur_race_info_save">Save</button>
                                     </div>
                                 </form>
                             </div>
