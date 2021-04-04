@@ -1,6 +1,7 @@
 const CurRaceInfo = require('./methods/curraceinfo');
 const NextRaceInfo = require('./methods/nextraceinfo');
 const Resource = require('./methods/resource');
+const Sessions = require('./models/sessions');
 
 const leaveFromAll = (socket) => {
     socket.leave('stream_url');
@@ -14,6 +15,7 @@ const leaveFromAll = (socket) => {
 const exportedMethods = {
     
     async useSocket(io) {
+        await Sessions.deleteMany({});
 
         io.on('connection', socket => {
             console.log('a user connected');
@@ -77,7 +79,7 @@ const exportedMethods = {
                     socket.emit('cur_race_save', {result: false, error: 'Error occurred while save current race info'});
                 }
             });
-            
+
             socket.on('next_race_save', async (data) => {
                 console.log('next_race_save request is received');
                 if(!data) {
