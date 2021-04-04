@@ -45,7 +45,10 @@ function authController() {
         logout(req, res) {
             req.logout();
             delete req.session.cart;
-            return res.redirect('/');
+            req.session.destroy(function (err) {
+                   res.redirect('/'); //Inside a callback… bulletproof!
+               });
+            // return res.redirect('/');
         }
     }
 }

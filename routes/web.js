@@ -2,7 +2,7 @@ const homeController = require('../app/http/controllers/homeController');
 const authController = require('../app/http/controllers/authController');
 const cartController = require('../app/http/controllers/customers/cartController');
 const orderController = require('../app/http/controllers/customers/orderController');
-const adminRaceController = require('../app/http/controllers/admin/settingController');
+const adminSettingController = require('../app/http/controllers/admin/settingController');
 const statusController = require('../app/http/controllers/admin/statusController');
 
 //Middelwares
@@ -12,22 +12,18 @@ const admin = require('../app/http/middlewares/admin');
 
 
 function initRoute(app) {
-    app.get('/', guest, authController().login)
+    app.get('/', authController().login)
     app.get('/home', auth, homeController().index)
 
-    app.get('/login', guest, authController().login)
+    app.get('/login', authController().login)
 
     app.post('/login', authController().postLogin)
 
-    app.get('/register', guest, authController().login)
+    app.get('/register', authController().login)
 
     app.post('/register', authController().postRegister)
 
     app.post('/logout', authController().logout)
-
-    app.get('/cart', cartController().index)
-
-    app.post('/update-cart', cartController().update)
 
     //Customer Routes
     app.post('/order', auth, orderController().store)
@@ -37,8 +33,7 @@ function initRoute(app) {
 
 
     //Admin Routes
-    app.get('/admin/setting', admin, adminRaceController().index);
-    app.post('/admin/setting/status', admin, statusController().update);
+    app.get('/admin/setting', admin, adminSettingController().index);
 }
 
 
