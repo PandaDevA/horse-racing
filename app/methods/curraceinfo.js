@@ -1,41 +1,20 @@
 const CurRaceInfo = require('../models/curraceinfo');
-const mongoose = require('mongoose');
 
 const editCurRaceInfo = async(data) => {
-    if(!data) {
+    if(!data || data.length == 0) {
         console.log(`Data is undefined in editCurRaceInfo`);
-        return;
+        return false;
     }
 
-    let id;
-    try {
-        id = mongoose.Types.ObjectId(data.id);
-    } catch (e) {
-        console.log(`${id} is not valid ID while editCurRaceInfo`);
-        return {result: false, error: 'id is not valid'};
-    }
-
-    if(!await CurRaceInfo.exists({_id: id}))
-        try {
-            const info = new CurRaceInfo({ name: data.name, sp: data.sp });
-            let returnInfo = await info.save();
-            if(returnInfo) {
-                return { result: returnInfo, error: '' };
-            } else {
-                return { result: returnInfo, error: 'Error CurRaceInfo could not save'};
-            }
-        } catch (e) {
-            console.log(`Error while editCurRaceInfo: ${e.message}`);
-            return { result: false, error: e.message};
-        }
-
-    try {
-        result = await CurRaceInfo.updateOne({_id: id}, {name: data.name, sp: data.sp}, {upsert : true});
-        return { result: result, error: '' }
-    } catch(e) {
-        console.log(`Error while editCurRaceInfo: ${e.message}`);
-        return { result: false, error: e.message};
-    }
+    await CurRaceInfo.deleteMany({});
+    
+    await CurRaceInfo.insertMany(data).then(function(){
+        console.log("Data inserted")  // Success
+        return true;
+    }).catch(function(error){
+        console.log(error)      // Failure
+        return false;
+    });
 }
 
 const getCurRaceInfo = async() => {

@@ -1,31 +1,33 @@
-const Resource = require('../models/resource');
+const NextRaceInfo = require('../models/nextraceinfo');
 
-const editResource = async(data) => {
-    if(!data) {
-        console.log(`Data is undefined in editResource`);
-        return;
+const editNextRaceInfo = async(data) => {
+    if(!data || data.length == 0) {
+        console.log(`Data is undefined in editNextRaceInfo`);
+        return false;
     }
 
-    try {
-        result = await Resource.replaceOne({}, {stream_url: data.stream_url}, {upsert : true});
-        return { result: result, error: ''}
-    } catch(e) {
-        console.log(`Error while editResource: ${e.message}`);
-        return { result: false, error: e.message};
-    }
+    await NextRaceInfo.deleteMany({});
+    
+    await NextRaceInfo.insertMany(data).then(function(){
+        console.log("Data inserted")  // Success
+        return true;
+    }).catch(function(error){
+        console.log(error)      // Failure
+        return false;
+    });
 }
 
-const getResource = async() => {
+const getNextRaceInfo = async() => {
     try {
-        result = await Resource.findOne({});
+        result = await NextRaceInfo.find({});
         return { result: result, error: ''}
     } catch(e) {
-        console.log(`Error while getResource: ${e.message}`);
+        console.log(`Error while getNextRaceInfo: ${e.message}`);
         return { result: false, error: e.message};
     }
 }
 
 module.exports = {
-    editResource,
-    getResource,
+    editNextRaceInfo,
+    getNextRaceInfo,
 };
