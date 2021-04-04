@@ -25,6 +25,10 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hours
 }))
 
+//Assets
+app.use(express.static('public'));
+app.use(express.json());
+
 //Passport config
 const passportInit = require('./app/config/passport');
 passportInit(passport);
@@ -33,9 +37,6 @@ app.use(passport.session());
 
 app.use(flash());
 
-//Assets
-app.use(express.static('public'));
-app.use(express.json());
 
 //Global Middleware to use session and user(if logged in) in client side
 app.use((req, res, next) => {

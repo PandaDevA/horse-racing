@@ -36,7 +36,7 @@ function passportInit(passport){
              const err = error;
              const user = result
              console.log('passed here');
-             if(result)
+            //  if(result)
                  done(err, user);
          })
      })
