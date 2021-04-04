@@ -35,7 +35,9 @@ function passportInit(passport){
          User.getUserById(id).then(({error, result})=>{
              const err = error;
              const user = result
-             done(err, user);
+             console.log('passed here');
+             if(result)
+                 done(err, user);
          })
      })
     

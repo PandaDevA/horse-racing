@@ -75,7 +75,7 @@ const getUserByName = async(username) => {
 }
 
 const getUserById = async(id) => {
-    let result = {};
+    let result = {result: {}, error: ''};
     await User.findById(id, (err, data) => {
         if(err) console.log(`Error while getUserById: `, err);
         result = { result: data, error: err };        
