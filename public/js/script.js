@@ -8,7 +8,10 @@ $('.Cur-Race-Delete').click(function(){
 })
 
 $('#cur_race_info_add').click(function(){
-    $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td><td class='border px-4 py-2'><input name='name' type='text' val='' placeholder='Name'/></td><td class='border px-4 py-2'><input name='sp' type='text' val='' placeholder='SP'/></td><td class='border px-4 py-2'><button type='delete' class='Cur-Race-Delete'>Delete</button></td></tr>");
+    $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
+    "<td class='border px-4 py-2'><input name='name' type='text' val='' placeholder='Name'/></td>"+
+    "<td class='border px-4 py-2'><input name='sp' type='text' val='' placeholder='SP'/></td>"+
+    "<td class='border px-4 py-2'><button type='button' class='Cur-Race-Delete'>Delete</button></td></tr>");
     update_row_num('#cur_race_info_table');
 })
 

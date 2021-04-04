@@ -97,7 +97,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/socket.js"></script>
-    <% if(user.role == "admin") { %>
+    <% if(user && user.role == "admin") { %>
         <script src="/js/socket_admin.js"></script>
     <% } %>
     <script src="/assets/js/main.js"></script>
