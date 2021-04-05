@@ -17,7 +17,7 @@ function initRoute(app) {
     app.get('/register', authController().login)
     app.post('/login', authController().postLogin)
     app.post('/register', authController().postRegister)
-    app.post('/logout', authController().logout)
+    app.post('/logout', authController().logout);
 
     //Customer Routes
     app.get('/home', auth, homeController().index)
