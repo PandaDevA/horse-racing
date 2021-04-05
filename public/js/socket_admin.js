@@ -47,3 +47,17 @@ Client.socket.on('next_race_save', function(data){
         $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
     }
 });
+
+$('#stream_url_save').click(function(){
+    Client.socket.emit('stream_url_save', $('#stream_url').val());
+});
+
+Client.socket.on('stream_url_save', function(data){
+    if(data.result){
+        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+    }
+    else
+    {
+        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+    }
+});
