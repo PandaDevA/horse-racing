@@ -111,11 +111,11 @@ button[type="submit"]{
     line-height: 1rem;
 }
 
-#message-box.hide{
+.hide{
     display: none;
 }
 
-#message-box.show{
+.show{
     display: block;
 }
 

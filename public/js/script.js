@@ -40,6 +40,40 @@ $('#next_race_info_add').click(function(){
     update_row_num('#next_race_info_table');
 })
 
+$('.Betting-Delete').click(function(){
+    $(this).closest('tr').remove();
+    update_row_num('#betting_info_table');
+})
+
+$('#betting_info_add').click(function(){
+    $('#next_race_info_table').prepend(
+        "<tr>"+
+        "<td class='border px-4 py-2 row_num'>"+
+        "</td>"+
+        "<td class='border px-4 py-2'>"+
+        "<input class='info_time' type='text' value='' placeholder='Time' readonly/>"+
+        "</td>"+
+        "<td class='border px-4 py-2'>"+
+        "<input class='info_name' type='text' value='' placeholder='Name'  readonly/>"+
+        "</td>"+
+        "<td class='border px-4 py-2'>"+
+        "<textarea class='info_text' value='' placeholder='Description'  readonly/>"+
+        "</td>"+
+        "<td class='border px-4 py-2'>"+
+        "<button type='button' class='Betting-Update'>Update</button>"+
+        "<button type='button' class='Betting-Delete'>Delete</button>"+
+        "<button type='button' class='Betting-Save hide'>Save</button>"+
+        "<button type='button' class='Betting-Cancel hide'>Cancel</button>"+
+        "</td></tr>");
+    
+    $('.Betting-Delete').click(function(){
+        $(this).closest('tr').remove();
+        update_row_num('#betting_info_table');
+    })
+        
+    update_row_num('#next_race_info_table');
+})
+
 function update_row_num(tbl_class){
     $(tbl_class).find("tr > td.row_num").each(function( index ) {
         $( this ).html(index+1);
