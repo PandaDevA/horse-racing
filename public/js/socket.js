@@ -4,17 +4,16 @@
 
 var Client = {};
 Client.socket = io.connect();
+Client.socket.emit('join', {joinTo: join_events});
 
-Client.socket.on('cur_race_info_table',function(data){
-    if(data.result)
+Client.socket.on('cur_race_update',function(data){
+    $('#cur_race_title').html(data.time + " " + data.name);
+    $('#cur_race_info_table').html('');
+    for(let i=0; i<data.dataArray.length; i++)
     {
-        userData = data.result;
-        game.scene.stop('LoginScreen');
-        game.scene.start('HomeScreen');
-        console.log('success');
+        $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
+        "<td class='border px-4 py-2'>" + data.dataArray[i].name + "</td>"+
+        "<td class='border px-4 py-2'>" + data.dataArray[i].sp + "</td></tr>");
     }
-    else
-    {
-        console.log('failed');
-    }
+    update_row_num('#cur_race_info_table');
 });

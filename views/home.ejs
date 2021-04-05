@@ -1,54 +1,38 @@
 <section class="sp_panel">
     <div class="container">
         <div class="row content">
+            <iframe id="stream_preview" src="<%= resource['stream_url']%>" width="100%" height="600px" frameborder="0" scrolling="no" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="row content">
             <div class="col-lg-6">
-                <table class="w-full table-auto bg-white">
+                <table class="w-full table-auto bg-white tbl-full-width">
                     <thead>
                       <tr>
                         <th class="border px-4 py-2 text-left">No</th>
-                        <th class="border px-4 py-2 text-left">4.00 Valparaiso - Race 1</th>
+                        <th class="border px-4 py-2 text-left" id="cur_race_title"><%= resource['cur_race_time'] + '' + resource['cur_race_name']%></th>
                         <th class="border px-4 py-2 text-left">Projected SP</th>
                       </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                1
-                            </td>
-                            <td class="border px-4 py-2">
-                                LA GALLEGA
-                            </td>
-                            <td class="border px-4 py-2">
-                                25/1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                2
-                            </td>
-                            <td class="border px-4 py-2">
-                                HEROINA DEL LUGAR
-                            </td>
-                            <td class="border px-4 py-2">
-                                6/4
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                3
-                            </td>
-                            <td class="border px-4 py-2">
-                                LA VIDA SE VIVE
-                            </td>
-                            <td class="border px-4 py-2">
-                                25/1
-                            </td>
-                        </tr>
+                    <tbody id="cur_race_info_table">
+                        <% for(var i=0; i<curRaceData.length; i++) { %>
+                            <tr>
+                                <td class="border px-4 py-2 row_num">
+                                    <%= i+1 %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= curRaceData[i].name %>
+                                <td class="border px-4 py-2">
+                                    <%= curRaceData[i].sp %>
+                                </td>
+                            </tr>
+                        <% } %>
                     </tbody>
-                  </table>
+                </table>
             </div>
             <div class="col-lg-6">
-                <table class="w-full table-auto bg-white">
+                <table class="w-full table-auto bg-white tbl-full-width">
                     <thead>
                       <tr>
                         <th class="border px-4 py-2 text-left">No</th>
@@ -140,3 +124,6 @@
         </div>
     </div>
 </section>
+<script>
+    var join_events = ['cur_race', 'stream_url', 'next_race'];
+</script>
