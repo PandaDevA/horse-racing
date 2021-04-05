@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { registerUser, getUserList, getUserByName, updateUserDataByName, removeUserByName } = require('./app/methods/users');
 const { editResource, getResource } = require('./app/methods/resource');
 const { editCurRaceInfo, getCurRaceInfo } = require('./app/methods/curraceinfo');
+const { editNextRaceInfo, getNextRaceInfo } = require('./app/methods/nextraceinfo');
 const { insertBettingInfo, getBettingInfo } = require('./app/methods/bettinginfo');
 const url = 'mongodb://192.168.104.56:8001/horse-racing';
 // const url = 'mongodb://localhost:8001/horse-racing';
@@ -93,6 +94,18 @@ const bettingData = [{
     }
 ];
 
+const resourceData = {
+    cur_race_time: '4:00',
+    cur_race_name: 'Valparaiso - Race 1',
+    next_race_time: '4:28',
+    next_race_name: 'Valparaiso - Race 2 LIVE',
+    stream_url: 'https://rudo.video/live/sportinghd',
+    pdf_url: '/file/card.pdf',
+    card_title: 'Valparaiso race card - Thursday 25th March 2021',
+    tip_source: 'Concepcion 25th March 2021',
+    feed_category: 'Concepcion',
+};
+
 async function main() {
     let result = await connection.dropDatabase();
     console.log('database droped : ', result);
@@ -103,19 +116,15 @@ async function main() {
     // console.log(await getUserByName('user2'));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
-    // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
-    // console.log(await editResource({
-    //     stream_url: 'https://rudo.video/live/sportinghd',
-    //     pdf_url: '/file/card.pdf',
-    //     card_title: 'Valparaiso race card - Thursday 25th March 2021',
-    //     tip_source: 'Concepcion 25th March 2021',
-    //     feed_category: 'Concepcion',
-    // }));
-    // console.log(await getResource());
-    // console.log(await editCurRaceInfo(raceData));
-    // console.log(await getCurRaceInfo());
-    // console.log(await insertBettingInfo(bettingData));
-    // console.log(await getBettingInfo());
+    console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
+    console.log(await editResource(resourceData));
+    console.log(await getResource());
+    console.log(await editCurRaceInfo(raceData));
+    console.log(await getCurRaceInfo());
+    console.log(await editNextRaceInfo(raceData));
+    console.log(await getNextRaceInfo());
+    console.log(await insertBettingInfo(bettingData));
+    console.log(await getBettingInfo());
 
     await connection.close();
 };
