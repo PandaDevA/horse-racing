@@ -1,16 +1,16 @@
 const CurRaceInfo = require('./methods/curraceinfo');
 const NextRaceInfo = require('./methods/nextraceinfo');
 const Resource = require('./methods/resource');
+const BettingInfo = require('./methods/bettinginfo');
 const Sessions = require('./models/sessions');
 
-const leaveFromAll = (socket) => {
-    socket.leave('stream_url');
-    socket.leave('pdf_url');
-    socket.leave('cur_race');
-    socket.leave('next_race');
-    socket.leave('card_title');
-    // socket.leave('');
-}
+// const leaveFromAll = (socket) => {
+//     socket.leave('stream_url');
+//     socket.leave('card_info');
+//     socket.leave('cur_race');
+//     socket.leave('next_race');
+//     // socket.leave('');
+// }
 
 const exportedMethods = {
     
@@ -22,16 +22,16 @@ const exportedMethods = {
             
             socket.on('disconnect', () => {
                 console.log('user disconnected');
-                leaveFromAll(socket);
+                // leaveFromAll(socket);
             });
 
             socket.on('join', (data) => {
                 console.log('join request received');
 
-                //join Urls are in data.joinTo as Array like this: data = {joinTo: ['stream_url', 'pdf_url' ...]}
+                //join Urls are in data.joinTo as Array like this: data = {joinTo: ['stream_url', 'card_info' ...]}
                 //same as urls which in leaveFromAll func
                 console.log(data.joinTo);
-                leaveFromAll(socket);
+                // leaveFromAll(socket);
                 if(data.joinTo) {
                     data.joinTo.map((url, index) => {
                         socket.join(url);
@@ -56,7 +56,7 @@ const exportedMethods = {
                     socket.emit('cur_race_save', {result: false, error: 'Name of current race is not supplied'});
                     return;
                 }
-                if(!data.tabledata || data.tabeldata.length == 0) {
+                if(!data.tabledata || data.tabledata.length == 0) {
                     //Error data.tabledata is not supplied
                     socket.emit('cur_race_save', {result: false, error: 'Runner info is not supplied'});
                     return;
@@ -133,29 +133,85 @@ const exportedMethods = {
                 
                 let result = await Resource.editResource({stream_url: url});
                 if(!result.result) {
-                    socket.emit('stream_url_save', {result: false, error: 'Error occurred while save stream url save'});
+                    socket.emit('stream_url_save', {result: false, error: 'Error occurred while save stream url'});
                     return;
                 }
 
                 socket.emit('stream_url_save', {result: true});
+                socket.to('stream_url').emit('stream_url_update', {url: url});
                 console.log('stream_url_save is processed');
             });
 
-            socket.on('pdf_url_save', async (data) => {
-                console.log('pdf_url_save request is received');
+            socket.on('card_info_save', async (data) => {
+                console.log('card_info_save request is received');
                 if(!data.url || !data.title) {
                     console.log('Error: pdf url or card tile is not supplied');
-                    socket.emit('pdf_url_save', {result: false, error: 'Pdf url and card title must be supplied'});
+                    socket.emit('card_info_save', {result: false, error: 'Pdf url and card title must be supplied'});
                 }
 
                 let result = await Resource.editResource({pdf_url: data.url, card_title: data.title});
                 if(!result.result) {
-                    socket.emit('pdf_url_save', {result: false, error: 'Error occurred while save pdf url save'});
+                    socket.emit('card_info_save', {result: false, error: 'Error occurred while save card info'});
                     return;
                 }
 
-                socket.emit('pdf_url_save', {result: true});
-                console.log('pdf_url_save is processed');
+                socket.emit('card_info_save', {result: true});
+                socket.to('card_info').emit('card_info_update', {pdf_url: data.url, card_title: data.title});
+                console.log('card_info_save is processed');
+            });
+
+            socket.on('tip_source_save', async (title) => {
+               console.log('tip_source_save request is received');
+               if(!title) {
+                   console.log('Error: tip source title is not supplied');
+                   socket.emit('tip_source_save', {result: false, error: 'Tip source title must be supplied'});
+               }
+
+               let result = await Resource.editResource({tip_source: title});
+               if(!result.result) {
+                   socket.emit('tip_source_save', {result: false, error: 'Error occurred while save tip source'});
+                   return;
+               }
+
+               socket.emit('tip_source_save', {result: true});
+               socket.to('tip_source').emit('tip_source_update', {title: title});
+               console.log('tip_source_save is processed');
+            });
+
+            socket.on('feed_category_save', async (category) => {
+               console.log('feed_category_save request is received');
+               if(!category) {
+                   console.log('Error: Feed category is not supplied');
+                   socket.emit('feed_category_save', {result: false, error: 'Feed category must be supplied'});
+               }
+
+               let result = await Resource.editResource({feed_category: category});
+               if(!result.result) {
+                   socket.emit('feed_category_save', {result: false, error: 'Error occurred while save feed category'});
+                   return;
+               }
+
+               socket.emit('feed_category_save', {result: true});
+               socket.to('feed_category').emit('feed_category_update', {category: category});
+               console.log('feed_category_save is processed');
+            });
+
+            socket.on('betting_info_save', async (data) => {
+                console.log('betting_info_save request is received');
+                if(!data || !data.method) {
+                    console.log('Error: Betting info or save method is not supplied');
+                    socket.emit('betting_info_save', {result: false, error: 'Betting info and save method must be supplied'});
+                }
+
+                if(data.method == 'insert') {
+                    let result = await BettingInfo.insertBettingInfo({time: data.info.time, name: data.info.name, text: data.info.text});
+                    if(!result) {
+                        socket.emit('betting_info_save', {result: false, error: 'Error occurred while save betting info'});
+                        return;
+                    }
+                } else if (data.method == 'update') {
+
+                }
             });
         });
     },
