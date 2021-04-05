@@ -94,12 +94,12 @@ const bettingData = [{
 ];
 
 async function main() {
-    // let result = await connection.dropDatabase();
-    // console.log('database droped : ', result);
-    // await registerUser(userData[0]);
-    // await registerUser(userData[2]);
+    let result = await connection.dropDatabase();
+    console.log('database droped : ', result);
+    await registerUser(userData[0]);
+    await registerUser(userData[2]);
     // console.log(await removeUserByName('user3'));
-    // console.log(await getUserList());
+    console.log(await getUserList());
     // console.log(await getUserByName('user2'));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
@@ -114,8 +114,8 @@ async function main() {
     // console.log(await getResource());
     // console.log(await editCurRaceInfo(raceData));
     // console.log(await getCurRaceInfo());
-    console.log(await insertBettingInfo(bettingData));
-    console.log(await getBettingInfo());
+    // console.log(await insertBettingInfo(bettingData));
+    // console.log(await getBettingInfo());
 
     await connection.close();
 };

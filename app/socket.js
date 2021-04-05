@@ -233,20 +233,20 @@ const exportedMethods = {
                     return;
                 }
 
-                let result;
-                    let result = await BettingInfo.updateBettingInfo({id: data.info.id, time: data.info.time, name: data.info.name, text: data.info.text});
-                    if(!result) {
-                        socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
-                        return;
-                    }
+                // let result;
+                //     let result = await BettingInfo.updateBettingInfo({id: data.info.id, time: data.info.time, name: data.info.name, text: data.info.text});
+                //     if(!result) {
+                //         socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
+                //         return;
+                //     }
 
-                result = await BettingInfo.getBettingInfo();
-                if(!result.result) {
-                    socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
-                    return;
-                }
+                // result = await BettingInfo.getBettingInfo();
+                // if(!result.result) {
+                //     socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
+                //     return;
+                // }
 
-                socket.emit('user_info_save', {result: true});
+                // socket.emit('user_info_save', {result: true});
                 console.log('user_info_save is processed');
             });
         });

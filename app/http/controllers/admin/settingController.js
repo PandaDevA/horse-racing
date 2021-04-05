@@ -33,6 +33,9 @@ function settingController(){
                 }*/
             const result = await Resource.getResource();
             if(result.result) resData['resource'] = result.result;
+            
+            const bettinginfo = await BettingInfo.getBettingInfo();
+            if(bettinginfo.result) resData['bettinginfo'] = bettinginfo.result;
 
             res.render('admin/setting', resData);
         },
