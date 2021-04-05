@@ -44,6 +44,8 @@ const registerUser = async(data) => {
         };
         if(data.company) userInf.company = data.company;
         if(data.ipaddress) userInf.ipaddress = data.ipaddress;
+        if(data.subscription) userInf.subscription = data.subscription;
+        if(data.able_pages) userInf.able_pages = data.able_pages;
         const user = new User(userInf);
         const returnInfo = await user.save();
         if (returnInfo) {
@@ -99,8 +101,11 @@ const updateUserDataByName = async(oldusername, data) => {
         return { result: false, error: `User is not exist in DB` };
     }
 
+    updateData = {};
+    if(data.able_pages) updateData['able_pages'] = data.able_pages;
+    if(data.subscription) updateData['subscription'] = data.subscription;
     try {
-        result = await User.updateOne({username: oldusername}, {able_pages: data.able_pages});
+        result = await User.updateOne({username: oldusername}, updateData);
         return { result: result, error: ''}
     } catch(e) {
         console.log(`Error while updateUserDataByName: ${e.message}`);

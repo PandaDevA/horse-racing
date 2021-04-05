@@ -4,7 +4,6 @@ const { registerUser, getUserList, getUserByName, updateUserDataByName, removeUs
 const { editResource, getResource } = require('./app/methods/resource');
 const { editCurRaceInfo, getCurRaceInfo } = require('./app/methods/curraceinfo');
 const { clearBettingInfo, insertBettingInfo, updateBettingInfo, getBettingInfo } = require('./app/methods/bettinginfo');
-const { setFeedCategory, getFeedCategory } = require('./app/methods/resultfeeds');
 const url = 'mongodb://192.168.104.56:8001/horse-racing';
 // const url = 'mongodb://localhost:8001/horse-racing';
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
@@ -22,6 +21,7 @@ const userData = [{
         username: "user1",
         password: "123456",
         company: "Oil Group",
+        able_pages: ["home", "card", "contact"],
         ipaddress: "192.168.104.57",
     },
     {
@@ -39,6 +39,8 @@ const userData = [{
         password: "123456",
         company: "Oil Group",
         ipaddress: "192.168.104.55",
+        able_pages: ["all"],
+        subscription: true,
     }
 ];
 
@@ -106,7 +108,8 @@ async function main() {
         stream_url: 'https://rudo.video/live/sportinghd',
         pdf_url: '/file/card.pdf',
         card_title: 'Valparaiso race card - Thursday 25th March 2021',
-        tip_source: 'Concepcion 25th March 2021'
+        tip_source: 'Concepcion 25th March 2021',
+        feed_category: 'Concepcion',
     }));
     console.log(await getResource());
     // console.log(await editCurRaceInfo(raceData));
@@ -120,8 +123,6 @@ async function main() {
     //     text: 'Text description of Valapora'
     // }));
     // console.log(await getBettingInfo());
-    // console.log(await setFeedCategory('Concepcion'));
-    // console.log(await getFeedCategory());
 
     await connection.close();
 };

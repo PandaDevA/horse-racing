@@ -98,7 +98,7 @@ const exportedMethods = {
                     socket.emit('next_race_save', {result: false, error: 'Name of next race is not supplied'});
                     return;
                 }
-                if(!data.tabledata || data.tabeldata.length == 0) {
+                if(!data.tabledata || data.tabledata.length == 0) {
                     //Error data.tabledata is not supplied
                     socket.emit('next_race_save', {result: false, error: 'Runner info is not supplied'});
                     return;
@@ -147,6 +147,7 @@ const exportedMethods = {
                 if(!data.url || !data.title) {
                     console.log('Error: pdf url or card tile is not supplied');
                     socket.emit('card_info_save', {result: false, error: 'Pdf url and card title must be supplied'});
+                    return;
                 }
 
                 let result = await Resource.editResource({pdf_url: data.url, card_title: data.title});
@@ -165,6 +166,7 @@ const exportedMethods = {
                if(!title) {
                    console.log('Error: tip source title is not supplied');
                    socket.emit('tip_source_save', {result: false, error: 'Tip source title must be supplied'});
+                   return;
                }
 
                let result = await Resource.editResource({tip_source: title});
@@ -183,6 +185,7 @@ const exportedMethods = {
                if(!category) {
                    console.log('Error: Feed category is not supplied');
                    socket.emit('feed_category_save', {result: false, error: 'Feed category must be supplied'});
+                   return;
                }
 
                let result = await Resource.editResource({feed_category: category});
@@ -198,20 +201,41 @@ const exportedMethods = {
 
             socket.on('betting_info_save', async (data) => {
                 console.log('betting_info_save request is received');
-                if(!data || !data.method) {
+                if(!data || !data.method || !data.info) {
                     console.log('Error: Betting info or save method is not supplied');
                     socket.emit('betting_info_save', {result: false, error: 'Betting info and save method must be supplied'});
+                    return;
                 }
 
+                let result;
                 if(data.method == 'insert') {
-                    let result = await BettingInfo.insertBettingInfo({time: data.info.time, name: data.info.name, text: data.info.text});
+                    result = await BettingInfo.insertBettingInfo({time: data.info.time, name: data.info.name, text: data.info.text});
                     if(!result) {
                         socket.emit('betting_info_save', {result: false, error: 'Error occurred while save betting info'});
                         return;
                     }
                 } else if (data.method == 'update') {
-
+                    let result = await BettingInfo.updateBettingInfo({id: data.info.id, time: data.info.time, name: data.info.name, text: data.info.text});
+                    if(!result) {
+                        socket.emit('betting_info_save', {result: false, error: 'Error occurred while save betting info'});
+                        return;
+                    }
                 }
+
+                result = await BettingInfo.getBettingInfo();
+                if(!result.result) {
+                    socket.emit('betting_info_save', {result: false, error: 'Error occurred while save betting info'});
+                    return;
+                }
+
+                socket.emit('betting_info_save', {result: true});
+                socket.to('betting_info').emit('betting_info_update', result.result);
+                console.log('betting_info_save is processed');
+            });
+
+            socket.on('user_info_save', async (data) => {
+                console.log('user_info_save request is received');
+                if(!data)
             });
         });
     },
