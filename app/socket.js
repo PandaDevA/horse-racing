@@ -75,6 +75,7 @@ const exportedMethods = {
                 if(result) {
                     socket.emit('cur_race_save', {result: true});
                     socket.to('cur_race').emit('cur_race_update', {time: data.time, name: data.name, dataArray: data.tabledata});
+                    console.log('cur_race_save is processed');
                 } else {
                     socket.emit('cur_race_save', {result: false, error: 'Error occurred while save current race info'});
                 }
@@ -116,9 +117,45 @@ const exportedMethods = {
                 if(result) {
                     socket.emit('next_race_save', {result: true});
                     socket.to('next_race').emit('next_race_update', {time: data.time, name: data.name, dataArray: data.tabledata});
+                    console.log('next_race_save is processed');
                 } else {
                     socket.emit('next_race_save', {result: false, error: 'Error occurred while save next race info'});
                 }
+            });
+
+            socket.on('stream_url_save', async (url) => {
+                console.log('stream_url_save request is received');
+                if(!url) {
+                    console.log('stream_url is not supplied');
+                    socket.emit('stream_url_save', {result: false, error: 'Stream_url must be supplied'});
+                    return;
+                }
+                
+                let result = await Resource.editResource({stream_url: url});
+                if(!result.result) {
+                    socket.emit('stream_url_save', {result: false, error: 'Error occurred while save stream url save'});
+                    return;
+                }
+
+                socket.emit('stream_url_save', {result: true});
+                console.log('stream_url_save is processed');
+            });
+
+            socket.on('pdf_url_save', async (data) => {
+                console.log('pdf_url_save request is received');
+                if(!data.url || !data.title) {
+                    console.log('Error: pdf url or card tile is not supplied');
+                    socket.emit('pdf_url_save', {result: false, error: 'Pdf url and card title must be supplied'});
+                }
+
+                let result = await Resource.editResource({pdf_url: data.url, card_title: data.title});
+                if(!result.result) {
+                    socket.emit('pdf_url_save', {result: false, error: 'Error occurred while save pdf url save'});
+                    return;
+                }
+
+                socket.emit('pdf_url_save', {result: true});
+                console.log('pdf_url_save is processed');
             });
         });
     },
