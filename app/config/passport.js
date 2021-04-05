@@ -8,13 +8,17 @@ function passportInit(passport){
         //Check if user exists or not
         let user = await User.getUserByName(username);
         if(!user.result){
-            return done(null, false, {message: `No user with this username${user.error}`});
+            return done(null, false, {message: `No user with this username ${user.error}`});
         }
         user = user.result;
         bcrypt.compare(password, user.password).then((match)=>{     // here match returns true or false
             if(match) {
-                if(user) return done(null, user, {message: 'Logged in successfully'});
-                else return done(null, false, {message: 'Could not read user info'});
+                let curDate = new Date();
+                let prevDate = user.createdAt;
+                let diffTime = curDate.getTime() - prevDate.getTime();
+                let freeDays = Math.ceil(diffTime / (1000 * 3600 * 24));
+                if(freeDays > 7)  return done(null, false, {message: 'Your trial day is over 7 days. Please upgrade your subscription.'});
+                else return done(null, user, {message: 'Logged in successfully'});
             }
 
             return done(null, false, {message: 'Username or password is incorrect'});

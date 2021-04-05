@@ -2,6 +2,7 @@ const Resource = require('../../../methods/resource')
 const CurRaceInfo = require('../../../methods/curraceinfo')
 const NextRaceInfo = require('../../../methods/nextraceinfo')
 const UserInfo = require('../../../methods/users')
+const BettingInfo = require('../../../methods/bettinginfo')
 
 function settingController(){
     return {
