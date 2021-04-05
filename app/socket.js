@@ -235,7 +235,7 @@ const exportedMethods = {
 
             socket.on('user_info_save', async (data) => {
                 console.log('user_info_save request is received');
-                if(!data)
+                // if(!data)
             });
         });
     },
