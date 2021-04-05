@@ -29,3 +29,7 @@ Client.socket.on('next_race_update',function(data){
     }
     update_row_num('#next_race_info_table');
 });
+
+Client.socket.on('stream_url_update',function(data){
+    $('#stream_preview').attr('src',data.url);
+});
