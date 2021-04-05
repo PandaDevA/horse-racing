@@ -46,7 +46,7 @@ $('.Betting-Delete').click(function(){
 })
 
 $('#betting_info_add').click(function(){
-    $('#next_race_info_table').prepend(
+    $('#betting_info_table').prepend(
         "<tr>"+
         "<td class='border px-4 py-2 row_num'>"+
         "</td>"+
@@ -57,7 +57,7 @@ $('#betting_info_add').click(function(){
         "<input class='info_name' type='text' value='' placeholder='Name'  readonly/>"+
         "</td>"+
         "<td class='border px-4 py-2'>"+
-        "<textarea class='info_text' value='' placeholder='Description'  readonly/>"+
+        "<textarea class='info_text' value='' placeholder='Description'  readonly></textarea>"+
         "</td>"+
         "<td class='border px-4 py-2'>"+
         "<button type='button' class='Betting-Update'>Update</button>"+
@@ -71,7 +71,7 @@ $('#betting_info_add').click(function(){
         update_row_num('#betting_info_table');
     })
         
-    update_row_num('#next_race_info_table');
+    update_row_num('#betting_info_table');
 })
 
 function update_row_num(tbl_class){
