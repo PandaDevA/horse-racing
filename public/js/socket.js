@@ -4,7 +4,7 @@
 
 var Client = {};
 Client.socket = io.connect();
-Client.socket.emit('join', join_events);
+Client.socket.emit('join', {joinTo: join_events});
 
 Client.socket.on('cur_race_update',function(data){
     $('#cur_race_title').html(data.time + " " + data.name);
@@ -12,8 +12,8 @@ Client.socket.on('cur_race_update',function(data){
     for(let i=0; i<data.dataArray.length; i++)
     {
         $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
-        "<td class='border px-4 py-2'><input name='name' type='text' value='" + data.dataArray[i].name + "' placeholder='Name'/></td>"+
-        "<td class='border px-4 py-2'><input name='sp' type='text' value='" + data.dataArray[i].sp + "' placeholder='SP'/></td></tr>");
+        "<td class='border px-4 py-2'>" + data.dataArray[i].name + "</td>"+
+        "<td class='border px-4 py-2'>" + data.dataArray[i].sp + "</td></tr>");
     }
     update_row_num('#cur_race_info_table');
 });
