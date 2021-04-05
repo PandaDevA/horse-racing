@@ -9,11 +9,11 @@ function homeController(){
             let resData = {};
             //current race table data: [{name: '', sp: '', color: ''},{...}]
             const curraces = await CurRaceInfo.getCurRaceInfo();
-            if(curraces.result) resData[curRaceData] = curraces.result;
+            if(curraces.result) resData['curRaceData'] = curraces.result;
 
             //next race table data: [{name: '', sp: '', color: ''},{...}]
             const nextraces = await NextRaceInfo.getNextRaceInfo();
-            if(nextraces.result) resData[nextRaceData] = nextraces.result;
+            if(nextraces.result) resData['nextRaceData'] = nextraces.result;
             
             /*resource data: 
                 {
@@ -28,10 +28,10 @@ function homeController(){
                     tip_source: ''
                 }*/
             const result = await Resource.getResource();
-            if(result.result) resData[resource] = result.result;
+            if(result.result) resData['resource'] = result.result;
 
             const bettinginfo = await BettingInfo.getBettingInfo();
-            if(bettinginfo.result) resData[bettinginfo] = bettinginfo.result;
+            if(bettinginfo.result) resData['bettinginfo'] = bettinginfo.result;
 
             res.render('home', resData);
         }
