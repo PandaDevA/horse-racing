@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     company: { type: String, default: '' },
     ipaddress: { type: String, default: '0.0.0.0' },
     able_pages: { type: Array, default: [] },
-    subscription: { type: Boolean, default: false},
+    // subscription: { type: Boolean, default: false},
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema)

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { registerUser, getUserList, getUserByName, updateUserDataByName, removeUserByName } = require('./app/methods/users');
 const { editResource, getResource } = require('./app/methods/resource');
 const { editCurRaceInfo, getCurRaceInfo } = require('./app/methods/curraceinfo');
-const { clearBettingInfo, insertBettingInfo, updateBettingInfo, getBettingInfo } = require('./app/methods/bettinginfo');
+const { insertBettingInfo, getBettingInfo } = require('./app/methods/bettinginfo');
 const url = 'mongodb://192.168.104.56:8001/horse-racing';
 // const url = 'mongodb://localhost:8001/horse-racing';
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
@@ -40,7 +40,7 @@ const userData = [{
         company: "Oil Group",
         ipaddress: "192.168.104.55",
         able_pages: ["all"],
-        subscription: true,
+        // subscription: true,
     }
 ];
 
@@ -104,25 +104,18 @@ async function main() {
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
-    console.log(await editResource({
-        stream_url: 'https://rudo.video/live/sportinghd',
-        pdf_url: '/file/card.pdf',
-        card_title: 'Valparaiso race card - Thursday 25th March 2021',
-        tip_source: 'Concepcion 25th March 2021',
-        feed_category: 'Concepcion',
-    }));
-    console.log(await getResource());
+    // console.log(await editResource({
+    //     stream_url: 'https://rudo.video/live/sportinghd',
+    //     pdf_url: '/file/card.pdf',
+    //     card_title: 'Valparaiso race card - Thursday 25th March 2021',
+    //     tip_source: 'Concepcion 25th March 2021',
+    //     feed_category: 'Concepcion',
+    // }));
+    // console.log(await getResource());
     // console.log(await editCurRaceInfo(raceData));
     // console.log(await getCurRaceInfo());
-    // console.log(await clearBettingInfo());
-    // console.log(await insertBettingInfo(bettingData[2]));
-    // console.log(await updateBettingInfo({
-    //     id: '606a49c0f51f504c3802c45f',
-    //     time: '6.00',
-    //     name: 'Valapora',
-    //     text: 'Text description of Valapora'
-    // }));
-    // console.log(await getBettingInfo());
+    console.log(await insertBettingInfo(bettingData));
+    console.log(await getBettingInfo());
 
     await connection.close();
 };
