@@ -150,3 +150,11 @@ button[type="submit"]{
 #stream_preview{
     margin: 1rem;
 }
+
+.tbl-full-width{
+    width: 100%;
+}
+
+.action-area{
+    margin: 0px;
+}
