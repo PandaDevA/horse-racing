@@ -8,8 +8,8 @@ const editCurRaceInfo = async(data) => {
 
     await CurRaceInfo.deleteMany({});
     
-    await CurRaceInfo.insertMany(data).then(function(){
-        console.log("Data inserted")  // Success
+    return await CurRaceInfo.insertMany(data).then(function(){
+        console.log("CurRace data inserted")  // Success
         return true;
     }).catch(function(error){
         console.log(error)      // Failure

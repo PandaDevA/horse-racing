@@ -1,20 +1,40 @@
 const Resource = require('../../../methods/resource')
 const CurRaceInfo = require('../../../methods/curraceinfo')
+const NextRaceInfo = require('../../../methods/nextraceinfo')
+const UserInfo = require('../../../methods/users')
 
 function settingController(){
     return {
         async index(req, res){
-            const races = await CurRaceInfo.getCurRaceInfo();
-            if(!races.result)
-                res.render('admin/setting', {race_info: [], error: races.error});
-            
-            const result = await Resource.getResource();
+            let resData = {};
 
-            if(result.result) {
-                res.render('admin/setting', {race_info: races.result, race_time: result.result.race_time, race_name: result.result.race_name});
-            } else {
-                res.render('admin/setting', {race_info: races.result, race_time: undefined, race_name: '', error: result.error});
-            }
+            //user table data: 
+            const users = await UserInfo.getUserList();
+            if(users.result) resData['users'] = users.result;
+            
+            //current race table data: [{name: '', sp: '', color: ''},{...}]
+            const curraces = await CurRaceInfo.getCurRaceInfo();
+            if(curraces.result) resData['curRaceData'] = curraces.result;
+
+            //next race table data: [{name: '', sp: '', color: ''},{...}]
+            const nextraces = await NextRaceInfo.getNextRaceInfo();
+            if(nextraces.result) resData['nextRaceData'] = nextraces.result;
+            
+            /*resource data: 
+                {
+                    stream_url: '',
+                    pdf_url: '',
+                    cur_race_time: '',
+                    cur_race_name: '',
+                    next_race_time: '',
+                    next_race_name: '',
+                    card_title: '',
+                    tip_source: ''
+                }*/
+            const result = await Resource.getResource();
+            if(result.result) resData['resource'] = result.result;
+
+            res.render('admin/setting', resData);
         },
      }
 }

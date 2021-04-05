@@ -8,8 +8,8 @@ const editNextRaceInfo = async(data) => {
 
     await NextRaceInfo.deleteMany({});
     
-    await NextRaceInfo.insertMany(data).then(function(){
-        console.log("Data inserted")  // Success
+    return await NextRaceInfo.insertMany(data).then(function(){
+        console.log("Next Race data inserted")  // Success
         return true;
     }).catch(function(error){
         console.log(error)      // Failure

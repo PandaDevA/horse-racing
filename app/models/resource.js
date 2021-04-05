@@ -8,6 +8,7 @@ const resourceSchema = new mongoose.Schema({
     next_race_time: {type: String, default: '4:28'},
     next_race_name: {type: String, default: 'Valparaiso - Race 2 LIVE'},
     card_title: {type: String, default: 'Valparaiso race card - Thursday 25th March 2021'},
+    feed_category: {type: String, default: 'Valparaiso'},
     tip_source: {type: String, default: 'Concepcion 25th March 2021'},
 });
 

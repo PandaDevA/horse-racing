@@ -15,6 +15,7 @@ const editResource = async(data) => {
         if(data.next_race_time) doc.next_race_time = data.next_race_time;
         if(data.next_race_name) doc.next_race_name = data.next_race_name;
         if(data.card_title) doc.card_title = data.card_title;
+        if(data.feed_category) doc.feed_category = data.feed_category;
         if(data.tip_source) doc.tip_source = data.tip_source;
 
         result = await Resource.updateOne({}, doc, {upsert : true});

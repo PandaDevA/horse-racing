@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { registerUser, getUserList, getUserByName, updateUserDataByName, removeUserByName } = require('./app/methods/users');
 const { editResource, getResource } = require('./app/methods/resource');
 const { editCurRaceInfo, getCurRaceInfo } = require('./app/methods/curraceinfo');
+const { clearBettingInfo, insertBettingInfo, updateBettingInfo, getBettingInfo } = require('./app/methods/bettinginfo');
+const { setFeedCategory, getFeedCategory } = require('./app/methods/resultfeeds');
 const url = 'mongodb://192.168.104.56:8001/horse-racing';
 // const url = 'mongodb://localhost:8001/horse-racing';
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
@@ -41,15 +43,52 @@ const userData = [{
 ];
 
 const raceData = [{
-        id: '606721630fb0b42f3c420d53',
         name: 'LAJUSARI NOA',
         sp: '13/1',
+        color: 'blue',
     },
     {
-        id: '606721630fb0b42f3c420d53',
         name: 'LAJUSARI NOA',
         sp: '5/1',
+        color: 'red',
     },
+    {
+        name: 'LAJUSARI NOA',
+        sp: '15/1',
+        color: 'none',
+    },
+    {
+        name: 'LAJUSARI NOA',
+        sp: '10/1',
+        color: 'red',
+    },
+    {
+        name: 'LAJUSARI NOA',
+        sp: '5/1',
+        color: 'blue',
+    },
+];
+
+const bettingData = [{
+        time: '4.00',
+        name: 'Valapora',
+        text: 'Text description of Valapora'
+    },
+    {
+        time: '8.00',
+        name: 'Valapora',
+        text: 'Text description of Valapora'
+    },
+    {
+        time: '5.20',
+        name: 'Valapora',
+        text: 'Text description of Valapora'
+    },
+    {
+        time: '6.00',
+        name: 'Valapora',
+        text: 'Text description of Valapora'
+    }
 ];
 
 async function main() {
@@ -63,11 +102,26 @@ async function main() {
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
     // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
-    // console.log(await editResource({stream_url: 'https://rudo.video/live/sportinghd'}));
-    // console.log(await getResource());
-    console.log(await editCurRaceInfo(raceData[0]));
-    console.log(await editCurRaceInfo(raceData[1]));
-    console.log(await getCurRaceInfo());
+    console.log(await editResource({
+        stream_url: 'https://rudo.video/live/sportinghd',
+        pdf_url: '/file/card.pdf',
+        card_title: 'Valparaiso race card - Thursday 25th March 2021',
+        tip_source: 'Concepcion 25th March 2021'
+    }));
+    console.log(await getResource());
+    // console.log(await editCurRaceInfo(raceData));
+    // console.log(await getCurRaceInfo());
+    // console.log(await clearBettingInfo());
+    // console.log(await insertBettingInfo(bettingData[2]));
+    // console.log(await updateBettingInfo({
+    //     id: '606a49c0f51f504c3802c45f',
+    //     time: '6.00',
+    //     name: 'Valapora',
+    //     text: 'Text description of Valapora'
+    // }));
+    // console.log(await getBettingInfo());
+    // console.log(await setFeedCategory('Concepcion'));
+    // console.log(await getFeedCategory());
 
     await connection.close();
 };
