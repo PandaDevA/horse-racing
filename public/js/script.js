@@ -21,6 +21,25 @@ $('#cur_race_info_add').click(function(){
     update_row_num('#cur_race_info_table');
 })
 
+$('.Next-Race-Delete').click(function(){
+    $(this).closest('tr').remove();
+    update_row_num('#next_race_info_table');
+})
+
+$('#next_race_info_add').click(function(){
+    $('#next_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
+    "<td class='border px-4 py-2'><input class='info_name' name='name' type='text' value='' placeholder='Name'/></td>"+
+    "<td class='border px-4 py-2'><input class='info_sp' name='sp' type='text' value='' placeholder='SP'/></td>"+
+    "<td class='border px-4 py-2'><button type='button' class='Next-Race-Delete'>Delete</button></td></tr>");
+    
+    $('.Next-Race-Delete').click(function(){
+        $(this).closest('tr').remove();
+        update_row_num('#next_race_info_table');
+    })
+
+    update_row_num('#next_race_info_table');
+})
+
 function update_row_num(tbl_class){
     $(tbl_class).find("tr > td.row_num").each(function( index ) {
         $( this ).html(index+1);
