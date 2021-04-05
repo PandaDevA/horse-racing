@@ -184,28 +184,34 @@
                                             <th class="border px-4 py-2 text-left">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="next_race_info_table">
-                                        <% for(var i=0; i<nextRaceData.length; i++) { %>
+                                    <tbody id="betting_info_table">
+                                        <% for(var i=0; i<bettinginfo.length; i++) { %>
                                             <tr>
                                                 <td class="border px-4 py-2 row_num">
                                                     <%= i+1 %>
                                                 </td>
                                                 <td class="border px-4 py-2">
-                                                    <input class="info_name" name="name" type="text" value="<%= nextRaceData[i].name %>" placeholder="Name"/>
+                                                    <input class="info_time" type="text" value="<%= bettinginfo[i].time %>" placeholder="Time" readonly/>
                                                 </td>
                                                 <td class="border px-4 py-2">
-                                                    <input class="info_sp" name="sp" type="text" value="<%= nextRaceData[i].sp %>" placeholder="SP"/>
+                                                    <input class="info_name" type="text" value="<%= bettinginfo[i].name %>" placeholder="Name"  readonly/>
                                                 </td>
                                                 <td class="border px-4 py-2">
-                                                    <button type="button" class="Next-Race-Delete">Delete</button>
+                                                    <textarea class="info_text" value="<%= bettinginfo[i].text %>" placeholder="Description"  readonly/>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <button type="button" class="Betting-Update">Update</button>
+                                                    <button type="button" class="Betting-Delete">Delete</button>
+                                                    <button type="button" class="Betting-Save hide">Save</button>
+                                                    <button type="button" class="Betting-Cancel hide">Cancel</button>
                                                 </td>
                                             </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
                                 <div class="row action-area">
-                                    <button class="offset-lg-6 col-lg-3" type="button" id="next_race_info_add">Add</button>
-                                    <button class="col-lg-3" id="next_race_info_save">Save</button>
+                                    <button class="offset-lg-6 col-lg-3" type="button" id="betting_info_add">Add</button>
+                                    <button class="col-lg-3" id="betting_info_save">Save</button>
                                 </div>
                             </div>
                         </div>
