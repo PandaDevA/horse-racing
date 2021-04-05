@@ -36,46 +36,25 @@
                     <thead>
                       <tr>
                         <th class="border px-4 py-2 text-left">No</th>
-                        <th class="border px-4 py-2 text-left">4.00 Valparaiso - Race 1</th>
+                        <th class="border px-4 py-2 text-left" id="next_race_title"><%= resource['next_race_time'] + '' + resource['next_race_name']%></th>
                         <th class="border px-4 py-2 text-left">Projected SP</th>
                       </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                1
-                            </td>
-                            <td class="border px-4 py-2">
-                                LA GALLEGA
-                            </td>
-                            <td class="border px-4 py-2">
-                                25/1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                2
-                            </td>
-                            <td class="border px-4 py-2">
-                                HEROINA DEL LUGAR
-                            </td>
-                            <td class="border px-4 py-2">
-                                6/4
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2">
-                                3
-                            </td>
-                            <td class="border px-4 py-2">
-                                LA VIDA SE VIVE
-                            </td>
-                            <td class="border px-4 py-2">
-                                25/1
-                            </td>
-                        </tr>
+                    <tbody id="next_race_info_table">
+                        <% for(var i=0; i<nextRaceData.length; i++) { %>
+                            <tr>
+                                <td class="border px-4 py-2 row_num">
+                                    <%= i+1 %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= nextRaceData[i].name %>
+                                <td class="border px-4 py-2">
+                                    <%= nextRaceData[i].sp %>
+                                </td>
+                            </tr>
+                        <% } %>
                     </tbody>
-                  </table>
+                </table>
             </div>
         </div>
     </div>
