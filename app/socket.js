@@ -2,6 +2,8 @@ const CurRaceInfo = require('./methods/curraceinfo');
 const NextRaceInfo = require('./methods/nextraceinfo');
 const Resource = require('./methods/resource');
 const BettingInfo = require('./methods/bettinginfo');
+const TipsInfo = require('./methods/tipsinfo');
+const OddsInfo = require('./methods/oddsinfo');
 const Sessions = require('./models/sessions');
 
 // const leaveFromAll = (socket) => {
@@ -161,25 +163,56 @@ const exportedMethods = {
                 console.log('card_title_save is processed');
             });
 
-            socket.on('tip_info_save', async (title) => {
+            socket.on('tip_info_save', async (data) => {
                console.log('tip_info_save request is received');
-               if(!title) {
+               if(!data.title) {
                    console.log('Error: tip source title is not supplied');
                    socket.emit('tip_info_save', {result: false, error: 'Tip source title must be supplied'});
                    return;
                }
+               if(!data.tabledata || data.tabledata.length == 0) {
+                   //Error data.tabledata is not supplied
+                   socket.emit('tip_info_save', {result: false, error: 'Tip info is not supplied'});
+                   return;
+               }
 
-               let result = await Resource.editResource({tip_info: title});
+               let result = await Resource.editResource({tip_info: data.title});
                if(!result.result) {
                    socket.emit('tip_info_save', {result: false, error: 'Error occurred while save tip source'});
                    return;
                }
 
+                //Format of data.tabledata is [{name: '...', sp: '...'}]
+                result = await TipsInfo.editTipsInfo(data.tabledata);
+                if(!result) {
+                    socket.emit('tip_info_save', {result: false, error: 'Error occurred while save tip info'});
+                    return;
+                }
+
                socket.emit('tip_info_save', {result: true});
-               socket.to('tip_info').emit('tip_info_update', {title: title});
+               socket.to('tip_info').emit('tip_info_update', {title: data.title, dataArray: data.tabledata});
                console.log('tip_info_save is processed');
             });
 
+            socket.on('odd_info_save', async (data) => {
+               console.log('odd_info_save request is received');
+               if(!data.tabledata || data.tabledata.length == 0) {
+                   //Error data.tabledata is not supplied
+                   socket.emit('odd_info_save', {result: false, error: 'odd info is not supplied'});
+                   return;
+               }
+
+                //Format of data.tabledata is [{name: '...', sp: '...'}]
+                result = await OddsInfo.editOddsInfo(data.tabledata);
+                if(!result) {
+                    socket.emit('odd_info_save', {result: false, error: 'Error occurred while save odd info'});
+                    return;
+                }
+
+               socket.emit('odd_info_save', {result: true});
+               socket.to('odd_info').emit('odd_info_update', {dataArray: data.tabledata});
+               console.log('odd_info_save is processed');
+            });
             socket.on('feed_category_save', async (category) => {
                console.log('feed_category_save request is received');
                if(!category) {
