@@ -1,5 +1,5 @@
 const Resource = require('../../methods/resource')
-const TipsInfo = require('../../../methods/tipsinfo')
+const TipsInfo = require('../../methods/tipsinfo')
 
 function tipsController(){
     return {

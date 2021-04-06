@@ -9,6 +9,7 @@ const adminSettingController = require('../app/http/controllers/admin/settingCon
 // const guest = require('../app/http/middlewares/guest');
 const auth = require('../app/http/middlewares/auth');
 const admin = require('../app/http/middlewares/admin');
+const settingController = require('../app/http/controllers/admin/settingController');
 
 
 function initRoute(app) {
@@ -27,6 +28,9 @@ function initRoute(app) {
 
     //Admin Routes
     app.get('/admin/setting', admin, adminSettingController().index);
+
+    //File upload and download
+    app.post('/admin/setting/pdf_upload', settingController().upload);
 }
 
 

@@ -1,4 +1,4 @@
-const OddsInfo = require('../../../methods/oddsinfo')
+const OddsInfo = require('../../methods/oddsinfo')
 const Resource = require('../../methods/resource')
 
 function oddsController(){

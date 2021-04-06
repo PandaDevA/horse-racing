@@ -4,6 +4,8 @@ const app = express();
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const sharedsession = require('express-socket.io-session');
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('express-flash');
@@ -31,6 +33,12 @@ const appsession = session({
 app.use(appsession);
 io.use(sharedsession(appsession));
 
+
+// enable files upload
+app.use(fileUpload({
+    createParentPath: true
+}));
+
 //Assets
 app.use(express.static('public'));
 app.use(express.json());
@@ -45,6 +53,7 @@ app.use(flash());
 
 
 //Global Middleware to use session and user(if logged in) in client side
+app.use(cors());
 app.use((req, res, next) => {
     res.locals.session = req.session;
     res.locals.user = req.user

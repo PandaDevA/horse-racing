@@ -46,7 +46,37 @@ function settingController(){
 
             res.render('admin/setting', resData);
         },
-     }
+
+        async upload(req, res) {
+            try {
+                if(!req.files) {
+                    req.flash('upload', {
+                        status: false,
+                        message: 'No file uploaded'
+                    });
+                } else {
+                    //Use the name of the input field (i.e. "file") to retrieve the uploaded file
+                    let file = req.files.file;
+                    
+                    //Use the mv() method to place the file in upload directory (i.e. "uploads")
+                    file.mv('./uploads/' + file.name);
+        
+                    //flash response
+                    req.flash('upload', {
+                        status: true,
+                        message: 'File is uploaded',
+                        data: {
+                            name: file.name,
+                            mimetype: file.mimetype,
+                            size: file.size
+                        }
+                    });
+                }
+            } catch (err) {
+                req.flash('upload', {status: false, message: err});
+            }
+        }
+    }
 }
 
 module.exports = settingController;
