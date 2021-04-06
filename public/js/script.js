@@ -135,6 +135,28 @@ function update_row_num(tbl_class){
     });
 }
 
+$('body').on('click', '#pdf_upload_button', function(){
+    var formData = new FormData();
+    if($('#pdf_file').length == 0)
+        return;
+    formData.append('file', $('#pdf_file')[0].files[0]);
+    $.ajax({
+        url : '/admin/setting/pdf_upload',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        },
+        error: function(data){
+            $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data);
+        }
+    });
+})
+
+
+
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
 

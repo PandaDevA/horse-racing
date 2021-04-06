@@ -127,3 +127,4 @@ Client.socket.on('tips_info_save', function(data){
         $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
     }
 });
+
