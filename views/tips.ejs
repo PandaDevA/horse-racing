@@ -2,8 +2,8 @@
     <div class="container">
         <h3 style="text-align:center">Racing tips and information for racing at <%= resource['tip_source']%></h3>
         <br>
-        <h6>Advised prices are early fixed odds, or 3rd party "show" prices.</h6>
-        <h6>Wagering at PMU indicative odds or SP is not recommended unless specially advised</h6>
+        <h6 style="text-align:center">Advised prices are early fixed odds, or 3rd party "show" prices.</h6>
+        <h6 style="text-align:center">Wagering at PMU indicative odds or SP is not recommended unless specially advised</h6>
         <table class="w-full table-auto bg-white full-width">
             <thead>
               <tr>
@@ -25,7 +25,7 @@
                         <td class="border px-4 py-2">
                             <%= tipsinfo[i].price %>
                         <td class="border px-4 py-2">
-                            <%= tipsinfo[i].notes %>
+                            <%= tipsinfo[i].note %>
                         </td>
                     </tr>
                 <% } %>

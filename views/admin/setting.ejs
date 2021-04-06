@@ -47,12 +47,12 @@
                                 <table class="w-full table-auto bg-white">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">Orders</th>
-                                            <th class="border px-4 py-2 text-left">Customer</th>
-                                            <th class="border px-4 py-2 text-left">Address</th>
-                                            <th class="border px-4 py-2 text-left">Status</th>
-                                            <th class="border px-4 py-2 text-left">Placed At</th>
-                                            <th class="border px-4 py-2 text-left">Payment Status</th>
+                                            <th class="border px-4 py-2 ">Orders</th>
+                                            <th class="border px-4 py-2 ">Customer</th>
+                                            <th class="border px-4 py-2 ">Address</th>
+                                            <th class="border px-4 py-2 ">Status</th>
+                                            <th class="border px-4 py-2 ">Placed At</th>
+                                            <th class="border px-4 py-2 ">Payment Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,10 +115,10 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">No</th>
-                                            <th class="border px-4 py-2 text-left">Name</th>
-                                            <th class="border px-4 py-2 text-left">SP</th>
-                                            <th class="border px-4 py-2 text-left">Action</th>
+                                            <th class="border px-4 py-2 ">No</th>
+                                            <th class="border px-4 py-2 ">Name</th>
+                                            <th class="border px-4 py-2 ">SP</th>
+                                            <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cur_race_info_table">
@@ -164,10 +164,10 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">No</th>
-                                            <th class="border px-4 py-2 text-left">Name</th>
-                                            <th class="border px-4 py-2 text-left">SP</th>
-                                            <th class="border px-4 py-2 text-left">Action</th>
+                                            <th class="border px-4 py-2 ">No</th>
+                                            <th class="border px-4 py-2 ">Name</th>
+                                            <th class="border px-4 py-2 ">SP</th>
+                                            <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="next_race_info_table">
@@ -203,11 +203,11 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">No</th>
-                                            <th class="border px-4 py-2 text-left">Time</th>
-                                            <th class="border px-4 py-2 text-left">Name</th>
-                                            <th class="border px-4 py-2 text-left">Text</th>
-                                            <th class="border px-4 py-2 text-left">Action</th>
+                                            <th class="border px-4 py-2 ">No</th>
+                                            <th class="border px-4 py-2 ">Time</th>
+                                            <th class="border px-4 py-2 ">Name</th>
+                                            <th class="border px-4 py-2 ">Text</th>
+                                            <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="betting_info_table">
@@ -256,37 +256,37 @@
                             <div class="col-lg-12 details order-2 order-lg-1">
                                 <h3>Tips and Information</h3>
                                 <div class="row action-area">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12 details order-2 order-lg-1">
                                         <label>Tip Source:</label>
-                                        <input id="tips_source" type="text" value="<%= resource['tip_source'] %>" placeholder="Tip Source"/>
+                                        <input class="col-lg-8" id="tips_source" type="text" value="<%= resource['tip_source'] %>" placeholder="Tip Source"/>
                                     </div>
                                 </div>
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">Race</th>
-                                            <th class="border px-4 py-2 text-left">Selection</th>
-                                            <th class="border px-4 py-2 text-left">Price</th>
-                                            <th class="border px-4 py-2 text-left">Notes</th>
-                                            <th class="border px-4 py-2 text-left">Action</th>
+                                            <th class="border py-2">Race</th>
+                                            <th class="border py-2">Selection</th>
+                                            <th class="border py-2">Price</th>
+                                            <th class="border py-2">Notes</th>
+                                            <th class="border py-2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tips_info_table">
                                         <% for(var i=0; i<tipsinfo.length; i++) { %>
                                             <tr>
-                                                <td class="border px-4 py-2">
+                                                <td class="border py-2">
                                                     <input class="info_race" type="text" value="<%= tipsinfo[i].race %>" placeholder="Name"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border py-2">
                                                     <input class="info_selection" type="text" value="<%= tipsinfo[i].selection %>" placeholder="Name"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border py-2">
                                                     <input class="info_price" type="text" value="<%= tipsinfo[i].price %>" placeholder="SP"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border py-2">
                                                     <input class="info_notes" type="text" value="<%= tipsinfo[i].notes %>" placeholder="SP"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border py-2">
                                                     <button type="button" class="Tips-Info-Delete">Delete</button>
                                                 </td>
                                             </tr>
@@ -307,11 +307,11 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 text-left">Race</th>
-                                            <th class="border px-4 py-2 text-left">Selection</th>
-                                            <th class="border px-4 py-2 text-left">Price</th>
-                                            <th class="border px-4 py-2 text-left">Notes</th>
-                                            <th class="border px-4 py-2 text-left">Action</th>
+                                            <th class="border px-4 py-2 ">Race</th>
+                                            <th class="border px-4 py-2 ">Selection</th>
+                                            <th class="border px-4 py-2 ">Price</th>
+                                            <th class="border px-4 py-2 ">Notes</th>
+                                            <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tips_info_table">

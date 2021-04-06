@@ -111,19 +111,19 @@ $('body').on('click', '.Tips-Info-Delete', function(){
 
 $('#tips_info_add').click(function(){
     $('#tips_info_table').append("<tr>"+
-    "<td class='border px-4 py-2'>"+
-        "<input class='info_race' type='text' value='' placeholder='Name'/>"+
+    "<td class='border py-2'>"+
+        "<input class='info_race' type='text' value='' placeholder='Race'/>"+
     "</td>"+
-    "<td class='border px-4 py-2'>"+
-        "<input class='info_selection' type='text' value='' placeholder='Name'/>"+
+    "<td class='border py-2'>"+
+        "<input class='info_selection' type='text' value='' placeholder='Selection'/>"+
     "</td>"+
-    "<td class='border px-4 py-2'>"+
-        "<input class='info_price' type='text' value='' placeholder='SP'/>"+
+    "<td class='border py-2'>"+
+        "<input class='info_price' type='text' value='' placeholder='Price'/>"+
     "</td>"+
-    "<td class='border px-4 py-2'>"+
-        "<input class='info_notes' type='text' value='' placeholder='SP'/>"+
+    "<td class='border py-2'>"+
+        "<input class='info_notes' type='text' value='' placeholder='Notes'/>"+
     "</td>"+
-    "<td class='border px-4 py-2'>"+
+    "<td class='border py-2'>"+
         "<button type='button' class='Tips-Info-Delete'>Delete</button>"+
     "</td>"+
     "</tr>");

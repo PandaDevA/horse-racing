@@ -177,3 +177,7 @@ button[type="submit"]{
 .action-area{
     margin: 0px;
 }
+
+th{
+    text-align:center;
+}

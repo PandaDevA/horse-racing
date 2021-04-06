@@ -163,35 +163,35 @@ const exportedMethods = {
                 console.log('card_title_save is processed');
             });
 
-            socket.on('tip_info_save', async (data) => {
+            socket.on('tips_info_save', async (data) => {
                console.log('tip_info_save request is received');
                if(!data.title) {
                    console.log('Error: tip source title is not supplied');
-                   socket.emit('tip_info_save', {result: false, error: 'Tip source title must be supplied'});
+                   socket.emit('tips_info_save', {result: false, error: 'Tip source title must be supplied'});
                    return;
                }
                if(!data.tabledata || data.tabledata.length == 0) {
                    //Error data.tabledata is not supplied
-                   socket.emit('tip_info_save', {result: false, error: 'Tip info is not supplied'});
+                   socket.emit('tips_info_save', {result: false, error: 'Tip info is not supplied'});
                    return;
                }
 
                let result = await Resource.editResource({tip_info: data.title});
                if(!result.result) {
-                   socket.emit('tip_info_save', {result: false, error: 'Error occurred while save tip source'});
+                   socket.emit('tips_info_save', {result: false, error: 'Error occurred while save tip source'});
                    return;
                }
 
                 //Format of data.tabledata is [{name: '...', sp: '...'}]
                 result = await TipsInfo.editTipsInfo(data.tabledata);
                 if(!result) {
-                    socket.emit('tip_info_save', {result: false, error: 'Error occurred while save tip info'});
+                    socket.emit('tips_info_save', {result: false, error: 'Error occurred while save tip info'});
                     return;
                 }
 
-               socket.emit('tip_info_save', {result: true});
-               socket.to('tip_info').emit('tip_info_update', {title: data.title, dataArray: data.tabledata});
-               console.log('tip_info_save is processed');
+               socket.emit('tips_info_save', {result: true});
+               socket.to('tip_info').emit('tips_info_update', {title: data.title, dataArray: data.tabledata});
+               console.log('tips_info_save is processed');
             });
 
             socket.on('odd_info_save', async (data) => {

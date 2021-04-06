@@ -100,7 +100,7 @@ $('#tips_info_save').click(function(){
     var race = [];
     var selection = [];
     var price = [];
-    var notes = [];
+    var note = [];
     $('#tips_info_table').find(".info_race").each(function( index ) {
         race.push($( this ).val());
     });
@@ -111,10 +111,10 @@ $('#tips_info_save').click(function(){
         price.push($( this ).val());
     });
     $('#tips_info_table').find(".info_notes").each(function( index ) {
-        notes.push($( this ).val());
+        note.push($( this ).val());
     });
     for(let i=0; i<race.length; i++)
-        tabledata.push({race:race[i], selection:selection[i], price:price[i], notes:notes[i]});
+        tabledata.push({race:race[i], selection:selection[i], price:price[i], note:note[i]});
     Client.socket.emit('tips_info_save', {tabledata: tabledata, title:$('#tips_source').val()});
 });
 
