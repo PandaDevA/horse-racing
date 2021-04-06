@@ -18,7 +18,7 @@ function tipsController(){
                     tip_source: ''      This is only used in here
                 }*/
             const result = await Resource.getResource();
-            if(result.result) resData[resource] = result.result;
+            if(result.result) resData["resource"] = result.result;
             const tipsinfo = await TipsInfo.getTipsInfo();
             if(tipsinfo.result) resData['tipsinfo'] = tipsinfo.result;
 

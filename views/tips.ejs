@@ -1,0 +1,36 @@
+<section class="sp_panel">
+    <div class="container">
+        <h3 style="text-align:center">Racing tips and information for racing at <%= resource['tip_source']%></h3>
+        <br>
+        <h6>Advised prices are early fixed odds, or 3rd party "show" prices.</h6>
+        <h6>Wagering at PMU indicative odds or SP is not recommended unless specially advised</h6>
+        <table class="w-full table-auto bg-white full-width">
+            <thead>
+              <tr>
+                <th class="border px-4 py-2 text-left">Race</th>
+                <th class="border px-4 py-2 text-left">Selection</th>
+                <th class="border px-4 py-2 text-left">Price</th>
+                <th class="border px-4 py-2 text-left">Notes/Addtional Info</th>
+              </tr>
+            </thead>
+            <tbody id="tips_info_table">
+                <% for(var i=0; i<tipsinfo.length; i++) { %>
+                    <tr>
+                        <td class="border px-4 py-2">
+                            <%= tipsinfo[i].race %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= tipsinfo[i].selection %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= tipsinfo[i].price %>
+                        <td class="border px-4 py-2">
+                            <%= tipsinfo[i].notes %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</section>
+
