@@ -35,14 +35,6 @@ const appsession = session({
 app.use(appsession);
 io.use(sharedsession(appsession));
 
-let log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-let log_stdout = process.stdout;
-
-console.log = function(d) { //
-  const now = new Date();
-  log_file.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
-  log_stdout.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
-};
 
 // enable files upload
 app.use(fileUpload({
@@ -75,6 +67,15 @@ app.use((req, res, next) => {
 app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+
+let log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+let log_stdout = process.stdout;
+
+console.log = function(d) { //
+  const now = new Date();
+  log_file.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
+  log_stdout.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
+};
 
 //Set Route
 require('./routes/web.js')(app);
