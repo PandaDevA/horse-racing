@@ -41,6 +41,7 @@ app.use(fileUpload({
 
 //Assets
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.use(express.json());
 
 //Passport config

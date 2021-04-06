@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const resourceSchema = new mongoose.Schema({
     stream_url: {type: String, default: 'https://rudo.video/live/sportinghd'},
-    pdf_url: {type: String, default: '/file/card.pdf'},
+    pdf_url: {type: String, default: '/card/card.pdf'},
     cur_race_time: {type: String, default: '4:00'},
     cur_race_name: {type: String, default: 'Valparaiso - Race 1'},
     next_race_time: {type: String, default: '4:28'},

@@ -50,51 +50,22 @@ function settingController(){
         async upload(req, res) {
             try {
                 if(!req.files) {
-                    req.flash('upload', {
-                        status: false,
-                        message: 'No file uploaded'
-                    });
-
-                    res.send (
-                        ...res,
-                        {
-                            status: false,
-                            message: 'No file uploaded'
-                        }
-                    ) ;
+                    console.log('Error: Pdf file must be supplied while uploading.')
+                    res.status(403).send ({message: 'Error: Select the upload file.'});
                 } else {
                     //Use the name of the input field (i.e. "file") to retrieve the uploaded file
                     let file = req.files.file;
                     
                     //Use the mv() method to place the file in upload directory (i.e. "uploads")
-                    file.mv('./uploads/' + file.name);
+                    file.mv('./uploads/card/' + 'card.pdf');
         
                     //flash response
-                    req.flash('upload', {
-                        status: true,
-                        message: 'File is uploaded',
-                        data: {
-                            name: file.name,
-                            mimetype: file.mimetype,
-                            size: file.size
-                        }
-                    });
-                    res.send ({
-                        status: true,
-                        message: 'File is uploaded',
-                        data: {
-                            name: file.name,
-                            mimetype: file.mimetype,
-                            size: file.size
-                        }
-                    });
+                    console.log('Upload pdf success.');
+                    res.status(200).send({result: true});
                 }
             } catch (err) {
-                req.flash('upload', {status: false, message: err});
-                // return {
-                //     status: false,
-                //     message: err
-                // };
+                console.log('Error occured while upload :', err);
+                res.status(500).end({message: err});
             }
         }
     }
