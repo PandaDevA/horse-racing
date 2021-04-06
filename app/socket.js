@@ -213,6 +213,7 @@ const exportedMethods = {
                socket.to('odd_info').emit('odd_info_update', {dataArray: data.tabledata});
                console.log('odd_info_save is processed');
             });
+            
             socket.on('feed_category_save', async (category) => {
                console.log('feed_category_save request is received');
                if(!category) {
