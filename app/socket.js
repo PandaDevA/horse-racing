@@ -6,7 +6,7 @@ const Sessions = require('./models/sessions');
 
 // const leaveFromAll = (socket) => {
 //     socket.leave('stream_url');
-//     socket.leave('card_info');
+//     socket.leave('card_title');
 //     socket.leave('cur_race');
 //     socket.leave('next_race');
 //     // socket.leave('');
@@ -28,7 +28,7 @@ const exportedMethods = {
             socket.on('join', (data) => {
                 console.log('join request received');
 
-                //join Urls are in data.joinTo as Array like this: data = {joinTo: ['stream_url', 'card_info' ...]}
+                //join Urls are in data.joinTo as Array like this: data = {joinTo: ['stream_url', 'card_title' ...]}
                 //same as urls which in leaveFromAll func
                 console.log(data.joinTo);
                 // leaveFromAll(socket);
@@ -142,23 +142,23 @@ const exportedMethods = {
                 console.log('stream_url_save is processed');
             });
 
-            socket.on('card_info_save', async (data) => {
-                console.log('card_info_save request is received');
-                if(!data.url || !data.title) {
+            socket.on('card_title_save', async (data) => {
+                console.log('card_title_save request is received');
+                if(!data.title) {
                     console.log('Error: pdf url or card tile is not supplied');
-                    socket.emit('card_info_save', {result: false, error: 'Pdf url and card title must be supplied'});
+                    socket.emit('card_title_save', {result: false, error: 'Pdf url and card title must be supplied'});
                     return;
                 }
 
-                let result = await Resource.editResource({pdf_url: data.url, card_title: data.title});
+                let result = await Resource.editResource({card_title: data.title});
                 if(!result.result) {
-                    socket.emit('card_info_save', {result: false, error: 'Error occurred while save card info'});
+                    socket.emit('card_title_save', {result: false, error: 'Error occurred while save card info'});
                     return;
                 }
 
-                socket.emit('card_info_save', {result: true});
-                socket.to('card_info').emit('card_info_update', {pdf_url: data.url, card_title: data.title});
-                console.log('card_info_save is processed');
+                socket.emit('card_title_save', {result: true});
+                socket.to('card_title').emit('card_title_update', {card_title: data.title});
+                console.log('card_title_save is processed');
             });
 
             socket.on('tip_source_save', async (title) => {
