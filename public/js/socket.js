@@ -13,7 +13,7 @@ Client.socket.on('cur_race_update',function(data){
     {
         $('#cur_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
         "<td class='border px-4 py-2'>" + data.dataArray[i].name + "</td>"+
-        "<td class='border px-4 py-2'>" + data.dataArray[i].sp + "</td></tr>");
+        "<td class='border px-4 py-2 " + data.dataArray[i].color + "'>" + data.dataArray[i].sp + "</td></tr>");
     }
     update_row_num('#cur_race_info_table');
 });

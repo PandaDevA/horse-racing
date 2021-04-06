@@ -181,3 +181,11 @@ button[type="submit"]{
 th{
     text-align:center;
 }
+
+.Color_Blue{
+    background-color:cyan;
+}
+
+.Color_Red{
+    background-color:mediumvioletred;
+}
