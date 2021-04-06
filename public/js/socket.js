@@ -33,3 +33,24 @@ Client.socket.on('next_race_update',function(data){
 Client.socket.on('stream_url_update',function(data){
     $('#stream_preview').attr('src',data.url);
 });
+
+Client.socket.on('tips_info_update',function(data){
+    $('#tip_source').html('Racing tips and information for racing at ' + data.title);
+    $('#tips_info_table').html('');
+    for(let i=0; i<data.dataArray.length; i++)
+    {
+        $('#tips_info_table').append("<tr>"+
+            "<td class='border px-4 py-2'>"+
+                data.dataArray[i].race+
+            "</td>"+
+            "<td class='border px-4 py-2'>"+
+                data.dataArray[i].selection+
+            "</td>"+
+            "<td class='border px-4 py-2'>"+
+                data.dataArray[i].price+
+            "<td class='border px-4 py-2'>"+
+                data.dataArray[i].note+
+            "</td>"+
+            "</tr>");
+    }
+});
