@@ -2,7 +2,7 @@ $( '#view_stream' ).click(function() {
     $('#stream_preview').attr('src',$('#stream_url').val());
 });
 
-$('.Cur-Race-Delete').click(function(){
+$('body').on('click', '.Cur-Race-Delete', function(){
     $(this).closest('tr').remove();
     update_row_num('#cur_race_info_table');
 })
@@ -13,15 +13,10 @@ $('#cur_race_info_add').click(function(){
     "<td class='border px-4 py-2'><input class='info_sp' name='sp' type='text' value='' placeholder='SP'/></td>"+
     "<td class='border px-4 py-2'><button type='button' class='Cur-Race-Delete'>Delete</button></td></tr>");
     
-    $('.Cur-Race-Delete').click(function(){
-        $(this).closest('tr').remove();
-        update_row_num('#cur_race_info_table');
-    })
-
     update_row_num('#cur_race_info_table');
 })
 
-$('.Next-Race-Delete').click(function(){
+$('body').on('click', '.Next-Race-Delete', function(){
     $(this).closest('tr').remove();
     update_row_num('#next_race_info_table');
 })
@@ -32,18 +27,59 @@ $('#next_race_info_add').click(function(){
     "<td class='border px-4 py-2'><input class='info_sp' name='sp' type='text' value='' placeholder='SP'/></td>"+
     "<td class='border px-4 py-2'><button type='button' class='Next-Race-Delete'>Delete</button></td></tr>");
     
-    $('.Next-Race-Delete').click(function(){
-        $(this).closest('tr').remove();
-        update_row_num('#next_race_info_table');
-    })
-
     update_row_num('#next_race_info_table');
 })
 
-$('.Betting-Delete').click(function(){
+$('body').on('click', '.Betting-Delete', function(){
     $(this).closest('tr').remove();
     update_row_num('#betting_info_table');
-})
+});
+
+$('body').on('click', '.Betting-Update', function(){
+    $(this).closest('tr').find('td > input').each(function(index){
+        $(this).attr('temp', $(this).val());
+        $(this).removeAttr('readonly');
+    });
+    $(this).closest('tr').find('td > textarea').each(function(index){
+        $(this).attr('temp', $(this).text());
+        $(this).removeAttr('readonly');
+    });
+    $(this).addClass('hide');
+    $(this).siblings('.Betting-Delete').addClass('hide');
+    $(this).siblings('.Betting-Cancel').removeClass('hide');
+    $(this).siblings('.Betting-Save').removeClass('hide');
+});
+
+$('body').on('click', '.Betting-Cancel', function(){
+    $(this).closest('tr').find('td > input').each(function(index){
+        $(this).val($(this).attr('temp'));
+        $(this).attr('readonly', true);
+    });
+    $(this).closest('tr').find('td > textarea').each(function(index){
+        $(this).text($(this).attr('temp'));
+        $(this).attr('readonly', true);
+    });
+    $(this).siblings('.Betting-Update').removeClass('hide');
+    $(this).siblings('.Betting-Delete').removeClass('hide');
+    $(this).addClass('hide');
+    $(this).siblings('.Betting-Save').addClass('hide');
+});
+
+$('body').on('click', '.Betting-Save', function(){
+    $(this).siblings('.Betting-Update').removeClass('hide');
+    $(this).siblings('.Betting-Delete').removeClass('hide');
+    $(this).addClass('hide');
+    $(this).siblings('.Betting-Cancel').addClass('hide');
+    $(this).closest('tr').find('td > input').each(function(index){
+        $(this).attr('readonly', true);
+    });
+    $(this).closest('tr').find('td > textarea').each(function(index){
+        $(this).attr('readonly', true);
+    });
+    $('#betting_info_table').prepend($(this).closest('tr').clone());
+    $(this).closest('tr').remove();
+    update_row_num('#betting_info_table');
+});
 
 $('#betting_info_add').click(function(){
     $('#betting_info_table').prepend(
@@ -65,13 +101,32 @@ $('#betting_info_add').click(function(){
         "<button type='button' class='Betting-Save hide'>Save</button>"+
         "<button type='button' class='Betting-Cancel hide'>Cancel</button>"+
         "</td></tr>");
-    
-    $('.Betting-Delete').click(function(){
-        $(this).closest('tr').remove();
-        update_row_num('#betting_info_table');
-    })
-        
     update_row_num('#betting_info_table');
+})
+
+$('body').on('click', '.Tips-Info-Delete', function(){
+    $(this).closest('tr').remove();
+    update_row_num('#tips_info_table');
+})
+
+$('#tips_info_add').click(function(){
+    $('#tips_info_table').append("<tr>"+
+    "<td class='border px-4 py-2'>"+
+        "<input class='info_race' type='text' value='' placeholder='Name'/>"+
+    "</td>"+
+    "<td class='border px-4 py-2'>"+
+        "<input class='info_selection' type='text' value='' placeholder='Name'/>"+
+    "</td>"+
+    "<td class='border px-4 py-2'>"+
+        "<input class='info_price' type='text' value='' placeholder='SP'/>"+
+    "</td>"+
+    "<td class='border px-4 py-2'>"+
+        "<input class='info_notes' type='text' value='' placeholder='SP'/>"+
+    "</td>"+
+    "<td class='border px-4 py-2'>"+
+        "<button type='button' class='Tips-Info-Delete'>Delete</button>"+
+    "</td>"+
+    "</tr>");
 })
 
 function update_row_num(tbl_class){
