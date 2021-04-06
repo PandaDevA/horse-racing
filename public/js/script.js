@@ -150,7 +150,7 @@ $('body').on('click', '#pdf_upload_button', function(){
             $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
         },
         error: function(data){
-            $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data);
+            $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.message);
         }
     });
 })

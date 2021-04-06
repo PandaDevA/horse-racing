@@ -17,7 +17,7 @@ function cardsController(){
                     tip_source: ''
                 }*/
             const result = await Resource.getResource();
-            if(result.result) resData[resource] = result.result;
+            if(result.result) resData["resource"] = result.result;
 
             res.render('cards', resData);
         }

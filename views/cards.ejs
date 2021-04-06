@@ -1,0 +1,13 @@
+<section class="sp_panel">
+    <div class="container">
+        <h3><%= resource['card_title']%></h3>
+        <br>
+        <h4>Click <a href="<%= resource['pdf_url']%>" target="_blank">HERE</a> to open PDF in new tab</h4>
+        <br>
+        <% if(resource['pdf_url']) {%>
+            <object data="<%= resource['pdf_url']%>" type="application/pdf" width="100%" height="600px" style="border:2px solid black;">
+            </object>
+        <% }%>
+    </div>
+</section>
+
