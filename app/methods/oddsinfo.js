@@ -1,4 +1,4 @@
-const OddsInfo = require('../models/Oddsinfo');
+const OddsInfo = require('../models/oddsinfo');
 
 const editOddsInfo = async(data) => {
     if(!data || data.length == 0) {
