@@ -8,6 +8,8 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const fs = require('fs');
+const util = require('util');
 const flash = require('express-flash');
 const MongoDBStore = require('connect-mongo')(session); // It will store our session id in database.
 const passport = require('passport');
@@ -33,6 +35,14 @@ const appsession = session({
 app.use(appsession);
 io.use(sharedsession(appsession));
 
+let log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+let log_stdout = process.stdout;
+
+console.log = function(d) { //
+  const now = new Date();
+  log_file.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
+  log_stdout.write( now.toLocaleTimeString()+ ' ' + util.format(d) + '\n');
+};
 
 // enable files upload
 app.use(fileUpload({
