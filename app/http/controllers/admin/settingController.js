@@ -54,6 +54,14 @@ function settingController(){
                         status: false,
                         message: 'No file uploaded'
                     });
+
+                    res.send (
+                        ...res,
+                        {
+                            status: false,
+                            message: 'No file uploaded'
+                        }
+                    ) ;
                 } else {
                     //Use the name of the input field (i.e. "file") to retrieve the uploaded file
                     let file = req.files.file;
@@ -71,9 +79,22 @@ function settingController(){
                             size: file.size
                         }
                     });
+                    res.send ({
+                        status: true,
+                        message: 'File is uploaded',
+                        data: {
+                            name: file.name,
+                            mimetype: file.mimetype,
+                            size: file.size
+                        }
+                    });
                 }
             } catch (err) {
                 req.flash('upload', {status: false, message: err});
+                // return {
+                //     status: false,
+                //     message: err
+                // };
             }
         }
     }
