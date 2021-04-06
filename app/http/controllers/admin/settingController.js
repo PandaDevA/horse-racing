@@ -3,6 +3,8 @@ const CurRaceInfo = require('../../../methods/curraceinfo')
 const NextRaceInfo = require('../../../methods/nextraceinfo')
 const UserInfo = require('../../../methods/users')
 const BettingInfo = require('../../../methods/bettinginfo')
+const OddsInfo = require('../../../methods/oddsinfo')
+const TipsInfo = require('../../../methods/tipsinfo')
 
 function settingController(){
     return {
@@ -37,6 +39,10 @@ function settingController(){
             
             const bettinginfo = await BettingInfo.getBettingInfo();
             if(bettinginfo.result) resData['bettinginfo'] = bettinginfo.result;
+            const tipsinfo = await TipsInfo.getTipsInfo();
+            if(tipsinfo.result) resData['tipsinfo'] = tipsinfo.result;
+            const oddsinfo = await OddsInfo.getOddsInfo();
+            if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;
 
             res.render('admin/setting', resData);
         },

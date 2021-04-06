@@ -161,23 +161,23 @@ const exportedMethods = {
                 console.log('card_title_save is processed');
             });
 
-            socket.on('tip_source_save', async (title) => {
-               console.log('tip_source_save request is received');
+            socket.on('tip_info_save', async (title) => {
+               console.log('tip_info_save request is received');
                if(!title) {
                    console.log('Error: tip source title is not supplied');
-                   socket.emit('tip_source_save', {result: false, error: 'Tip source title must be supplied'});
+                   socket.emit('tip_info_save', {result: false, error: 'Tip source title must be supplied'});
                    return;
                }
 
-               let result = await Resource.editResource({tip_source: title});
+               let result = await Resource.editResource({tip_info: title});
                if(!result.result) {
-                   socket.emit('tip_source_save', {result: false, error: 'Error occurred while save tip source'});
+                   socket.emit('tip_info_save', {result: false, error: 'Error occurred while save tip source'});
                    return;
                }
 
-               socket.emit('tip_source_save', {result: true});
-               socket.to('tip_source').emit('tip_source_update', {title: title});
-               console.log('tip_source_save is processed');
+               socket.emit('tip_info_save', {result: true});
+               socket.to('tip_info').emit('tip_info_update', {title: title});
+               console.log('tip_info_save is processed');
             });
 
             socket.on('feed_category_save', async (category) => {

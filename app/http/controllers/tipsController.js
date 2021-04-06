@@ -1,4 +1,5 @@
 const Resource = require('../../methods/resource')
+const TipsInfo = require('../../../methods/tipsinfo')
 
 function tipsController(){
     return {
@@ -18,6 +19,8 @@ function tipsController(){
                 }*/
             const result = await Resource.getResource();
             if(result.result) resData[resource] = result.result;
+            const tipsinfo = await TipsInfo.getTipsInfo();
+            if(tipsinfo.result) resData['tipsinfo'] = tipsinfo.result;
 
             res.render('tips', resData);
         }
