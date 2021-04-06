@@ -32,6 +32,13 @@ $('#next_race_info_add').click(function(){
     $('#next_race_info_table').append("<tr><td class='border px-4 py-2 row_num'></td>"+
     "<td class='border px-4 py-2'><input class='info_name' name='name' type='text' value='' placeholder='Name'/></td>"+
     "<td class='border px-4 py-2'><input class='info_sp' name='sp' type='text' value='' placeholder='SP'/></td>"+
+    "<td class='border px-4 py-2'>" +
+    "<select id='info_color'>"+
+        "<option class = 'Color_None' value='Color_None' 'selected'>None</option>"+
+        "<option class = 'Color_Blue' value='Color_Blue' >Blue</option>"+
+        "<option class = 'Color_Red' value='Color_Red' >Red</option>"+
+    "</select>"+
+    "</td>"+
     "<td class='border px-4 py-2'><button type='button' class='Next-Race-Delete'>Delete</button></td></tr>");
     
     update_row_num('#next_race_info_table');

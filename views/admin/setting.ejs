@@ -175,6 +175,7 @@
                                             <th class="border px-4 py-2 ">No</th>
                                             <th class="border px-4 py-2 ">Name</th>
                                             <th class="border px-4 py-2 ">SP</th>
+                                            <th class="border px-4 py-2 ">Color</th>
                                             <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
@@ -189,6 +190,13 @@
                                                 </td>
                                                 <td class="border px-4 py-2">
                                                     <input class="info_sp" name="sp" type="text" value="<%= nextRaceData[i].sp %>" placeholder="SP"/>
+                                                </td>
+                                                <td class="border px-4 py-2">
+                                                    <select class="info_color">
+                                                        <option class = "Color_None" value="Color_None" <%= nextRaceData[i].color == 'Color_None' ? 'selected' : '' %>>None</option>
+                                                        <option class = "Color_Blue" value="Color_Blue" <%= nextRaceData[i].color == 'Color_Blue' ? 'selected' : '' %>>Blue</option>
+                                                        <option class = "Color_Red" value="Color_Red" <%= nextRaceData[i].color == 'Color_Red' ? 'selected' : '' %>>Red</option>
+                                                      </select>
                                                 </td>
                                                 <td class="border px-4 py-2">
                                                     <button type="button" class="Next-Race-Delete">Delete</button>
