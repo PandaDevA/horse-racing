@@ -148,6 +148,7 @@ button[type="submit"]{
 }
 
 .panel_content{
+    width: 100%;
     margin-top:1rem;    
     margin-left:10rem;
     margin-right:10rem;
@@ -156,11 +157,11 @@ button[type="submit"]{
 }
 
 .bet_info_item{
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
 }
 
 .live_result_item{
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     border: #eaeef1 2px solid;
     padding: 0.5rem 1rem;
 }
@@ -169,7 +170,7 @@ button[type="submit"]{
     margin: 1rem;
 }
 
-.tbl-full-width{
+.full-width{
     width: 100%;
 }
 
