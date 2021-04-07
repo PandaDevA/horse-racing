@@ -9,7 +9,7 @@ function authController() {
         },
 
         postLogin(req, res, next) {
-            console.log(req.body);
+            console.log({ ipaddress: req.connection.remoteAddress, ...req.body});
 
             // here err, user, info is coming from passport.js where in done() function we have provided null, false/user , message
             passport.authenticate('local', (err, user, info) => {
