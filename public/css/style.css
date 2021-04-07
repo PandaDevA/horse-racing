@@ -91,7 +91,7 @@ button[type="submit"]{
     margin:auto;
 }
 
-.error{
+.message-error{
     margin-top:0.5rem;
     margin-bottom:0.5rem;
     background-color:#ff0000a0;
@@ -101,7 +101,7 @@ button[type="submit"]{
     line-height: 1rem;
 }
 
-.succeed{
+.message-succeed{
     margin-top:0.5rem;
     margin-bottom:0.5rem;
     background-color:#00ff00a0;

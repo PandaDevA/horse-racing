@@ -161,10 +161,10 @@ $('body').on('click', '#pdf_upload_button', function(){
         processData: false,  // tell jQuery not to process the data
         contentType: false,  // tell jQuery not to set contentType
         success : function(data) {
-            $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
         },
         error: function(data){
-            $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.message);
+            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
         }
     });
 })

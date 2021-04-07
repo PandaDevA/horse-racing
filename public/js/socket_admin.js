@@ -19,11 +19,11 @@ $('#cur_race_info_save').click(function(){
 
 Client.socket.on('cur_race_save', function(data){
     if(data.result){
-        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
     }
     else
     {
-        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
 
@@ -48,11 +48,11 @@ $('#next_race_info_save').click(function(){
 
 Client.socket.on('next_race_save', function(data){
     if(data.result){
-        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
     }
     else
     {
-        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
 
@@ -66,11 +66,11 @@ $('#card_title_save').click(function(){
 
 Client.socket.on('stream_url_save', function(data){
     if(data.result){
-        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
     }
     else
     {
-        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
 
@@ -95,11 +95,11 @@ $('#betting_info_save').click(function(){
 
 Client.socket.on('betting_info_save', function(data){
     if(data.result){
-        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
     }
     else
     {
-        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
 
@@ -128,11 +128,11 @@ $('#tips_info_save').click(function(){
 
 Client.socket.on('tips_info_save', function(data){
     if(data.result){
-        $('#message-box').first().removeClass('error').addClass('succeed').addClass('show').html('Update Succeed');
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
     }
     else
     {
-        $('#message-box').first().removeClass('succeed').addClass('error').addClass('show').html(data.error);
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
 
