@@ -57,13 +57,19 @@
   <div class="container">
     <div class="register_panel">
       <h2>Register</h2>
-      <form action="/register" method="POST">
+      <form id="register_form" action="/register" method="POST">
         <input type="hidden" name="remember" value="true">
-        <label for="user-name">Full Name:</label>
-        <input id="user-name" value="<%= messages.name %>" name="name" type="text" autocomplete="name" class="form-control" placeholder="Full Name">
+        <label for="full-name">Full Name:</label>
+        <input id="full-name" value="<%= messages.name %>" name="fullname" type="text" autocomplete="fullname" class="form-control" placeholder="Full Name">
         <br>
         <label for="email-address">Email address:</label>
         <input id="email-address" value="<%= messages.email %>" name="email" type="email" autocomplete="email" class="form-control" placeholder="Email address">
+        <br>
+        <label for="company">Company:</label>
+        <input id="company" value="<%= messages.name %>" name="company" type="text" autocomplete="company" class="form-control" placeholder="Company">
+        <br>
+        <label for="user-name">User Name:</label>
+        <input id="user-name" value="<%= messages.name %>" name="username" type="text" autocomplete="username" class="form-control" placeholder="User Name">
         <br>
         <label for="password">Password:</label>
         <input id="password" name="password" type="password" autocomplete="current-password" class="form-control" placeholder="Password">
