@@ -80,7 +80,7 @@ console.log = function(d) { //
 //Set Route
 require('./routes/web.js')(app);
 socketSrc.useSocket(io).then(() => {
-    server.listen(process.env.PORT || 3000, () => {
-        console.log('Listening on port 3000');
+    server.listen(process.env.PORT || 8082, () => {
+        console.log('Listening on port 8082');
     })
 });
