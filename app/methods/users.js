@@ -1,7 +1,7 @@
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 
-const registerUser = async(data) => {
+const registerUser = async(data, ipaddr) => {
     const { name, email, username, password } = data;
     let error = '';
 
@@ -43,8 +43,7 @@ const registerUser = async(data) => {
             password: hashedPass,
         };
         if(data.company) userInf.company = data.company;
-        if(data.ipaddress) userInf.ipaddress = data.ipaddress;
-        // if(data.subscription) userInf.subscription = data.subscription;
+        if(ipaddr) userInf.ipaddress = ipaddr;
         if(data.able_pages) userInf.able_pages = data.able_pages;
         const user = new User(userInf);
         const returnInfo = await user.save();
