@@ -55,6 +55,7 @@ Client.socket.on('feed_category_update',function(data){
     {
         $('.live_result_panel .panel_content').first().html("<a class='twitter-timeline' href='https://twitter.com/hipodromo_chile?ref_src=twsrc%5Etfw'>Tweets by hipodromo_chile</a>");
     }
+    location.reload();
 });
 
 Client.socket.on('tips_info_update',function(data){
