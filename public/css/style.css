@@ -259,3 +259,13 @@ th{
 .form-row > .form-control{
     margin-top: auto;
 }
+
+.resource-block{
+    border: 2px solid black;
+    padding:5px 10px;
+    margin: 5px 0px;
+}
+
+.resource-block > .row{
+    padding: 5px 10px;
+}

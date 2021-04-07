@@ -34,6 +34,29 @@ Client.socket.on('stream_url_update',function(data){
     $('#stream_preview').attr('src',data.url);
 });
 
+Client.socket.on('feed_category_update',function(data){
+    if(data.category == 'V_Sporting')
+    {
+        $('.live_result_panel .panel_content').first().html("<a class='twitter-timeline' href='https://twitter.com/V_Sporting?ref_src=twsrc%5Etfw'>Tweets by V_Sporting</a>");
+    }
+
+    if(data.category == 'ClubHipico_Stgo')
+    {
+        var element = $('.live_result_panel .panel_content');
+        $('.live_result_panel .panel_content').first().html("<a class='twitter-timeline' href='https://twitter.com/ClubHipico_Stgo?ref_src=twsrc%5Etfw'>Tweets by ClubHipico_Stgo</a>");
+    }
+
+    if(data.category == 'CHCmediocamino')
+    {
+        $('.live_result_panel .panel_content').first().html("<a class='twitter-timeline' href='https://twitter.com/CHCmediocamino?ref_src=twsrc%5Etfw'>Tweets by CHCmediocamino</a>");
+    }
+
+    if(data.category == 'hipodromo_chile')
+    {
+        $('.live_result_panel .panel_content').first().html("<a class='twitter-timeline' href='https://twitter.com/hipodromo_chile?ref_src=twsrc%5Etfw'>Tweets by hipodromo_chile</a>");
+    }
+});
+
 Client.socket.on('tips_info_update',function(data){
     $('#tip_source').html('Racing tips and information for racing at ' + data.title);
     $('#tips_info_table').html('');

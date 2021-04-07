@@ -91,12 +91,23 @@
                 LIVE RESULT
             </div>
             <div class="panel_content">
-                <a class="twitter-timeline" href="https://twitter.com/V_Sporting?ref_src=twsrc%5Etfw">Tweets by V_Sporting</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <% if(resource['feed_category'] == 'V_Sporting') {%>
+                    <a class="twitter-timeline" href="https://twitter.com/V_Sporting?ref_src=twsrc%5Etfw">Tweets by V_Sporting</a>
+                <% } %>
+                <% if(resource['feed_category'] == 'ClubHipico_Stgo') {%>
+                    <a class="twitter-timeline" href="https://twitter.com/ClubHipico_Stgo?ref_src=twsrc%5Etfw">Tweets by ClubHipico_Stgo</a> 
+                <% } %>
+                <% if(resource['feed_category'] == 'CHCmediocamino') {%>
+                    <a class="twitter-timeline" href="https://twitter.com/CHCmediocamino?ref_src=twsrc%5Etfw">Tweets by CHCmediocamino</a>
+                <% } %>
+                <% if(resource['feed_category'] == 'hipodromo_chile') {%>
+                    <a class="twitter-timeline" href="https://twitter.com/hipodromo_chile?ref_src=twsrc%5Etfw">Tweets by hipodromo_chile</a>
+                <% } %>
             </div>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </div>
 </section>
 <script>
-    var join_events = ['cur_race', 'stream_url', 'next_race'];
+    var join_events = ['cur_race', 'stream_url', 'next_race', 'feed_category'];
 </script>

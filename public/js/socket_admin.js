@@ -60,6 +60,11 @@ $('#stream_url_save').click(function(){
     Client.socket.emit('stream_url_save', $('#stream_url').val());
 });
 
+$('#live_feedback_save').click(function(){
+    Client.socket.emit('feed_category_save', $('#live_feedback').val());
+});
+
+
 $('#card_title_save').click(function(){
     Client.socket.emit('card_title_save', $('#card_title').val());
 });
