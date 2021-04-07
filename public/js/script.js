@@ -23,6 +23,10 @@ $('#cur_race_info_add').click(function(){
     update_row_num('#cur_race_info_table');
 })
 
+$('#cur_race_info_clear').click(function(){
+    $('#cur_race_info_table').html("");
+})
+
 $('body').on('click', '.Next-Race-Delete', function(){
     $(this).closest('tr').remove();
     update_row_num('#next_race_info_table');
@@ -42,6 +46,10 @@ $('#next_race_info_add').click(function(){
     "<td class='border px-4 py-2'><button type='button' class='Next-Race-Delete'>Delete</button></td></tr>");
     
     update_row_num('#next_race_info_table');
+})
+
+$('#next_race_info_clear').click(function(){
+    $('#next_race_info_table').html("");
 })
 
 $('body').on('click', '.Betting-Delete', function(){
@@ -141,6 +149,10 @@ $('#tips_info_add').click(function(){
         "<button type='button' class='Tips-Info-Delete'>Delete</button>"+
     "</td>"+
     "</tr>");
+})
+
+$('#tips_info_clear').click(function(){
+    $('#tips_info_table').html("");
 })
 
 function update_row_num(tbl_class){
