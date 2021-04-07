@@ -7,7 +7,7 @@ $(function() {
         // The key name on the left side is the name attribute
         // of an input field. Validation rules are defined
         // on the right side
-        fullname: "required",
+        name: "required",
         username: "required",
         email: {
           required: true,
@@ -22,7 +22,7 @@ $(function() {
       },
       // Specify validation error messages
       messages: {
-        fullname: "Please enter your name",
+        name: "Please enter your name",
         username: "Please enter your username",
         password: {
           required: "Please provide a password",
