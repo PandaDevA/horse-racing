@@ -131,7 +131,7 @@ const updateUserDataByName = async(oldusername, data) => {
     }
 
     updateData = {};
-    let accessInfo = user.access;
+    let accessInfo = user.result.access;
     const idx = accessInfo.indexOf(data.access);
     if(data.method == 'add') {
         if(idx == -1) {

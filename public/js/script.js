@@ -272,7 +272,7 @@ $('body').on('click', '#stream_toggle', function(){
 $('body').on('change', '#user_table input:checkbox', function(){
     var returnVal = confirm("Are you sure?");
     if(!returnVal)
-        $(this).prop("checked", !$(this).checked);
+        $(this).prop("checked", !this.checked);
     else{
         $.blockUI({ message: '<h1><img src="/img/busy.gif" /> Just a moment...</h1>' });
         $.ajax({
@@ -281,7 +281,7 @@ $('body').on('change', '#user_table input:checkbox', function(){
             data : {
                 username: $(this).closest('td').data('username'),
                 type: $(this).val(),
-                checked: $(this).checked,
+                checked: this.checked,
             },
             success : function(data) {
             },
