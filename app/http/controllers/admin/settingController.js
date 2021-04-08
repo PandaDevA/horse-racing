@@ -73,6 +73,16 @@ function settingController(){
             res.status(200).send(resData);
         },
 
+        async access(req, res){
+            let { username, type, result } = req.body;
+            let resData = {};
+
+            const users = await UserInfo.updateUserDataByName(username, {access: type, method: result ? 'add' : 'del'});
+            resData = users;
+
+            res.status(200).send(resData);
+        },
+
         async upload(req, res) {
             try {
                 if(!req.files) {
@@ -105,7 +115,7 @@ function settingController(){
                     let file = req.files.file;
                     
                     //Use the mv() method to place the file in upload directory (i.e. "uploads")
-                    file.mv('./uploads/odd/' + file);
+                    file.mv('./uploads/odds/' + file);
         
                     //flash response
                     console.log('Upload excel success.');
@@ -115,8 +125,56 @@ function settingController(){
                 console.log('Error occured while upload :', err);
                 res.status(500).end({message: err});
             }
-        }
+        },
 
+        async oddDelete(req, res) {
+            try {
+                if(!req.files) {
+                    console.log('Error: Excel file must be supplied while deleteing.')
+                    res.status(403).send ({message: 'Error: Select the delete file.'});
+                } else {
+                    //Use the name of the input field (i.e. "file") to retrieve the deleted file
+                    let file = req.files.file;
+                    
+                    //Use the mv() method to place the file in delete directory 
+                    fs.unlink('./uploads/odds/' + file, (err, files) => {
+                        if(err) 
+                        {
+                            console.error(`Error occured while delete Excel files ${err}`);
+                            res.status(404).send({result: false, error: err});
+                        }
+                        else {
+                            console.log('Delete excel success.');
+                            res.status(200).send({result: true, error: ''});
+                        }
+                    });
+                }
+            } catch (err) {
+                console.log('Error occured while delete :', err);
+                res.status(500).end({message: err});
+            }
+        },
+
+        async oddClear(req, res) {
+            try {
+
+                //Use the unlint() method to delete the file in upload directory 
+                fs.unlink('./uploads/odds/*.*', (err, files) => {
+                    if(err) 
+                    {
+                        console.error(`Error occured while clear Excel files ${err}`);
+                        res.status(404).send({result: false, error: err});
+                    }
+                    else {
+                        console.log('Delete all excels success.');
+                        res.status(200).send({result: true, error: ''});
+                    }
+                });
+            } catch (err) {
+                console.log('Error occured while clear :', err);
+                res.status(500).end({message: err});
+            }
+        }
     }
 }
 

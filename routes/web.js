@@ -29,10 +29,13 @@ function initRoute(app) {
     //Admin Routes
     app.get('/admin/setting', admin, adminSettingController().index);
     app.post('/admin/setting/user', admin, adminSettingController().user);
+    app.post('/admin/setting/user/access', admin, adminSettingController().access);
 
     //File upload and download
     app.post('/admin/setting/pdf_upload', settingController().upload);
     app.post('/admin/setting/odds/file_upload', settingController().oddUpload);
+    app.post('/admin/setting/odds/delete', settingController().oddDelete);
+    app.post('/admin/setting/odds/clear', settingController().oddClear);
 }
 
 

@@ -259,30 +259,6 @@ const exportedMethods = {
                 console.log('betting_info_save is processed');
             });
 
-            socket.on('user_info_save', async (data) => {
-                console.log('user_info_save request is received');
-                if(!data) {
-                    console.log('Error: User info is not supplied');
-                    socket.emit('user_info_save', {result: false, error: 'User info must be supplied'});
-                    return;
-                }
-
-                // let result;
-                //     let result = await BettingInfo.updateBettingInfo({id: data.info.id, time: data.info.time, name: data.info.name, text: data.info.text});
-                //     if(!result) {
-                //         socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
-                //         return;
-                //     }
-
-                // result = await BettingInfo.getBettingInfo();
-                // if(!result.result) {
-                //     socket.emit('user_info_save', {result: false, error: 'Error occurred while save betting info'});
-                //     return;
-                // }
-
-                // socket.emit('user_info_save', {result: true});
-                console.log('user_info_save is processed');
-            });
         });
     },
 };

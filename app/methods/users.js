@@ -131,11 +131,28 @@ const updateUserDataByName = async(oldusername, data) => {
     }
 
     updateData = {};
-    if(data.access) updateData['access'] = data.access;
-    // if(data.subscription) updateData['subscription'] = data.subscription;
+    let accessInfo = user.access;
+    const idx = accessInfo.indexOf(data.access);
+    if(data.method == 'add') {
+        if(idx == -1) {
+            accessInfo.push(data.access);
+        } else {
+            return { result: true, error: '' };
+        }
+    } else {
+        if(idx != -1) {
+            accessInfo.splice(idx, 1);
+        }
+        else {
+            return { result: false, error: `Access Info, ${data.access}, is not exist in the User's AccessInfo`}
+        }
+    }
+
+    updateData = {access: accessInfo};
+
     try {
         result = await User.updateOne({username: oldusername}, updateData);
-        return { result: result, error: ''}
+        return { result: true, error: ''}
     } catch(e) {
         console.log(`Error while updateUserDataByName: ${e.message}`);
         return { result: false, error: e.message};
