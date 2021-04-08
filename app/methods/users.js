@@ -90,17 +90,28 @@ const getUserList = async(filter, pageId, countPerPage) => {
     let result = {};
 
     let query = {};
-    if(filter) query = {$or: [{username: filter}, {name: filter}, {email: filter}, {company: filter}, {ipaddress: filter}]};
+    if(filter) query = {
+        $or:
+        [
+            {username: { $regex: filter }},
+            {name: { $regex: filter }},
+            {email: { $regex: filter }},
+            {company: { $regex: filter }},
+            {ipaddress: { $regex: filter }}
+        ]};
 
-    const count = await User.countDocuments(query);
-    if(!count) console.log('could not get the count of users');
+    let count = await User.countDocuments(query);
+    if(!count) {
+        console.log('could not get the count of users');
+        count = 0;
+    }
     else console.log(`page count is : ${count}`);
 
     if(count <= perPage * ( pageId - 1 )) curPage = 1;
 
     try {
         await User
-            .find(query, {}, { skip: perPage * (curPage - 1), limit: perPage }, function(err, data) {
+            .find(query, {}, { skip: perPage * (curPage - 1), limit: Number.parseInt(perPage) }, function(err, data) {
                 if(err) console.log(`Error while getUserList: ${err}`);
                 result = { result: data, pageInfo: {perPage: perPage, count: count, curPage: curPage}, error: err };        
             });

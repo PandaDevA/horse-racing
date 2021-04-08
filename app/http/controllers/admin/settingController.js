@@ -68,9 +68,9 @@ function settingController(){
 
             //user table data: 
             const users = await UserInfo.getUserList(filter, page, count);
-            if(users.result) resData = users.result;
+            if(!users.error) resData = users;
 
-            res.render('admin/setting/user', resData);
+            res.status(200).send(resData);
         },
 
         async upload(req, res) {

@@ -151,9 +151,27 @@ $('#tips_info_add').click(function(){
     "</tr>");
 })
 
-$('#tips_info_clear').click(function(){
+$('body').on('click', '#tips_info_clear', function(){
     $('#tips_info_table').html("");
 })
+
+function update_user(filter, page, count){
+7}
+
+$('body').on('click', '#user_find', function(){
+    update_user($('#user_filter').val(), 1,  $('#user_perPage').val());
+})
+
+$('body').on('change', '#user_perPage', function(){
+    update_user($('#user_filter').val(), 1,  $('#user_perPage').val());
+})
+
+$('body').on('click', '#user-pagination li', function(){
+    if(!$(this).data('page'))
+        return;
+    update_user($('#user_filter').val(), $(this).data('page'),  $('#user_perPage').val());
+})
+
 
 function update_row_num(tbl_class){
     $(tbl_class).find("tr > td.row_num").each(function( index ) {
@@ -191,3 +209,28 @@ $('body').on('click', '#stream_toggle', function(){
         })
     }
 })
+
+$('#user_table input:checkbox').change(function() {
+    var returnVal = confirm("Are you sure?");
+    if(!returnVal)
+        $(this).prop("checked", !$(this).checked);
+    else{
+        $.blockUI({ message: '<h1><img src="/img/busy.gif" /> Just a moment...</h1>' });
+        $.ajax({
+            url : '/admin/setting/user/access',
+            type : 'POST',
+            data : {
+                type: $(this).val(),
+                result: $(this).checked,
+            },
+            success : function(data) {
+            },
+            error: function(data){
+                alert("Error occured...");
+                $(this).prop("checked", !$(this).checked);
+            }
+        });
+    }
+});
+
+$(document).ajaxStop($.unblockUI);

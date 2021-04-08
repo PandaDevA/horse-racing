@@ -269,3 +269,9 @@ th{
 .resource-block > .row{
     padding: 5px 10px;
 }
+
+#user-pagination li{
+    margin:2px;
+    border: 1px solid black;
+    padding:2px 5px;
+}
