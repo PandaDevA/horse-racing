@@ -14,7 +14,7 @@ function settingController(){
 
             //user table data: 
             const users = await UserInfo.getUserList(null, 1, 10);
-            if(users.result) resData['users'] = users.result;
+            resData['users'] = users;
             
             //current race table data: [{name: '', sp: '', color: ''},{...}]
             const curraces = await CurRaceInfo.getCurRaceInfo();
