@@ -18,7 +18,7 @@ function oddsController(){
                     tip_source: ''
                 }*/
             const result = await Resource.getResource();
-            if(result.result) resData[resource] = result.result;
+            if(result.result) resData['resource'] = result.result;
             
             const oddsinfo = await OddsInfo.getOddsInfo();
             if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;

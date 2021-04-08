@@ -275,3 +275,19 @@ th{
     border: 1px solid black;
     padding:2px 5px;
 }
+
+.long-table input {
+    width: 120px;
+}
+
+.long-table select {
+    width: 120px;
+}
+
+button{
+    background-color: #0000ffaa;
+    border: 1px solid blue;
+    border-radius: 2px;
+    color:white;
+}
+

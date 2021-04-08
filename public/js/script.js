@@ -308,7 +308,7 @@ $('#odds_info_add').click(function(){
     "</td>"+
     "<td class='border py-2'>"+
     "<input class='info_meeting' type='text' value='' placeholder='Meeting'/>"+
-    "</td>"
+    "</td>"+
     "<td class='border py-2'>"+
     "<input class='info_overnight' type='text' value='' placeholder='Overnight'/>"+
     "</td>"+

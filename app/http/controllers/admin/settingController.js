@@ -160,13 +160,23 @@ function settingController(){
             try {
 
                 //Use the unlint() method to delete the file in upload directory 
-                fs.unlink('./uploads/odds/*.*', (err, files) => {
+                let directory = './uploads/odds/';
+                fs.readdir(directory, (err, files) => {
                     if(err) 
                     {
                         console.error(`Error occured while clear Excel files ${err}`);
                         res.status(404).send({result: false, error: err});
                     }
                     else {
+                        
+                        for (const file of files) {
+                            fs.unlink(directory + file, err => {
+                                if(err) {
+                                    console.error(`Error occured while clear Excel files ${err}`);
+                                    res.status(404).send({result: false, error: err});
+                                }
+                            });
+                        }
                         console.log('Delete all excels success.');
                         res.status(200).send({result: true, error: ''});
                     }
