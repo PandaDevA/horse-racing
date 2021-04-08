@@ -44,7 +44,7 @@ const registerUser = async(data, ipaddr) => {
         };
         if(data.company) userInf.company = data.company;
         if(ipaddr) userInf.ipaddress = ipaddr;
-        if(data.able_pages) userInf.able_pages = data.able_pages;
+        if(data.access) userInf.access = data.access;
         const user = new User(userInf);
         const returnInfo = await user.save();
         if (returnInfo) {
@@ -120,7 +120,7 @@ const updateUserDataByName = async(oldusername, data) => {
     }
 
     updateData = {};
-    if(data.able_pages) updateData['able_pages'] = data.able_pages;
+    if(data.access) updateData['access'] = data.access;
     // if(data.subscription) updateData['subscription'] = data.subscription;
     try {
         result = await User.updateOne({username: oldusername}, updateData);

@@ -5,6 +5,7 @@ const UserInfo = require('../../../methods/users')
 const BettingInfo = require('../../../methods/bettinginfo')
 const OddsInfo = require('../../../methods/oddsinfo')
 const TipsInfo = require('../../../methods/tipsinfo')
+const fs = require('fs');
 
 function settingController(){
     return {
@@ -44,6 +45,20 @@ function settingController(){
             const oddsinfo = await OddsInfo.getOddsInfo();
             if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;
 
+            const directory = __dirname + '/uploads/odd/';
+            try {
+                fs.readdir(directory, (err, files) => {
+                    if(err) console.error(`Error occured while list Excel files ${err}`);
+                    else {
+                        resData['excelList'] = files;
+                        console.log('List of excel files :');
+                        console.log(files);
+                    }
+                });
+            } catch (err) {
+                console.error(`Error occured while list Excel files ${err}`);
+            }
+
             res.render('admin/setting', resData);
         },
 
@@ -78,7 +93,30 @@ function settingController(){
                 console.log('Error occured while upload :', err);
                 res.status(500).end({message: err});
             }
+        },
+
+        async oddUpload(req, res) {
+            try {
+                if(!req.files) {
+                    console.log('Error: Excel file must be supplied while uploading.')
+                    res.status(403).send ({message: 'Error: Select the upload file.'});
+                } else {
+                    //Use the name of the input field (i.e. "file") to retrieve the uploaded file
+                    let file = req.files.file;
+                    
+                    //Use the mv() method to place the file in upload directory (i.e. "uploads")
+                    file.mv('./uploads/odd/' + file);
+        
+                    //flash response
+                    console.log('Upload excel success.');
+                    res.status(200).send({result: true});
+                }
+            } catch (err) {
+                console.log('Error occured while upload :', err);
+                res.status(500).end({message: err});
+            }
         }
+
     }
 }
 

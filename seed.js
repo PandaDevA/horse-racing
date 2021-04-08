@@ -24,7 +24,7 @@ const userData = [{
         username: "user1",
         password: "123456",
         company: "Oil Group",
-        able_pages: ["home", "card", "contact"],
+        access: ["home", "card", "contact"],
         ipaddress: "192.168.104.57",
     },
     {
@@ -42,7 +42,7 @@ const userData = [{
         password: "123456",
         company: "Oil Group",
         ipaddress: "192.168.104.55",
-        able_pages: ["all"],
+        access: ["all"],
         // subscription: true,
     }
 ];
@@ -116,9 +116,9 @@ async function main() {
     // console.log(await removeUserByName('user3'));
     console.log(await getUserList('testuser1', 3, 2));
     // console.log(await getUserByName('user2'));
-    // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b']}));
-    // console.log(await updateUserDataByName('user1', {able_pages: ['a']}));
-    // console.log(await updateUserDataByName('user1', {able_pages: ['a', 'b', 'c']}));
+    // console.log(await updateUserDataByName('user1', {access: ['a', 'b']}));
+    // console.log(await updateUserDataByName('user1', {access: ['a']}));
+    // console.log(await updateUserDataByName('user1', {access: ['a', 'b', 'c']}));
     // console.log(await editResource(resourceData));
     // console.log(await getResource());
     // console.log(await editCurRaceInfo(raceData));

@@ -32,6 +32,7 @@ function initRoute(app) {
 
     //File upload and download
     app.post('/admin/setting/pdf_upload', settingController().upload);
+    app.post('/admin/setting/odds/file_upload', settingController().oddUpload);
 }
 
 

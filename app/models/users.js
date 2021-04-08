@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: 'customer' },
     company: { type: String, default: '' },
     ipaddress: { type: String, default: '0.0.0.0' },
-    able_pages: { type: Array, default: [] },
+    access: { type: Array, default: [] },
     // subscription: { type: Boolean, default: false},
 }, { timestamps: true });
 
