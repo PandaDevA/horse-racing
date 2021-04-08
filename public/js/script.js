@@ -220,6 +220,7 @@ $('#user_table input:checkbox').change(function() {
             url : '/admin/setting/user/access',
             type : 'POST',
             data : {
+                username: $(this).closest('td').data('username'),
                 type: $(this).val(),
                 result: $(this).checked,
             },

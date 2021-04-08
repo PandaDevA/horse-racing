@@ -78,3 +78,35 @@ Client.socket.on('tips_info_update',function(data){
             "</tr>");
     }
 });
+
+Client.socket.on('odd_info_update',function(data){
+    $('#odds_info_table').html('');
+    for(let i=0; i<data.dataArray.length; i++)
+    {
+        let content = '';
+        content += "<tr>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.dataArray[i].date+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.dataArray[i].meeting+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>";
+        if(data.dataArray[i].overnighturl=='') { 
+            content += data.dataArray[i].overnight;
+        } else {
+            content += "<a href='/uploads/odds/" + data.dataArray[i].overnighturl + "'>"+
+                            "available</a>";
+        }
+        content += "</td><td class='border px-4 py-2'>";
+        if(data.dataArray[i].morningurl=='') { 
+            content += data.dataArray[i].morning;
+        } else {
+            content += "<a href='/uploads/odds/" + data.dataArray[i].morningurl + "'>"+
+                            "available</a>";
+        }
+        content+="</td></tr>";
+        $('#odds_info_table').append(content);
+    }
+});
+

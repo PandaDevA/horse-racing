@@ -1,0 +1,50 @@
+<section class="sp_panel">
+    <div class="container">
+        <h3 style="text-align:center">Overnight and Morning Tissue Prices</h3>
+        <br>
+        <h6 style="text-align:center">Prices for upcoming races can be downloaded in excel format below</h6>
+        <table class="w-full table-auto bg-white full-width">
+            <thead>
+              <tr>
+                <th class="border px-4 py-2 text-left">Date</th>
+                <th class="border px-4 py-2 text-left">Meeting</th>
+                <th class="border px-4 py-2 text-left">Overnight</th>
+                <th class="border px-4 py-2 text-left">Morning Update</th>
+              </tr>
+            </thead>
+            <tbody id="odds_info_table">
+                <% for(var i=0; i<oddsinfo.length; i++) { %>
+                    <tr>
+                        <td class="border px-4 py-2">
+                            <%= oddsinfo[i].date %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <%= oddsinfo[i].meeting %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <% if(oddsinfo[i].overnighturl=='') { %>
+                                <%= oddsinfo[i].overnight %>
+                            <% } else { %>
+                                <a href="/uploads/odds/<%= oddsinfo[i].overnighturl %>">
+                                    available
+                                </a>
+                            <% } %>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <% if(oddsinfo[i].morningurl=='') { %>
+                                <%= oddsinfo[i].morning %>
+                            <% } else { %>
+                                <a href="/uploads/odds/<%= oddsinfo[i].morningurl %>">
+                                    available
+                                </a>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</section>
+<script>
+    var join_events = ['odd_info'];
+</script>
