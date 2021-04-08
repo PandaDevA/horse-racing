@@ -24,7 +24,7 @@ const userData = [{
         username: "user1",
         password: "123456",
         company: "Oil Group",
-        access: ["home", "card", "contact"],
+        access: [],
         ipaddress: "192.168.104.57",
     },
     {
@@ -34,6 +34,7 @@ const userData = [{
         password: "123456",
         company: "Oil Group",
         ipaddress: "192.168.104.55",
+        access: [],
     },
     {
         name: "testuser3",
@@ -42,7 +43,7 @@ const userData = [{
         password: "123456",
         company: "Oil Group",
         ipaddress: "192.168.104.55",
-        access: ["all"],
+        access: [],
         // subscription: true,
     }
 ];
