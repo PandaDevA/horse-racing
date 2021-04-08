@@ -128,7 +128,6 @@ $('#betting_info_add').click(function(){
 
 $('body').on('click', '.Tips-Info-Delete', function(){
     $(this).closest('tr').remove();
-    update_row_num('#tips_info_table');
 })
 
 $('#tips_info_add').click(function(){
@@ -156,7 +155,75 @@ $('body').on('click', '#tips_info_clear', function(){
 })
 
 function update_user(filter, page, count){
-7}
+    $.blockUI({ message: '<h1><img src="/img/busy.gif" /> Just a moment...</h1>' });
+    $.ajax({
+        url : '/admin/setting/user',
+        type : 'POST',
+        data : {
+            filter: filter,
+            page: page,
+            count: count
+        },
+        success : function(data) {
+            $('#user-pagination').empty();
+            let pageCount = Math.ceil(data.pageInfo.count / data.pageInfo.perPage);
+            if ( pageCount> 0) {
+                let content = "";
+                content+="<ul class='pagination text-center'>";
+                if (data.pageInfo.curPage == 1) {
+                    content+="<li class='disabled'>First</li>";
+                } else {
+                    content+="<li data-page='1'>First</li>";
+                }
+                var i = (Number(data.pageInfo.curPage) > 5 ? Number(data.pageInfo.curPage) - 4 : 1);
+                if (i !== 1) {
+                    content+="<li class='disabled'>...</li>";
+                }
+                for (; i <= (Number(data.pageInfo.curPage) + 4) && i <= pageCount; i++) {
+                    if (i == data.pageInfo.curPage) {
+                        content+="<li class='active'>" + i  + "</li>";
+                    } else {
+                        content+="<li data-page='" + i + "'>" + i + "</li>";
+                    }
+                    if (i == Number(data.pageInfo.curPage) + 4 && i < pageCount) {
+                        content+="<li class='disabled'>...</li>";
+                    }
+                }
+                if (data.pageInfo.curPage == pageCount) {
+                    content+="<li class='disabled'>Last</li>";
+                } else {
+                    content+="<li data-page='" + pageCount + "'>Last</li>";
+                }
+                content+="</ul>";
+                $('#user-pagination').html(content);
+            }
+            $('#user_table').empty();
+            for(var i=0; i<data.result.length; i++) {
+                $('#user_table').append("<tr>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.result[i].name+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.result[i].email+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.result[i].username+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.result[i].company+
+                    "</td>"+
+                    "<td class='border px-4 py-2'>"+
+                        data.result[i].ipaddress+
+                    "</td>"+ 
+                    "<td class='border px-4 py-2'>"+
+                    "</td>"+
+                "</tr>");
+            } 
+        },
+        error: function(data){
+        }
+    });
+}
 
 $('body').on('click', '#user_find', function(){
     update_user($('#user_filter').val(), 1,  $('#user_perPage').val());
@@ -178,26 +245,6 @@ function update_row_num(tbl_class){
         $( this ).html(index+1);
     });
 }
-
-$('body').on('click', '#pdf_upload_button', function(){
-    var formData = new FormData();
-    if($('#pdf_file').length == 0)
-        return;
-    formData.append('file', $('#pdf_file')[0].files[0]);
-    $.ajax({
-        url : '/admin/setting/pdf_upload',
-        type : 'POST',
-        data : formData,
-        processData: false,  // tell jQuery not to process the data
-        contentType: false,  // tell jQuery not to set contentType
-        success : function(data) {
-            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
-        },
-        error: function(data){
-            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
-        }
-    });
-})
 
 $('body').on('click', '#stream_toggle', function(){
     if($('#stream_preview').hasClass('hide')){
@@ -233,5 +280,53 @@ $('#user_table input:checkbox').change(function() {
         });
     }
 });
+
+$('body').on('click', '.Odds-Info-Delete', function(){
+    $(this).closest('tr').remove();
+})
+
+$('#odds_info_add').click(function(){
+    var excelList=[];
+    $('#odds_file_table').find(".Odd-File-Name").each(function( index ) {
+        excelList.push($( this ).html());
+    });
+    let content = "";
+    content += "<tr><td class='border py-2'>"+
+    "<input class='info_date' type='text' value='' placeholder='Date'/>"+
+    "</td>"+
+    "<td class='border py-2'>"+
+    "<input class='info_meeting' type='text' value='' placeholder='Meeting'/>"+
+    "</td>"
+    "<td class='border py-2'>"+
+    "<input class='info_overnight' type='text' value='' placeholder='Overnight'/>"+
+    "</td>"+
+    "<td class='border py-2'>"+
+    "<select class='info_overnighturl'>"+
+    "<option value='' selected >None</option>";
+    for(var i=0; i<excelList.length; i++) {
+        content += "<option class = '" + excelList[i] + "' value='" + excelList[i] + "'>" + excelList[i] + "</option>";
+    }
+    content += "</select>" + 
+    "</td>" + 
+    "<td class='border py-2'>" + 
+    "<input class='info_morning' type='text' value='' placeholder='Morning'/>"+
+    "</td>"+
+    "<td class='border py-2'>"+
+    "<select class='info_morningurl'>"+
+    "<option value='' selected >None</option>";
+    for(var i=0; i<excelList.length; i++) {
+        content += "<option class = '" + excelList[i] + "' value='" + excelList[i] + "'>" + excelList[i] + "</option>";
+    }
+    content += "</select>"+
+    "</td>"+
+    "<td class='border py-2'>"+
+    "<button type='button' class='Odds-Info-Delete'>Delete</button>"+
+    "</td>";
+    $('#odds_info_table').append(content);
+})
+
+$('body').on('click', '#odds_info_clear', function(){
+    $('#odds_info_table').html("");
+})
 
 $(document).ajaxStop($.unblockUI);

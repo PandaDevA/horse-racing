@@ -129,12 +129,12 @@ function settingController(){
 
         async oddDelete(req, res) {
             try {
-                if(!req.files) {
+                if(!req.body.fileName) {
                     console.log('Error: Excel file must be supplied while deleteing.')
                     res.status(403).send ({message: 'Error: Select the delete file.'});
                 } else {
                     //Use the name of the input field (i.e. "file") to retrieve the deleted file
-                    let file = req.files.file;
+                    let file = req.body.fileName;
                     
                     //Use the mv() method to place the file in delete directory 
                     fs.unlink('./uploads/odds/' + file, (err, files) => {

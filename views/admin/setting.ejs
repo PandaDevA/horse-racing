@@ -374,13 +374,13 @@
                                                     <input class="info_race" type="text" value="<%= tipsinfo[i].race %>" placeholder="Name"/>
                                                 </td>
                                                 <td class="border py-2">
-                                                    <input class="info_selection" type="text" value="<%= tipsinfo[i].selection %>" placeholder="Name"/>
+                                                    <input class="info_selection" type="text" value="<%= tipsinfo[i].selection %>" placeholder="Selection"/>
                                                 </td>
                                                 <td class="border py-2">
-                                                    <input class="info_price" type="text" value="<%= tipsinfo[i].price %>" placeholder="SP"/>
+                                                    <input class="info_price" type="text" value="<%= tipsinfo[i].price %>" placeholder="Price"/>
                                                 </td>
                                                 <td class="border py-2">
-                                                    <input class="info_notes" type="text" value="<%= tipsinfo[i].notes %>" placeholder="SP"/>
+                                                    <input class="info_notes" type="text" value="<%= tipsinfo[i].notes %>" placeholder="Notes"/>
                                                 </td>
                                                 <td class="border py-2">
                                                     <button type="button" class="Tips-Info-Delete">Delete</button>
@@ -404,38 +404,90 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 ">Race</th>
-                                            <th class="border px-4 py-2 ">Selection</th>
-                                            <th class="border px-4 py-2 ">Price</th>
-                                            <th class="border px-4 py-2 ">Notes</th>
-                                            <th class="border px-4 py-2 ">Action</th>
+                                            <th class="border py-2">Date</th>
+                                            <th class="border py-2">Meeting</th>
+                                            <th class="border py-2">Overnight</th>
+                                            <th class="border py-2">OvernightUrl</th>
+                                            <th class="border py-2">Morning</th>
+                                            <th class="border py-2">MorningUrl</th>
+                                            <th class="border py-2">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tips_info_table">
-                                        <% for(var i=0; i<tipsinfo.length; i++) { %>
+                                    <tbody id="odds_info_table">
+                                        <% for(var i=0; i<oddsinfo.length; i++) { %>
                                             <tr>
-                                                <td class="border px-4 py-2">
-                                                    <input class="info_race" type="text" value="<%= tipsinfo[i].race %>" placeholder="Name"/>
+                                                <td class="border py-2">
+                                                    <input class="info_date" type="text" value="<%= oddsinfo[i].date %>" placeholder="Date"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
-                                                    <input class="info_selection" type="text" value="<%= tipsinfo[i].selection %>" placeholder="Name"/>
+                                                <td class="border py-2">
+                                                    <input class="info_meeting" type="text" value="<%= oddsinfo[i].meeting %>" placeholder="Meeting"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
-                                                    <input class="info_price" type="text" value="<%= tipsinfo[i].price %>" placeholder="SP"/>
+                                                <td class="border py-2">
+                                                    <input class="info_overnight" type="text" value="<%= oddsinfo[i].overnight %>" placeholder="Overnight"/>
                                                 </td>
-                                                <td class="border px-4 py-2">
-                                                    <input class="info_notes" type="text" value="<%= tipsinfo[i].notes %>" placeholder="SP"/>
+                                                <td class="border py-2">
+                                                    <select class="info_overnighturl">
+                                                        <option value="" <%= oddsinfo[i].overnighturl == '' ? 'selected' : '' %>>None</option>
+                                                        <% for(var i=0; i<excelList.length; i++) { %>
+                                                            <option class = "<%= excelList[i] %>" value="<%= excelList[i] %>" <%= oddsinfo[i].overnighturl == '<%= excelList[i] %>' ? 'selected' : '' %>><%= excelList[i] %></option>
+                                                        <% } %>
+                                                    </select>
                                                 </td>
-                                                <td class="border px-4 py-2">
-                                                    <button type="button" class="Tips-Info-Delete">Delete</button>
+                                                <td class="border py-2">
+                                                    <input class="info_morning" type="text" value="<%= oddsinfo[i].morning %>" placeholder="Morning"/>
+                                                </td>
+                                                <td class="border py-2">
+                                                    <select class="info_morningurl">
+                                                        <option value="" <%= oddsinfo[i].morningurl == '' ? 'selected' : '' %>>None</option>
+                                                        <% for(var i=0; i<excelList.length; i++) { %>
+                                                            <option class = "<%= excelList[i] %>" value="<%= excelList[i] %>" <%= oddsinfo[i].morningurl == '<%= excelList[i] %>' ? 'selected' : '' %>><%= excelList[i] %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </td>
+                                                <td class="border py-2">
+                                                    <button type="button" class="Odds-Info-Delete">Delete</button>
                                                 </td>
                                             </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
                                 <div class="row action-area">
-                                    <button class="col-lg-3" type="button" id="tips_info_add">Add</button>
-                                    <button class="col-lg-3" id="tips_info_save">Save</button>
+                                    <button class="offset-lg-3 col-lg-3" type="button" id="odds_info_clear">Clear</button>
+                                    <button class="col-lg-3" type="button" id="odds_info_add">Add</button>
+                                    <button class="col-lg-3" id="odds_info_save">Save</button>
+                                </div>
+                                <div class="row action-area">
+                                    <div class="col-lg-4 details order-2 order-lg-1">
+                                        <h4 class="col-lg-10">Upload List:</h4>
+                                        <button class="col-lg-2" type="button" id="odd_file_clear_button">Clear</button>
+                                    </div>
+                                    <div class="col-lg-12 details order-2 order-lg-1">
+                                        <table class="w-full table-auto bg-white full-width">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border py-2">File Name</th>
+                                                    <th class="border py-2">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="odds_file_table">
+                                                <% for(var i=0; i<excelList.length; i++) { %>
+                                                    <tr>
+                                                        <td class="border py-2" class="Odd-File-Name">
+                                                            <%= excelList[i] %>
+                                                        </td> 
+                                                        <td class="border py-2">
+                                                            <button type="button" class="Odd-File-Delete">Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-12 details order-2 order-lg-1">
+                                        <label class="col-lg-4">UploadFile:</label>
+                                        <input class="col-lg-4" type="file" name="file" id="odd_file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                        <button class="col-lg-4" type="button" id="odd_file_upload_button">Upload</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -443,7 +495,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 <script>

@@ -141,3 +141,138 @@ Client.socket.on('tips_info_save', function(data){
     }
 });
 
+$('#odds_info_save').click(function(){
+    var tabledata = [];
+    var date = [];
+    var meeting = [];
+    var overnight = [];
+    var overnighturl = [];
+    var morning = [];
+    var morningurl = [];
+    $('#odds_info_table').find(".info_date").each(function( index ) {
+        date.push($( this ).val());
+    });
+    $('#odds_info_table').find(".info_meeting").each(function( index ) {
+        meeting.push($( this ).val());
+    });
+    $('#odds_info_table').find(".info_overnight").each(function( index ) {
+        overnight.push($( this ).val());
+    });
+    $('#odds_info_table').find(".info_overnighturl").each(function( index ) {
+        overnighturl.push($( this ).val());
+    });
+    $('#odds_info_table').find(".info_morning").each(function( index ) {
+        morning.push($( this ).val());
+    });
+    $('#odds_info_table').find(".info_morningurl").each(function( index ) {
+        morningurl.push($( this ).val());
+    });
+    for(let i=0; i<race.length; i++)
+        tabledata.push({date:date[i], meeting:meeting[i], overnight:overnight[i], overnighturl:overnighturl[i], morning:morning[i], morningurl:morningurl[i]});
+    Client.socket.emit('odds_info_save', {tabledata: tabledata});
+});
+
+Client.socket.on('odds_info_save', function(data){
+    if(data.result){
+        $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
+    }
+    else
+    {
+        $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
+    }
+});
+
+$('body').on('click', '#pdf_upload_button', function(){
+    var formData = new FormData();
+    if($('#pdf_file').length == 0)
+        return;
+    formData.append('file', $('#pdf_file')[0].files[0]);
+    $.ajax({
+        url : '/admin/setting/pdf_upload',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
+        },
+        error: function(data){
+            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
+        }
+    });
+})
+
+$('body').on('click', '#odd_file_upload_button', function(){
+    var formData = new FormData();
+    if($('#odd_file').length == 0)
+        return;
+    formData.append('file', $('#odd_file')[0].files[0]);
+    var fileName = $('#odd_file')[0].files[0].name;
+    $.ajax({
+        url : '/admin/setting//admin/setting/odds/file_upload',
+        type : 'POST',
+        data : formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Upload Succeed');
+            $('#odds_info_table .info_overnighturl').each(function(index){
+                $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
+            });
+            $('#odds_info_table .info_morningurl').each(function(index){
+                $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
+            });
+            $("#odds_file_table").append("<td class='border py-2'>"+
+                fileName+
+                "</td> "+
+                "<td class='border py-2'>"+
+                "<button type='button' class='Odd-File-Delete'>Delete</button>"+
+                "</td>");
+        },
+        error: function(data){
+            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
+        }
+    });
+})
+
+$('body').on('click', '.Odd-File-Delete', function(){
+    var fileName = $(this).closest('tr').find('.Odd-File-Name').first().html();
+    var self = this;
+    $.ajax({
+        url : '/admin/setting//admin/setting/odds/delete',
+        type : 'POST',
+        data : {fileName:fileName},
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Upload Succeed');
+            $(this).closest('tr').remove();
+            $('#odds_info_table .info_overnighturl').each(function(index){
+                $(this).remove('.' + fileName);
+            });
+            $('#odds_info_table .info_morningurl').each(function(index){
+                $(this).remove('.' + fileName);
+            });
+        },
+        error: function(data){
+            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
+        }
+    });
+})
+
+$('body').on('click', '#odd_file_clear_button', function(){
+    $.ajax({
+        url : '/admin/setting//admin/setting/odds/clear',
+        type : 'POST',
+        data : {},
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success : function(data) {
+            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Upload Succeed');
+            $('#tips_info_table').html();
+        },
+        error: function(data){
+            $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
+        }
+    });
+})
