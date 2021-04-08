@@ -28,6 +28,7 @@ function initRoute(app) {
 
     //Admin Routes
     app.get('/admin/setting', admin, adminSettingController().index);
+    app.post('/admin/setting/user', admin, adminSettingController().user);
 
     //File upload and download
     app.post('/admin/setting/pdf_upload', settingController().upload);

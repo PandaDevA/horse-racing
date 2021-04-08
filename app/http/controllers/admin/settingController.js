@@ -12,7 +12,7 @@ function settingController(){
             let resData = {};
 
             //user table data: 
-            const users = await UserInfo.getUserList();
+            const users = await UserInfo.getUserList(null, 1, 10);
             if(users.result) resData['users'] = users.result;
             
             //current race table data: [{name: '', sp: '', color: ''},{...}]
@@ -45,6 +45,17 @@ function settingController(){
             if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;
 
             res.render('admin/setting', resData);
+        },
+
+        async user(req, res){
+            let { filter, page, count } = req.body;
+            let resData = {};
+
+            //user table data: 
+            const users = await UserInfo.getUserList(filter, page, count);
+            if(users.result) resData = users.result;
+
+            res.render('admin/setting/user', resData);
         },
 
         async upload(req, res) {
