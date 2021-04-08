@@ -75,10 +75,10 @@ function settingController(){
         },
 
         async access(req, res){
-            let { username, type, result } = req.body;
+            let { username, type, checked } = req.body;
             let resData = {};
 
-            const users = await UserInfo.updateUserDataByName(username, {access: type, method: result ? 'add' : 'del'});
+            const users = await UserInfo.updateUserDataByName(username, {access: type, method: checked ? 'add' : 'del'});
             resData = users;
 
             res.status(200).send(resData);

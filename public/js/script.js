@@ -281,7 +281,7 @@ $('body').on('change', '#user_table input:checkbox', function(){
             data : {
                 username: $(this).closest('td').data('username'),
                 type: $(this).val(),
-                result: $(this).checked,
+                checked: $(this).checked,
             },
             success : function(data) {
             },
