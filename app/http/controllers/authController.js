@@ -9,7 +9,6 @@ function authController() {
         },
 
         postLogin(req, res, next) {
-            console.log({ ipaddress: req.connection.remoteAddress, ...req.body});
 
             // here err, user, info is coming from passport.js where in done() function we have provided null, false/user , message
             passport.authenticate('local', (err, user, info) => {
@@ -21,26 +20,6 @@ function authController() {
                     req.flash('error', info.message);
                     return res.redirect('/login');
                 }
-
-                // g-recaptcha-response is the key that browser will generate upon form submit.
-                // if its blank or null means user has not selected the captcha, so return the error.
-                if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-                    req.flash("error", "Please select captcha");
-                    return res.redirect('/login');
-                }
-                // Put your secret key here.
-                let secretKey = "6LfEw58aAAAAAIKefugvWGprNgQEPX1YtLOyjgJs";
-                // req.connection.remoteAddress will provide IP address of connected user.
-                let verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-                // Hitting GET request to the URL, Google will respond with success or error scenario.
-                request(verificationUrl,function(error,response,body) {
-                    body = JSON.parse(body);
-                    // Success will be true or false depending upon captcha validation.
-                    if(body.success !== undefined && !body.success) {
-                        req.flash("error", "Failed captcha verification");
-                        return res.redirect('/login');
-                    }
-                });
 
                 // when user exists and password matches then login the user using login method;
                 req.logIn(user, (err) => {
@@ -60,6 +39,28 @@ function authController() {
         },
 
         async postRegister(req, res) {
+            console.log({ ipaddress: req.connection.remoteAddress, ...req.body});
+
+            // g-recaptcha-response is the key that browser will generate upon form submit.
+            // if its blank or null means user has not selected the captcha, so return the error.
+            if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+                req.flash("error", "Please select captcha");
+                return res.redirect('/login');
+            }
+            // Put your secret key here.
+            let secretKey = "6LfEw58aAAAAAIKefugvWGprNgQEPX1YtLOyjgJs";
+            // req.connection.remoteAddress will provide IP address of connected user.
+            let verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+            // Hitting GET request to the URL, Google will respond with success or error scenario.
+            request(verificationUrl,function(error,response,body) {
+                body = JSON.parse(body);
+                // Success will be true or false depending upon captcha validation.
+                if(body.success !== undefined && !body.success) {
+                    req.flash("error", "Failed captcha verification");
+                    return res.redirect('/login');
+                }
+            });
+
             const info = registerUser(req.body, req.connection.remoteAddress);
             req.flash('result', info.result);
             req.flash('error', info.error);

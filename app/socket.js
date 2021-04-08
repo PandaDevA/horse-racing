@@ -75,7 +75,7 @@ const exportedMethods = {
                 //Format of data.tabledata is [{name: '...', sp: '...'}]
                 result = await CurRaceInfo.editCurRaceInfo(data.tabledata);
                 if(result) {
-                    socket.emit('cur_race_save', {result: true});
+                    socket.emit('cur_race_save', {result: true, cur_race_time: data.time, cur_race_name: data.name, dataArray: data.tabledata});
                     socket.to('cur_race').emit('cur_race_update', {time: data.time, name: data.name, dataArray: data.tabledata});
                     console.log('cur_race_save is processed');
                 } else {

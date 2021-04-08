@@ -20,12 +20,57 @@ $('#cur_race_info_save').click(function(){
 Client.socket.on('cur_race_save', function(data){
     if(data.result){
         $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
+        $('#cur_race_time').val(data.cur_race_time);
+        $('#cur_race_name').val(data.cur_race_name);
+        $('#cur_race_info_table').html('');
+        for(var i=0; i<dataArray.length; i++) { 
+            $('#cur_race_info_table').append("<tr>"+
+                "<td class='border px-4 py-2 row_num'>"+
+                    (i+1 )+
+                "</td>"+
+                "<td class='border px-4 py-2'>"+
+                    "<input class='info_name' name='name' type='text' value='" + dataArray[i].name + "' placeholder='Name'/>"+
+                "</td>"+
+                "<td class='border px-4 py-2'>"+
+                    "<input class='info_sp' name='sp' type='text' value='" + dataArray[i].sp +  "' placeholder='SP'/>"+
+                "</td>"+
+                "<td class='border px-4 py-2'>"+
+                    "<select class='info_color'>"+
+                        "<option class = 'Color_None' value='Color_None' " +dataArray[i].color == 'Color_None' ? 'selected' : '' + ">None</option>"+
+                        "<option class = 'Color_Blue' value='Color_Blue' " + dataArray[i].color == 'Color_Blue' ? 'selected' : ''  + ">Blue</option>"+
+                        "<option class = 'Color_Red' value='Color_Red' " + dataArray[i].color == 'Color_Red' ? 'selected' : ''  + ">Red</option>"+
+                      "</select>"+
+                "</td>"+
+                "<td class='border px-4 py-2'>"+
+                    "<button type='button' class='Cur-Race-Delete'>Delete</button>"+
+                "</td>"+
+            "</tr>");
+         } 
     }
     else
     {
         $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.error);
     }
 });
+
+$('#next_race_info_current').click(function(){
+    var tabledata = [];
+    var name = [];
+    var sp = [];
+    var color = [];
+    $('#next_race_info_table').find(".info_name").each(function( index ) {
+        name.push($( this ).val());
+    });
+    $('#next_race_info_table').find(".info_sp").each(function( index ) {
+        sp.push($( this ).val());
+    });
+    $('#next_race_info_table').find(".info_color").each(function( index ) {
+        color.push($( this ).val());
+    });
+    for(let i=0; i<name.length; i++)
+        tabledata.push({name:name[i], sp:sp[i], color:color[i]});
+    Client.socket.emit('cur_race_save', {tabledata: tabledata, time:$('#next_race_time').val(), name:$('#next_race_name').val()});
+})
 
 $('#next_race_info_save').click(function(){
     var tabledata = [];

@@ -45,7 +45,8 @@ function settingController(){
             const oddsinfo = await OddsInfo.getOddsInfo();
             if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;
 
-            const directory = __dirname + '/uploads/odd/';
+            resData['excelList'] = '';
+            const directory = process.env.INIT_CWD + '/uploads/odds/';
             try {
                 fs.readdir(directory, (err, files) => {
                     if(err) console.error(`Error occured while list Excel files ${err}`);
@@ -54,12 +55,12 @@ function settingController(){
                         console.log('List of excel files :');
                         console.log(files);
                     }
+                    res.render('admin/setting', resData);
                 });
             } catch (err) {
                 console.error(`Error occured while list Excel files ${err}`);
+                res.render('admin/setting', resData);
             }
-
-            res.render('admin/setting', resData);
         },
 
         async user(req, res){

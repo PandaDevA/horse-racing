@@ -215,9 +215,21 @@ function update_user(filter, page, count){
                     "<td class='border px-4 py-2'>"+
                         data.result[i].ipaddress+
                     "</td>"+ 
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border px-4 py-2' data-username='" + data.result[i].username + "'>"+
+                    "<div style='width: 80px;'>" +
+                        "<input type='checkbox' name='cards' value='cards' " + (data.result[i].access.includes('cards')? 'checked':'') + " >"+
+                        "<label for='cards'>Cards</label>"+
+                    "</div>"+
+                    "<div style='width: 80px;'>"+
+                        "<input type='checkbox' name='odds' value='odds' " + (data.result[i].access.includes('odds')? 'checked':'') + ">" +
+                        "<label for='odds'>Odds</label>"+
+                    "</div>"+
+                    "<div style='width: 80px;'>"+
+                        "<input type='checkbox' name='tips' value='tips' " + (data.result[i].access.includes('tips')? 'checked':'') + ">" +
+                        "<label for='tips'>Tips</label>"+
+                    "</div>"+
                     "</td>"+
-                "</tr>");
+                    "</tr>");
             } 
         },
         error: function(data){
@@ -257,7 +269,7 @@ $('body').on('click', '#stream_toggle', function(){
     }
 })
 
-$('#user_table input:checkbox').change(function() {
+$('body').on('change', '#user_table input:checkbox', function(){
     var returnVal = confirm("Are you sure?");
     if(!returnVal)
         $(this).prop("checked", !$(this).checked);
