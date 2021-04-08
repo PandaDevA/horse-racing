@@ -42,17 +42,18 @@
                             <div class="col-lg-12 details order-2 order-lg-1">
                                 <h3>User Information</h3>
                                 <div class="row action-area">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-7">
                                         <label>Search:</label>
                                         <input id="user_filter" type="text" value="" placeholder="Input filter"/>
                                         <button id="user_find">Find</button>
+                                        <label>Row:</label>
                                         <select id="user_perPage">
                                             <option value="10" <%= users.pageInfo.perPage == 10 ? 'selected':'' %>>10</option>
                                             <option value="20" <%= users.pageInfo.perPage == 20 ? 'selected':'' %>>20</option>
                                             <option value="50" <%= users.pageInfo.perPage == 50 ? 'selected':'' %>>50</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-6" id="user-pagination">
+                                    <div class="col-lg-5" id="user-pagination">
                                         <% if (Math.ceil(users.pageInfo.count / users.pageInfo.perPage) > 0) { %>
                                             <ul class="pagination text-center">
                                                 <% if (users.pageInfo.curPage == 1) { %>
@@ -112,7 +113,7 @@
                                                 <td class="border px-4 py-2">
                                                     <%= users.result[i].ipaddress %>
                                                 </td>
-                                                <td class="border px-4 py-2" data-id="<%= users.result[i]._id %>">
+                                                <td class="border px-4 py-2" data-username="<%= users.result[i].username %>">
                                                     <div style="width: 80px;">
                                                         <input type="checkbox" name="cards" value="cards" <%= users.result[i].access.includes('cards')? 'checked':'' %>>
                                                         <label for="cards">Cards</label>
