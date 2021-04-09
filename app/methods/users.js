@@ -68,11 +68,17 @@ const registerUser = async(data, ipaddr) => {
 
 const getUserByName = async(username) => {
     let result = {};
-    await User.findOne({ username: username }, (err, data) => {
-        if(err) console.log('Error while getUserByName: ', err);
-        result = { result: data, error: err };
-    });
-    return result;
+    try {
+        const result = await User.findOne({ username: username });
+        if(!result) {
+            console.log('Error while getUserByName: ', username);
+            return {result: false, error: 'Could now get the user Data form database.'};
+        }
+        return {result, error: '' };
+    } catch (e) {
+        console.log('Error while getUserByName: ', username);
+        return {result: false, error: 'Could now get the user Data form database:'+e.message};
+    }
 }
 
 const getUserById = async(id) => {
