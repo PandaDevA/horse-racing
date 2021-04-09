@@ -39,7 +39,14 @@ function authController() {
         },
 
         async postRegister(req, res) {
-            console.log({ ipaddress: req.connection.remoteAddress, ...req.body});
+            const parseIp = (req) =>
+                (typeof req.headers['x-forwarded-for'] === 'string'
+                    && req.headers['x-forwarded-for'].split(',').shift())
+                || req.connection?.remoteAddress
+                || req.socket?.remoteAddress
+                || req.connection?.socket?.remoteAddress
+
+            console.log(parseIp(req));
 
             // g-recaptcha-response is the key that browser will generate upon form submit.
             // if its blank or null means user has not selected the captcha, so return the error.
@@ -61,7 +68,7 @@ function authController() {
                 }
             });
 
-            const info = registerUser(req.body, req.connection.remoteAddress);
+            const info = registerUser(req.body, parseIp(req));
             req.flash('result', info.result);
             req.flash('error', info.error);
             res.redirect('/login');
