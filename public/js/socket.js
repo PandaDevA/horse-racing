@@ -59,10 +59,11 @@ Client.socket.on('feed_category_update',function(data){
 });
 
 Client.socket.on('betting_info_update', function(data){
-    $('.panel_content').html('');
-    for(let i=0; i<data.dataArray.length; i++) {
-        $('.panel_content').append("<div class='bet_info_item'>" + 
-            "<p>" + data.dataArray[i].time + ' ' + data.dataArray[i].name + ' ' + data.dataArray[i].text + "</p>" +
+    var betting_panel = $('.bet_info_panel .panel_content').first();
+    betting_panel.html('');
+    for(let i=0; i<data.length; i++) {
+        betting_panel.append("<div class='bet_info_item'>" + 
+            "<p>" + data[i].time + ' ' + data[i].name + ' ' + data[i].text + "</p>" +
             "</div>");
     }
 });
