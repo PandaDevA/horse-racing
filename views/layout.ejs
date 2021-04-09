@@ -41,7 +41,10 @@
         <% if(!user){ %>
             <form action="/login" method="POST" role="form" class="ml-auto">
                 <div class="form-row">
-                    <button type="submit" class="col-md-3 btn-get-started form-control">
+                    <button type="button" class="col-md-2 btn-get-started form-control"><a href="#register_div" >
+                        Register
+                    </a></button>
+                    <button type="submit" class="offset-md-1 col-md-3 btn-get-started form-control">
                         Sign in
                     </button>
                     <input id="username-login" name="username" type="text" autocomplete="username" required class="col-md-3 form-control" placeholder="UserName">
@@ -54,7 +57,7 @@
                     <li><a href="/home">Next Race</a></li>
                     <li><a href="/cards">Cards</a></li>
                     <li><a href="/odds">Odds</a></li>
-                    <li><a href="/tips">Tips and Info</a></li>
+                    <li><a href="/tips">Race Information</a></li>
                     <% if(user.role == "admin") { %>
                         <li><a href="/admin/setting">Settings</a></li>
                     <% } %>
