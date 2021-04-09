@@ -95,14 +95,14 @@ Client.socket.on('odd_info_update',function(data){
         if(data.dataArray[i].overnighturl=='') { 
             content += data.dataArray[i].overnight;
         } else {
-            content += "<a href='/uploads/odds/" + data.dataArray[i].overnighturl + "'>"+
+            content += "<a href='/odds/" + data.dataArray[i].overnighturl + "' download>"+
                             "available</a>";
         }
         content += "</td><td class='border px-4 py-2'>";
         if(data.dataArray[i].morningurl=='') { 
             content += data.dataArray[i].morning;
         } else {
-            content += "<a href='/uploads/odds/" + data.dataArray[i].morningurl + "'>"+
+            content += "<a href='/odds/" + data.dataArray[i].morningurl + "' download>"+
                             "available</a>";
         }
         content+="</td></tr>";

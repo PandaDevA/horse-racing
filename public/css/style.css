@@ -267,7 +267,11 @@ th{
 }
 
 .resource-block > .row{
-    padding: 5px 10px;
+    padding: 10px 20px;
+}
+
+.resource-block h3{
+    border-bottom: 1px solid black;
 }
 
 #user-pagination li{
