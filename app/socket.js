@@ -185,7 +185,7 @@ const exportedMethods = {
                    return;
                }
 
-               let result = await Resource.editResource({tip_info: data.title});
+               let result = await Resource.editResource({tip_source: data.title});
                if(!result.result) {
                    socket.emit('tips_info_save', {result: false, error: 'Error occurred while save tip source'});
                    return;
