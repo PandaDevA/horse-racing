@@ -144,23 +144,32 @@ const exportedMethods = {
                 console.log('stream_url_save is processed');
             });
 
-            socket.on('card_title_save', async (data) => {
+            socket.on('card_title_save', async (title) => {
                 console.log('card_title_save request is received');
-                if(!data.title) {
-                    console.log('Error: pdf url or card tile is not supplied');
-                    socket.emit('card_title_save', {result: false, error: 'Pdf url and card title must be supplied'});
+                if(!title) {
+                    console.log('Error: card tile is not supplied');
+                    socket.emit('card_title_save', {result: false, error: 'Card title must be supplied'});
                     return;
                 }
 
-                let result = await Resource.editResource({card_title: data.title});
+                let result = await Resource.editResource({card_title: title});
                 if(!result.result) {
                     socket.emit('card_title_save', {result: false, error: 'Error occurred while save card info'});
                     return;
                 }
 
                 socket.emit('card_title_save', {result: true});
-                socket.to('card_title').emit('card_title_update', {card_title: data.title});
+                socket.to('card_title').emit('card_title_update', title);
                 console.log('card_title_save is processed');
+            });
+
+            socket.on('pdf_source_updated', async (data) => {
+                console.log('pdf_source_updated request is received');
+                let result = await Resource.getResource();
+                if(!result.result) {
+                    return;
+                }
+                socket.to('card_title').emit('pdf_source_update', result.result['pdf_url']);
             });
 
             socket.on('tips_info_save', async (data) => {

@@ -4,10 +4,12 @@
         <br>
         <h4 style="text-align:center">Click <a id="card_url" href="<%= resource['pdf_url']%>" target="_blank">HERE</a> to open PDF in new tab</h4>
         <br>
+        <div id="card_view_container">
         <% if(resource['pdf_url']) {%>
             <object id="card_view" data="<%= resource['pdf_url']%>" type="application/pdf" width="100%" height="600px" style="border:2px solid black;">
             </object>
         <% }%>
+        </div>
     </div>
 </section>
 <script>

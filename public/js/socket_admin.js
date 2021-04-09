@@ -240,6 +240,7 @@ $('body').on('click', '#pdf_upload_button', function(){
         contentType: false,  // tell jQuery not to set contentType
         success : function(data) {
             $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
+            Client.socket.emit('pdf_source_updated', {});
         },
         error: function(data){
             $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);
@@ -260,19 +261,25 @@ $('body').on('click', '#odd_file_upload_button', function(){
         processData: false,  // tell jQuery not to process the data
         contentType: false,  // tell jQuery not to set contentType
         success : function(data) {
-            $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Upload Succeed');
-            $('#odds_info_table .info_overnighturl').each(function(index){
-                $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
-            });
-            $('#odds_info_table .info_morningurl').each(function(index){
-                $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
-            });
-            $("#odds_file_table").append("<td class='border py-2'>"+
-                fileName+
-                "</td> "+
-                "<td class='border py-2'>"+
-                "<button type='button' class='Odd-File-Delete'>Delete</button>"+
-                "</td>");
+            if(data.error) {
+                $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html(data.error);
+            } else {
+                $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Upload Succeed');
+                $('#odds_info_table .info_overnighturl').each(function(index){
+                    $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
+                });
+                $('#odds_info_table .info_morningurl').each(function(index){
+                    $(this).append("<option class = '" + fileName + "' value='" + fileName + "'>" + fileName + "</option>");
+                });
+                $("#odds_file_table").append("<tr>"+
+                    "<td class='border py-2'>"+
+                    fileName+
+                    "</td> "+
+                    "<td class='border py-2'>"+
+                    "<button type='button' class='Odd-File-Delete'>Delete</button>"+
+                    "</td>"+
+                    "</tr>");
+            }
         },
         error: function(data){
             $('#message-box').first().removeClass('message-succeed').addClass('message-error').addClass('show').html(data.message);

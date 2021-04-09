@@ -7,6 +7,8 @@ const OddsInfo = require('../../../methods/oddsinfo')
 const TipsInfo = require('../../../methods/tipsinfo')
 const fs = require('fs');
 
+const directory = process.env.INIT_CWD + '/uploads/odds/';
+
 function settingController(){
     return {
         async index(req, res){
@@ -47,7 +49,6 @@ function settingController(){
             if(oddsinfo.result) resData['oddsinfo'] = oddsinfo.result;
 
             resData['excelList'] = '';
-            const directory = process.env.INIT_CWD + '/uploads/odds/';
             try {
                 fs.readdir(directory, (err, files) => {
                     if(err) console.error(`Error occured while list Excel files ${err}`);
@@ -132,12 +133,17 @@ function settingController(){
                     //Use the name of the input field (i.e. "file") to retrieve the uploaded file
                     let file = req.files.file;
                     
-                    //Use the mv() method to place the file in upload directory (i.e. "uploads")
-                    file.mv('./uploads/odds/' + file.name);
-        
-                    //flash response
-                    console.log('Upload excel success.');
-                    res.status(200).send({result: true});
+                    fs.readdir(directory, (err, files) => {
+                        const isExist = files.indexOf(file.name);
+
+                        //Use the mv() method to place the file in upload directory (i.e. "uploads")
+                        file.mv('./uploads/odds/' + file.name);
+            
+                        //flash response
+                        console.log('Upload excel success.');
+                        if(isExist != -1) res.status(200).send({result:true, error: "File already exist, it's updated"})
+                        else res.status(200).send({result: true});
+                    });
                 }
             } catch (err) {
                 console.log('Error occured while upload :', err);
@@ -156,7 +162,7 @@ function settingController(){
                     let file = req.body.fileName;
                     
                     //Use the mv() method to place the file in delete directory 
-                    fs.unlink('./uploads/odds/' + file, (err, files) => {
+                    fs.unlink(directory + file, (err, files) => {
                         if(err) 
                         {
                             console.error(`Error occured while delete Excel files ${err}`);
@@ -179,7 +185,6 @@ function settingController(){
             try {
 
                 //Use the unlint() method to delete the file in upload directory 
-                let directory = './uploads/odds/';
                 fs.readdir(directory, (err, files) => {
                     if(err) 
                     {

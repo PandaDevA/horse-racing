@@ -68,8 +68,17 @@ Client.socket.on('betting_info_update', function(data){
     }
 });
 
+Client.socket.on('card_title_update', function(data){
+    $('#card_title').html(data);
+});
+
+Client.socket.on('pdf_source_update', function(url){
+    $('#card_view_container').html('<object id="card_view" data='+url+' type="application/pdf" width="100%" height="600px" style="border:2px solid black;">'+
+    '</object>');
+});
+
 Client.socket.on('tips_info_update',function(data){
-    $('#tip_source').html('Racing tips and information for racing at ' + data.title);
+    $('#tip_source').html('Early information for racing at ' + data.title);
     $('#tips_info_table').html('');
     for(let i=0; i<data.dataArray.length; i++)
     {
