@@ -103,7 +103,7 @@ const resourceData = {
     next_race_time: '4:28',
     next_race_name: 'Valparaiso - Race 2 LIVE',
     stream_url: 'https://rudo.video/live/sportinghd',
-    pdf_url: '/file/card.pdf',
+    pdf_url: '/uploads/card/card.pdf',
     card_title: 'Valparaiso race card - Thursday 25th March 2021',
     tip_source: 'Concepcion 25th March 2021',
     feed_category: 'Concepcion',
