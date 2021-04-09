@@ -87,34 +87,34 @@
                                 <table class="w-full table-auto bg-white full-width">
                                     <thead>
                                         <tr>
-                                            <th class="border px-4 py-2 ">Name</th>
-                                            <th class="border px-4 py-2 ">Email</th>
-                                            <th class="border px-4 py-2 ">UserName</th>
-                                            <th class="border px-4 py-2 ">Company</th>
-                                            <th class="border px-4 py-2 ">IP</th>
-                                            <th class="border px-4 py-2 ">Access</th>
-                                            <th class="border px-4 py-2 ">Action</th>
+                                            <th class="border usercell py-2 ">Name</th>
+                                            <th class="border usercell py-2 ">Email</th>
+                                            <th class="border usercell py-2 ">UserName</th>
+                                            <th class="border usercell py-2 ">Company</th>
+                                            <th class="border usercell py-2 ">IP</th>
+                                            <th class="border usercell py-2 ">Access</th>
+                                            <th class="border usercell py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user_table">
                                         <% for(var i=0; i<users.result.length; i++) { %>
                                             <tr>
-                                                <td class="border px-4 py-2">
+                                                <td class="border usercell py-2">
                                                     <%= users.result[i].name %>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border usercell py-2">
                                                     <%= users.result[i].email %>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border usercell py-2">
                                                     <%= users.result[i].username %>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border usercell py-2">
                                                     <%= users.result[i].company %>
                                                 </td>
-                                                <td class="border px-4 py-2">
+                                                <td class="border usercell py-2">
                                                     <%= users.result[i].ipaddress %>
                                                 </td>
-                                                <td class="border px-4 py-2" data-username="<%= users.result[i].username %>">
+                                                <td class="border usercell py-2" data-username="<%= users.result[i].username %>">
                                                     <div style="width: 80px;">
                                                         <input type="checkbox" name="cards" value="cards" <%= users.result[i].access.includes('cards')? 'checked':'' %>>
                                                         <label for="cards">Cards</label>
@@ -128,7 +128,7 @@
                                                         <label for="tips">Tips</label>
                                                     </div>
                                                 </td>
-                                                <td class="border px-4 py-2" data-username="<%= users.result[i].username %>">
+                                                <td class="border usercell py-2" data-username="<%= users.result[i].username %>">
                                                     <button type="button" class="User-Delete">Delete</button>
                                                 </td>
                                             </tr>

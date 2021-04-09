@@ -200,22 +200,22 @@ function update_user(filter, page, count){
             $('#user_table').empty();
             for(var i=0; i<data.result.length; i++) {
                 $('#user_table').append("<tr>"+
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border usercell py-2'>"+
                         data.result[i].name+
                     "</td>"+
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border usercell py-2'>"+
                         data.result[i].email+
                     "</td>"+
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border usercell py-2'>"+
                         data.result[i].username+
                     "</td>"+
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border usercell py-2'>"+
                         data.result[i].company+
                     "</td>"+
-                    "<td class='border px-4 py-2'>"+
+                    "<td class='border usercell py-2'>"+
                         data.result[i].ipaddress+
                     "</td>"+ 
-                    "<td class='border px-4 py-2' data-username='" + data.result[i].username + "'>"+
+                    "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
                     "<div style='width: 80px;'>" +
                         "<input type='checkbox' name='cards' value='cards' " + (data.result[i].access.includes('cards')? 'checked':'') + " >"+
                         "<label for='cards'>Cards</label>"+
@@ -229,7 +229,7 @@ function update_user(filter, page, count){
                         "<label for='tips'>Tips</label>"+
                     "</div>"+
                     "</td>"+
-                    "<td class='border px-4 py-2' data-username='" + data.result[i].username + "'>"+
+                    "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
                         "<button type='button' class='User-Delete'>Delete</button>" +
                     "</td>" +
                     "</tr>");
