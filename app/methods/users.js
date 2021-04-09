@@ -89,7 +89,7 @@ const getUserList = async(filter, pageId, countPerPage) => {
     let curPage = Number.parseInt(pageId);
     let result = {};
 
-    let query = {};
+    let query = {role: 'customer'};
     if(filter && filter != '') query = {
         $or:
         [
@@ -97,7 +97,8 @@ const getUserList = async(filter, pageId, countPerPage) => {
             {name: { $regex: filter }},
             {email: { $regex: filter }},
             {company: { $regex: filter }},
-            {ipaddress: { $regex: filter }}
+            {ipaddress: { $regex: filter }},
+            {role: 'customer'},
         ]};
 
     let count = await User.countDocuments(query);
