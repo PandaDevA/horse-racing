@@ -67,7 +67,6 @@ const registerUser = async(data, ipaddr) => {
 }
 
 const getUserByName = async(username) => {
-    let result = {};
     try {
         const result = await User.findOne({ username: username });
         if(!result) {
