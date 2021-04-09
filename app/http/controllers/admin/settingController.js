@@ -47,6 +47,7 @@ function settingController(){
 
             resData['excelList'] = '';
             const directory = process.env.INIT_CWD + '/uploads/odds/';
+			console.log(directory);
             try {
                 fs.readdir(directory, (err, files) => {
                     if(err) console.error(`Error occured while list Excel files ${err}`);
