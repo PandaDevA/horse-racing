@@ -25,7 +25,7 @@
                             <% if(oddsinfo[i].overnighturl=='') { %>
                                 <%= oddsinfo[i].overnight %>
                             <% } else { %>
-                                <a href="/uploads/odds/<%= oddsinfo[i].overnighturl %>">
+                                <a href="/odds/<%= oddsinfo[i].overnighturl %>" download>
                                     available
                                 </a>
                             <% } %>
@@ -34,7 +34,7 @@
                             <% if(oddsinfo[i].morningurl=='') { %>
                                 <%= oddsinfo[i].morning %>
                             <% } else { %>
-                                <a href="/uploads/odds/<%= oddsinfo[i].morningurl %>">
+                                <a href="/odds/<%= oddsinfo[i].morningurl %>" download>
                                     available
                                 </a>
                             <% } %>

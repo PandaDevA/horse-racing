@@ -254,7 +254,7 @@ $('body').on('click', '#odd_file_upload_button', function(){
     formData.append('file', $('#odd_file')[0].files[0]);
     var fileName = $('#odd_file')[0].files[0].name;
     $.ajax({
-        url : '/admin/setting//admin/setting/odds/file_upload',
+        url : '/admin/setting/odds/file_upload',
         type : 'POST',
         data : formData,
         processData: false,  // tell jQuery not to process the data
