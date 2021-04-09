@@ -229,6 +229,9 @@ function update_user(filter, page, count){
                         "<label for='tips'>Tips</label>"+
                     "</div>"+
                     "</td>"+
+                    "<td class='border px-4 py-2' data-username='" + data.result[i].username + "'>"+
+                        "<button type='button' class='User-Delete'>Delete</button>" +
+                    "</td>" +
                     "</tr>");
             } 
         },
@@ -251,6 +254,25 @@ $('body').on('click', '#user-pagination li', function(){
     update_user($('#user_filter').val(), $(this).data('page'),  $('#user_perPage').val());
 })
 
+$('body').on('click', '.User-Delete', function(){
+    var returnVal = confirm("Are you sure?");
+    if(returnVal) {
+        $.blockUI({ message: '<h1><img src="/img/busy.gif" /> Just a moment...</h1>' });
+        $.ajax({
+            url : '/admin/setting/user/delete',
+            type : 'POST',
+            data : {
+                username: $(this).closest('td').data('username'),
+            },
+            success : function(data) {
+                update_user($('#user_filter').val(), $('#user-pagination li').data('page'),  $('#user_perPage').val());
+            },
+            error: function(data){
+                alert("Error occured..." + data.error);
+            }
+        });
+    }
+})
 
 function update_row_num(tbl_class){
     $(tbl_class).find("tr > td.row_num").each(function( index ) {

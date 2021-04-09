@@ -58,6 +58,15 @@ Client.socket.on('feed_category_update',function(data){
     location.reload();
 });
 
+Client.socket.on('betting_info_update', function(data){
+    $('.panel_content').html('');
+    for(let i=0; i<data.dataArray.length; i++) {
+        $('.panel_content').append("<div class='bet_info_item'>" + 
+            "<p>" + data.dataArray[i].time + ' ' + data.dataArray[i].name + ' ' + data.dataArray[i].text + "</p>" +
+            "</div>");
+    }
+});
+
 Client.socket.on('tips_info_update',function(data){
     $('#tip_source').html('Racing tips and information for racing at ' + data.title);
     $('#tips_info_table').html('');

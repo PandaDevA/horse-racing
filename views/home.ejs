@@ -16,7 +16,7 @@
                     <thead>
                       <tr>
                         <th class="border px-4 py-2 text-left">No</th>
-                        <th class="border px-4 py-2 text-left" id="cur_race_title"><%= resource['cur_race_time'] + '' + resource['cur_race_name']%></th>
+                        <th class="border px-4 py-2 text-left" id="cur_race_title"><%= resource['cur_race_time'] + ' ' + resource['cur_race_name']%></th>
                         <th class="border px-4 py-2 text-left">Projected SP</th>
                       </tr>
                     </thead>
@@ -41,7 +41,7 @@
                     <thead>
                       <tr>
                         <th class="border px-4 py-2 text-left">No</th>
-                        <th class="border px-4 py-2 text-left" id="next_race_title"><%= resource['next_race_time'] + '' + resource['next_race_name']%></th>
+                        <th class="border px-4 py-2 text-left" id="next_race_title"><%= resource['next_race_time'] + ' ' + resource['next_race_name']%></th>
                         <th class="border px-4 py-2 text-left">Projected SP</th>
                       </tr>
                     </thead>
@@ -109,5 +109,5 @@
     </div>
 </section>
 <script>
-    var join_events = ['cur_race', 'stream_url', 'next_race', 'feed_category'];
+    var join_events = ['cur_race', 'stream_url', 'next_race', 'feed_category', 'betting_info'];
 </script>

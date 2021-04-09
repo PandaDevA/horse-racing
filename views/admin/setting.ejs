@@ -93,6 +93,7 @@
                                             <th class="border px-4 py-2 ">Company</th>
                                             <th class="border px-4 py-2 ">IP</th>
                                             <th class="border px-4 py-2 ">Access</th>
+                                            <th class="border px-4 py-2 ">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user_table">
@@ -126,6 +127,9 @@
                                                         <input type="checkbox" name="tips" value="tips" <%= users.result[i].access.includes('tips')? 'checked':'' %>>
                                                         <label for="tips">Tips</label>
                                                     </div>
+                                                </td>
+                                                <td class="border px-4 py-2" data-username="<%= users.result[i].username %>">
+                                                    <button type="button" class="User-Delete">Delete</button>
                                                 </td>
                                             </tr>
                                         <% } %>

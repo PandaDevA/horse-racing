@@ -78,11 +78,11 @@ function settingController(){
 
         async userDelete(req, res){
             console.log('ajax userDelete request is received');
-            let { name } = req.body;
+            let { username } = req.body;
             let resData = {};
 
             //user table data: 
-            const users = await UserInfo.removeUserByName(name);
+            const users = await UserInfo.removeUserByName(username);
             resData = users;
             if(!resData.result) res.status(404).send(resData);
             else res.status(200).send(resData);
