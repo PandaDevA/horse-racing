@@ -295,3 +295,9 @@ button{
     color:white;
 }
 
+.button{
+    background-color: #0000ffaa;
+    border: 1px solid blue;
+    border-radius: 5px;
+    color:white;
+}
