@@ -76,6 +76,18 @@ function settingController(){
             else res.status(200).send(resData);
         },
 
+        async userDelete(req, res){
+            console.log('ajax userDelete request is received');
+            let { name } = req.body;
+            let resData = {};
+
+            //user table data: 
+            const users = await UserInfo.removeUserByName(name);
+            resData = users;
+            if(!resData.result) res.status(404).send(resData);
+            else res.status(200).send(resData);
+        },
+
         async access(req, res){
             console.log('ajax access request is received');
             let { username, type, checked } = req.body;

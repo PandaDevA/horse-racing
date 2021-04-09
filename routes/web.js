@@ -30,6 +30,7 @@ function initRoute(app) {
     app.get('/admin/setting', admin, adminSettingController().index);
     app.post('/admin/setting/user', admin, adminSettingController().user);
     app.post('/admin/setting/user/access', admin, adminSettingController().access);
+    app.post('/admin/setting/user/delete', admin, adminSettingController().userDelete);
 
     //File upload and download
     app.post('/admin/setting/pdf_upload', settingController().upload);

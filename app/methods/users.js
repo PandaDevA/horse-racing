@@ -169,7 +169,7 @@ const removeUserByName = async(username) => {
 
     try {
         result = await User.deleteOne({username: username});
-        return { result: result, error: ''}
+        return { result: true, error: ''}
     } catch(e) {
         console.log(`Error while removeUserByName: ${e.message}`);
         return { result: false, error: e.message};
