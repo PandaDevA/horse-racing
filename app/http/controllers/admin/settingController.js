@@ -10,10 +10,11 @@ const fs = require('fs');
 function settingController(){
     return {
         async index(req, res){
+            console.log('ajax index request is received');
             let resData = {};
 
             //user table data: 
-            const users = await UserInfo.getUserList(null, 1, 10);
+            const users = await UserInfo.getUserList('', 1, 10);
             resData['users'] = users;
             
             //current race table data: [{name: '', sp: '', color: ''},{...}]
@@ -47,7 +48,6 @@ function settingController(){
 
             resData['excelList'] = '';
             const directory = process.env.INIT_CWD + '/uploads/odds/';
-			console.log(directory);
             try {
                 fs.readdir(directory, (err, files) => {
                     if(err) console.error(`Error occured while list Excel files ${err}`);
@@ -65,17 +65,19 @@ function settingController(){
         },
 
         async user(req, res){
+            console.log('ajax user request is received');
             let { filter, page, count } = req.body;
             let resData = {};
 
             //user table data: 
             const users = await UserInfo.getUserList(filter, page, count);
-            if(!users.error) resData = users;
-
-            res.status(200).send(resData);
+            resData = users;
+            if(resData.error) res.status(500).send(resData);
+            else res.status(200).send(resData);
         },
 
         async access(req, res){
+            console.log('ajax access request is received');
             let { username, type, checked } = req.body;
             let resData = {};
 
@@ -86,6 +88,7 @@ function settingController(){
         },
 
         async upload(req, res) {
+            console.log('ajax upload request is received');
             try {
                 if(!req.files) {
                     console.log('Error: Pdf file must be supplied while uploading.')
@@ -108,6 +111,7 @@ function settingController(){
         },
 
         async oddUpload(req, res) {
+            console.log('ajax oddUpload request is received');
             try {
                 if(!req.files) {
                     console.log('Error: Excel file must be supplied while uploading.')
@@ -117,7 +121,7 @@ function settingController(){
                     let file = req.files.file;
                     
                     //Use the mv() method to place the file in upload directory (i.e. "uploads")
-                    file.mv('./uploads/odds/' + file);
+                    file.mv('./uploads/odds/' + file.name);
         
                     //flash response
                     console.log('Upload excel success.');
@@ -130,6 +134,7 @@ function settingController(){
         },
 
         async oddDelete(req, res) {
+            console.log('ajax oddDelete request is received');
             try {
                 if(!req.body.fileName) {
                     console.log('Error: Excel file must be supplied while deleteing.')
@@ -158,6 +163,7 @@ function settingController(){
         },
 
         async oddClear(req, res) {
+            console.log('ajax oddClear request is received');
             try {
 
                 //Use the unlint() method to delete the file in upload directory 

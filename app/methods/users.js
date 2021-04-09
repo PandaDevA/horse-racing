@@ -85,12 +85,12 @@ const getUserById = async(id) => {
 }
 
 const getUserList = async(filter, pageId, countPerPage) => {
-    let perPage = countPerPage ? countPerPage : 10;
-    let curPage = pageId;
+    let perPage = countPerPage ? Number.parseInt(countPerPage) : 10;
+    let curPage = Number.parseInt(pageId);
     let result = {};
 
     let query = {};
-    if(filter) query = {
+    if(filter && filter != '') query = {
         $or:
         [
             {username: { $regex: filter }},
@@ -107,20 +107,21 @@ const getUserList = async(filter, pageId, countPerPage) => {
     }
     else console.log(`page count is : ${count}`);
 
-    if(count <= perPage * ( pageId - 1 )) curPage = 1;
+    if(Number.parseInt(count) <= perPage * ( curPage - 1 )) curPage = 1;
 
     try {
-        await User
-            .find(query, {}, { skip: perPage * (curPage - 1), limit: Number.parseInt(perPage) }, function(err, data) {
-                if(err) console.log(`Error while getUserList: ${err}`);
-                result = { result: data, pageInfo: {perPage: perPage, count: count, curPage: curPage}, error: err };        
-            });
+        const userData = await User.find(query, {}, { skip: perPage * (curPage - 1), limit: perPage });
+        if(userData)
+            result = { result: userData, pageInfo: {perPage: perPage, count: count, curPage: curPage} };
+        else 
+            result = { result: [], pageInfo: {perPage: 10, count: 0, curPage: 1}, error: 'could not get user data' };
+        return result;
     } catch (e) {
         console.log(`Error while getUserList: ${e}`);
-        result = { error: e };        
+        result = { result: [], pageInfo: {perPage: 10, count: 0, curPage: 1}, error: e };
+        return result;
     }
 
-    return result;
 }
 
 const updateUserDataByName = async(oldusername, data) => {
