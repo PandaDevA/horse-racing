@@ -165,8 +165,7 @@ function update_user(filter, page, count){
             count: count
         },
         success : function(data) {
-            console.log('RESONSE DATA');
-            console.log(data);
+            if(!data.pageInfo)return;
             $('#user-pagination').empty();
             let pageCount = Math.ceil(data.pageInfo.count / data.pageInfo.perPage);
             if ( pageCount> 0) {
