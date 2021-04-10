@@ -81,12 +81,12 @@ const getUserByName = async(username) => {
 }
 
 const getUserById = async(id) => {
-    let result = {result: {}, error: ''};
-    await User.findById(id, (err, data) => {
-        if(err) console.log(`Error while getUserById: `, err);
-        result = { result: data, error: err };        
-    });
-    return result;
+    let result = await User.findById(id);
+    if(!result) {
+        console.log(`Error while getUserById`);
+        return { result: {}, error: `Error while getUserById` };
+    };
+    return {result};
 }
 
 const getUserList = async(filter, pageId, countPerPage) => {

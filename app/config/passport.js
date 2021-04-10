@@ -8,7 +8,7 @@ function passportInit(passport){
         //Check if user exists or not
         let user = await User.getUserByName(username);
         if(!user.result){
-            return done(null, false, {message: `No user with this username ${user.error}`});
+            return done(null, false, {message: `Please enter correct username ${user.error}`});
         }
         user = user.result;
         bcrypt.compare(password, user.password).then((match)=>{     // here match returns true or false
@@ -35,12 +35,13 @@ function passportInit(passport){
     
      //to receive whatever we have stored in session using passport.serializeUser, here we have stored user._id so we will receive that
      // we deserialize so that we can use req.user to know who is current user in our backend;
-     passport.deserializeUser((id, done)=>{
-         User.getUserById(id).then(({error, result})=>{
-             const err = error;
-             const user = result
+     passport.deserializeUser(async(id, done)=>{
+         const result = await User.getUserById(id);
+         if(!result.error){
+             const err = '';
+             const user = result.result;
              done(err, user);
-         })
+         } else done(result.error, false);
      })
     
 }
