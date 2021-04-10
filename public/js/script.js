@@ -265,7 +265,10 @@ $('body').on('click', '.User-Delete', function(){
                 username: $(this).closest('td').data('username'),
             },
             success : function(data) {
-                update_user($('#user_filter').val(), $('#user-pagination li').data('page'),  $('#user_perPage').val());
+                var filter = $('#user_filter').val();
+                var page = 1;
+                var perPage = $('#user_perPage').val();
+                update_user(filter, page, perPage);
             },
             error: function(data){
                 if(data.error) alert("Error occured..."+data.error);

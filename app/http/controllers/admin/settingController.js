@@ -92,10 +92,12 @@ function settingController(){
         async access(req, res){
             console.log('ajax access request is received');
             let { username, type, checked } = req.body;
+            // console.log(req.body);
             let resData = {};
 
-            const users = await UserInfo.updateUserDataByName(username, {access: type, method: checked ? 'add' : 'del'});
+            const users = await UserInfo.updateUserDataByName(username, {access: type, method: checked=='true' ? 'add' : 'del'});
             resData = users;
+            // console.log(resData);
             if(!resData.result) res.status(500).send(resData);
             else res.status(200).send(resData);
         },
