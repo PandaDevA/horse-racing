@@ -51,7 +51,7 @@ function authController() {
             // g-recaptcha-response is the key that browser will generate upon form submit.
             // if its blank or null means user has not selected the captcha, so return the error.
             if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-                req.flash("error", "Please select recaptcha");
+                req.flash("error", "Please select recaptcha.");
                 return res.redirect('/login');
             }
             // Put your secret key here.
@@ -63,14 +63,14 @@ function authController() {
                 body = JSON.parse(body);
                 // Success will be true or false depending upon captcha validation.
                 if(body.success !== undefined && !body.success) {
-                    req.flash("error", "Failed captcha verification");
+                    req.flash("error", "Failed recaptcha verification.");
                     return res.redirect('/login');
                 }
             });
 
             const info = await registerUser(req.body, parseIp(req));
             console.log('register info:= ', info.error);
-            if(!info.result) req.flash("error", info.error);
+            if(!info.result) req.flash("error", "Please check and try again.");
             else req.flash("success", "Registration success. Please login now.");
             res.redirect('/login');
         },
