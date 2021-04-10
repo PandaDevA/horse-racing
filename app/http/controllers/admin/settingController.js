@@ -73,8 +73,8 @@ function settingController(){
             //user table data: 
             const users = await UserInfo.getUserList(filter, page, count);
             resData = users;
-            console.log("SENDDATA:");
-            console.log(resData);
+            // console.log("SENDDATA:");
+            // console.log(resData);
             if(resData.error) res.status(500).send(resData);
             else res.status(200).send(resData);
         },
