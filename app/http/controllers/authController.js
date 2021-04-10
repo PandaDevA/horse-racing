@@ -51,7 +51,7 @@ function authController() {
             // g-recaptcha-response is the key that browser will generate upon form submit.
             // if its blank or null means user has not selected the captcha, so return the error.
             if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-                req.flash("error", "Please select captcha");
+                req.flash("error", "Please select recaptcha");
                 return res.redirect('/login');
             }
             // Put your secret key here.
@@ -69,8 +69,7 @@ function authController() {
             });
 
             const info = registerUser(req.body, parseIp(req));
-            req.flash('result', info.result);
-            req.flash('error', info.error);
+            if(!info.result) req.flash('error', info.error);
             res.redirect('/login');
         },
 
