@@ -96,8 +96,8 @@ function settingController(){
 
             const users = await UserInfo.updateUserDataByName(username, {access: type, method: checked ? 'add' : 'del'});
             resData = users;
-
-            res.status(200).send(resData);
+            if(!resData.result) res.status(500).send(resData);
+            else res.status(200).send(resData);
         },
 
         async upload(req, res) {

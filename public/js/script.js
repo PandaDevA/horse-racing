@@ -268,7 +268,8 @@ $('body').on('click', '.User-Delete', function(){
                 update_user($('#user_filter').val(), $('#user-pagination li').data('page'),  $('#user_perPage').val());
             },
             error: function(data){
-                alert("Error occured..." + data.error);
+                if(data.error) alert("Error occured..."+data.error);
+                else alert("Error occured...");
             }
         });
     }
@@ -308,7 +309,8 @@ $('body').on('change', '#user_table input:checkbox', function(){
             success : function(data) {
             },
             error: function(data){
-                alert("Error occured...");
+                if(data.error) alert("Error occured..."+data.error);
+                else alert("Error occured...");
                 $(this).prop("checked", !$(this).checked);
             }
         });
