@@ -17,9 +17,9 @@ const registerUser = async(data, ipaddr) => {
         //Check if user email already exists
         feedback = await User.exists({ email: email });
         if (feedback) {
-            error = `Email already exists, Try another!`;
+            error = 'Email already exists, Try another!';
             console.log('error while regitser: ', error);
-            console.log('name', name);
+            console.log('email', email);
             return { result: false, error: error };
         }
 
@@ -28,7 +28,7 @@ const registerUser = async(data, ipaddr) => {
         if (feedback) {
             error = 'Username already exists, Try another!';
             console.log('error while regitser: ', error);
-            console.log('name', name);
+            console.log('username', username);
             return { result: false, error: error };
         }
 
