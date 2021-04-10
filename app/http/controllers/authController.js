@@ -71,6 +71,7 @@ function authController() {
             const info = await registerUser(req.body, parseIp(req));
             console.log('register info:= ', info.error);
             if(!info.result) req.flash("error", info.error);
+            else req.flash("success", "Registration success. Please login now.");
             res.redirect('/login');
         },
 
