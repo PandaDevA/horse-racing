@@ -98,7 +98,7 @@
                                     </thead>
                                     <tbody id="user_table">
                                         <% for(var i=0; i<users.result.length; i++) { %>
-                                            <tr>
+                                            <tr class="<%= users.result[i].status ? 'online' : 'offline' %>">
                                                 <td class="border usercell py-2">
                                                     <%= users.result[i].name %>
                                                 </td>
@@ -126,6 +126,10 @@
                                                     <div style="width: 80px;">
                                                         <input type="checkbox" name="tips" value="tips" <%= users.result[i].access.includes('tips')? 'checked':'' %>>
                                                         <label for="tips">Tips</label>
+                                                    </div>
+                                                    <div style="width: 80px;">
+                                                        <input type="checkbox" name="next_race" value="next_race" <%= users.result[i].access.includes('next_race')? 'checked':'' %>>
+                                                        <label for="next_race">Next Race</label>
                                                     </div>
                                                 </td>
                                                 <td class="border usercell py-2" data-username="<%= users.result[i].username %>">
@@ -499,6 +503,7 @@
 </section>
 <script>
     var join_events = [];
+    var username = user.username;
 </script>
 <!-- </div>
 </section> -->

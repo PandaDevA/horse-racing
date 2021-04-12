@@ -327,3 +327,11 @@ button{
         padding-right: .1rem !important;
     }
 }
+
+tr.online{
+    background-color: #0000ffaa;
+}
+
+tr.offline{
+    background-color: #ff0000aa;
+}

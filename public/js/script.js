@@ -229,6 +229,10 @@ function update_user(filter, page, count){
                         "<input type='checkbox' name='tips' value='tips' " + (data.result[i].access.includes('tips')? 'checked':'') + ">" +
                         "<label for='tips'>Tips</label>"+
                     "</div>"+
+                    "<div style='width: 80px;'>"+
+                        "<input type='checkbox' name='next_race' value='next_race' " + (data.result[i].access.includes('next_race')? 'checked':'') + ">" +
+                        "<label for='next_race'>Next Race</label>"+
+                    "</div>"+
                     "</td>"+
                     "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
                         "<button type='button' class='User-Delete'>Delete</button>" +
