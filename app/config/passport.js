@@ -8,7 +8,7 @@ function passportInit(passport){
         //Check if user exists or not
         let user = await User.getUserByName(username);
         if(!user.result){
-            return done(null, false, {message: `Please check username and try again.`});
+            return done(null, false, {message: `Username does not exist. Please try again`});
         }
         user = user.result;
         bcrypt.compare(password, user.password).then((match)=>{     // here match returns true or false
