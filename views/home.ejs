@@ -36,7 +36,7 @@
                     </tbody>
                 </table>
             </div>
-            <% if(user.role == 'customer' && user.access.includes('next_race')) { %>
+            <% if(user.role == 'admin' || user.access.includes('next_race')) { %>
             <div class="col-lg-6">
                 <table class="w-full table-auto bg-white full-width">
                     <thead>
