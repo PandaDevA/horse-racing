@@ -142,29 +142,35 @@ const updateUserDataByName = async(oldusername, data) => {
     }
 
     updateData = {};
-    let accessInfo = user.result.access;
-    const idx = accessInfo.indexOf(data.access);
-    // console.log(accessInfo);
-    // console.log(idx)
-    // console.log(data);
-    if(data.method == 'add') {
-        if(idx == -1) {
-            accessInfo.push(data.access);
-        } else {
-            return { result: true, error: '' };
-        }
-    } else {
-        if(idx != -1) {
-            // console.log(accessInfo);
-            accessInfo.splice(idx, 1);
-            // console.log(accessInfo);
-        }
-        else {
-            return { result: false, error: `Access Info, ${data.access}, is not exist in the User's AccessInfo`}
-        }
-    }
 
-    updateData = {access: accessInfo};
+    if(data.method == 'status') {
+         updateData = {status: data.status};
+    } else {
+
+        let accessInfo = user.result.access;
+        const idx = accessInfo.indexOf(data.access);
+        // console.log(accessInfo);
+        // console.log(idx)
+        // console.log(data);
+        if(data.method == 'add') {
+            if(idx == -1) {
+                accessInfo.push(data.access);
+            } else {
+                return { result: true, error: '' };
+            }
+        } else {
+            if(idx != -1) {
+                // console.log(accessInfo);
+                accessInfo.splice(idx, 1);
+                // console.log(accessInfo);
+            }
+            else {
+                return { result: false, error: `Access Info, ${data.access}, is not exist in the User's AccessInfo`}
+            }
+        }
+
+        updateData = {access: accessInfo};
+    }
 
     try {
         result = await User.updateOne({username: oldusername}, updateData);

@@ -4,6 +4,7 @@ const TipsInfo = require('../../methods/tipsinfo')
 function tipsController(){
     return {
        async index(req, res) {
+        if(req.user && req.user.role != 'admin' && req.user.access.indexOf('tips') == -1)res.redirect('/home');
             let resData = {};
             
             /*resource data: 

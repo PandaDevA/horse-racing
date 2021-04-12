@@ -4,6 +4,7 @@ const Resource = require('../../methods/resource')
 function oddsController(){
     return {
        async index(req, res) {
+        if(req.user && req.user.role != 'admin' && req.user.access.indexOf('odds') == -1)res.redirect('/home');
             let resData = {};
             
             /*resource data: 
