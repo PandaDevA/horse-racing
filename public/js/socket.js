@@ -5,8 +5,8 @@
 var Client = {};
 Client.socket = io.connect();
 
-if(join_events && username)
-    Client.socket.emit('join', {joinTo: join_events, username: username});
+if(join_events && $('#logged_username').val() )
+    Client.socket.emit('join', {joinTo: join_events, username: $('#logged_username').val()});
 
 Client.socket.on('cur_race_update',function(data){
     $('#cur_race_title').html(data.time + " " + data.name);

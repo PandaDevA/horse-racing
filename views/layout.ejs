@@ -32,6 +32,7 @@
 </head>
 <body>
     <!-- ======= Header ======= -->
+    <input type="hidden" id="logged_username" value="<%= user? user.username : '' %>">
     <header id="header" class="fixed-top bottom-bar-1">
         <div class="container d-flex align-items-center">
 
@@ -55,9 +56,9 @@
             <nav class="nav-menu d-none d-lg-block ml-auto">
                 <ul>
                     <li><a href="/home">Next Race</a></li>
-                    <li><a href="<%= user.access.includes('cards') ? '/cards' : '#' %>">Cards</a></li>
-                    <li><a href="<%= user.access.includes('odds') ? '/odds' : '#' %>">Odds</a></li>
-                    <li><a href="<%= user.access.includes('tips') ? '/tips' : '#' %>">Race Information</a></li>
+                    <li><a href="<%= (user.role == 'customer' && user.access.includes('cards')) ? '/cards' : '#' %>">Cards</a></li>
+                    <li><a href="<%= (user.role == 'customer' && user.access.includes('odds')) ? '/odds' : '#' %>">Odds</a></li>
+                    <li><a href="<%= (user.role == 'customer' && user.access.includes('tips')) ? '/tips' : '#' %>">Race Information</a></li>
                     <% if(user.role == "admin") { %>
                         <li><a href="/admin/setting">Settings</a></li>
                     <% } %>
