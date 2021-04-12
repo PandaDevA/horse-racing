@@ -184,10 +184,16 @@ th{
 
 .Color_Blue{
     background-color:cyan;
+    font-weight: bold;
 }
 
 .Color_Red{
     background-color:mediumvioletred;
+    font-weight: bold;
+}
+
+.Color_None{
+    font-weight: bold;
 }
 
 .fade-in {
