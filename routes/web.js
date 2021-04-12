@@ -24,7 +24,7 @@ function initRoute(app) {
     app.get('/home', auth, homeController().index)
     app.get('/cards', auth, cardsController().index)
     app.get('/odds', auth, oddsController().index)
-    app.get('/tips', auth, tipsController().index)
+    app.get('/information', auth, tipsController().index)
 
     //Admin Routes
     app.get('/admin/setting', admin, adminSettingController().index);
