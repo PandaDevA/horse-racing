@@ -8,7 +8,7 @@ function passportInit(passport){
         //Check if user exists or not
         let user = await User.getUserByName(username);
         if(!user.result){
-            return done(null, false, {message: `Please enter correct username ${user.error}`});
+            return done(null, false, {message: `Please check username and try again.`});
         }
         user = user.result;
         bcrypt.compare(password, user.password).then((match)=>{     // here match returns true or false
@@ -23,7 +23,7 @@ function passportInit(passport){
 
             return done(null, false, {message: 'Username or password is incorrect'});
         }).catch((err)=>{
-            return done(null, false, {message: 'Something went wrong'});
+            return done(null, false, {message: 'Error occur while check password.'});
         })
      }));
      

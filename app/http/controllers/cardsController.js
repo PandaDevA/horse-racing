@@ -3,6 +3,9 @@ const Resource = require('../../methods/resource')
 function cardsController(){
     return {
        async index(req, res) {
+        console.log(req.user.access);
+        console.log(req.user.access.indexOf('Cards'));
+            if(req.user && req.user.role != 'admin' && req.user.access.indexOf('cards') == -1)res.redirect('/home');
             let resData = {};
             
             /*resource data: 
