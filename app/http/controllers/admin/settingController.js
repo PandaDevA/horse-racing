@@ -7,7 +7,7 @@ const OddsInfo = require('../../../methods/oddsinfo')
 const TipsInfo = require('../../../methods/tipsinfo')
 const fs = require('fs');
 
-const directory = process.env.INIT_CWD + '/uploads/odds/';
+const directory = './uploads/odds/';
 
 function settingController(){
     return {
