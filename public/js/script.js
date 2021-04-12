@@ -115,7 +115,7 @@ $('#betting_info_add').click(function(){
         "<input class='info_name' type='text' value='' placeholder='Name'  readonly/>"+
         "</td>"+
         "<td class='border px-4 py-2'>"+
-        "<textarea class='info_text' value='' placeholder='Description'  readonly></textarea>"+
+        "<textarea class='info_text' placeholder='Description'  readonly></textarea>"+
         "</td>"+
         "<td class='border px-4 py-2'>"+
         "<button type='button' class='Betting-Update'>Update</button>"+

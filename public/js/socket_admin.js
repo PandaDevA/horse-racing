@@ -136,7 +136,7 @@ $('#betting_info_save').click(function(){
         name.push($( this ).val());
     });
     $('#betting_info_table').find(".info_text").each(function( index ) {
-        text.push($( this ).val());
+        text.push($( this ).html());
     });
     for(let i=0; i<name.length; i++)
         tabledata.push({time:time[i], name:name[i], text:text[i]});
