@@ -5,6 +5,7 @@ const BettingInfo = require('./methods/bettinginfo');
 const TipsInfo = require('./methods/tipsinfo');
 const OddsInfo = require('./methods/oddsinfo');
 const Sessions = require('./models/sessions');
+const users = require('./methods/users');
 
 // const leaveFromAll = (socket) => {
 //     socket.leave('stream_url');
@@ -22,12 +23,19 @@ const exportedMethods = {
         io.on('connection', socket => {
             console.log('a user connected');
             
-            socket.on('disconnect', () => {
+            socket.on('disconnect', async() => {
                 console.log('user disconnected');
-                // leaveFromAll(socket);
+
+                if (socket.handshake.session.online_status_exists) {
+                    const username = socket.handshake.session.username;
+                    socket.handshake.session.online_status = false;
+                    socket.handshake.session.save();
+                    await users.updateUserDataByName(username, {method: 'status', status: false});
+                }
+                console.log(socket.handshake.session);
             });
 
-            socket.on('join', (data) => {
+            socket.on('join', async(data) => {
                 console.log('join request received');
 
                 //join Urls are in data.joinTo as Array like this: data = {joinTo: ['stream_url', 'card_title' ...]}
@@ -39,6 +47,16 @@ const exportedMethods = {
                         socket.join(url);
                     });
                 }
+                if(data.username) {
+                    if (!socket.handshake.session.online_status_exists) {
+                        socket.handshake.session.online_status_exists = true;
+                        socket.handshake.session.username = data.username;
+                    }
+                    socket.handshake.session.online_status = true;
+                    socket.handshake.session.save();
+                    await users.updateUserDataByName(data.username, {method: 'status', status: true});
+                }
+                console.log(socket.handshake.session);
             });
 
             socket.on('cur_race_save', async (data) => {
