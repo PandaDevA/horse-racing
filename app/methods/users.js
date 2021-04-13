@@ -143,8 +143,10 @@ const updateUserDataByName = async(oldusername, data) => {
 
     updateData = {};
 
-    if(data.method == 'status') {
-         updateData = {status: data.status};
+    if (data.method == 'ipaddress') {
+        updateData = {ipaddress: data.ip};
+    } else if (data.method == 'status') {
+        updateData = {status: data.status};
     } else {
 
         let accessInfo = user.result.access;
