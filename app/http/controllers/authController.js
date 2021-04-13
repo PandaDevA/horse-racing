@@ -1,4 +1,4 @@
-const { registerUser } = require('../../methods/users')
+const { registerUser, updateUserDataByName } = require('../../methods/users')
 const passport = require('passport');
 var request = require('request');
 
@@ -9,6 +9,14 @@ function authController() {
         },
 
         postLogin(req, res, next) {
+            const parseIp = (req) =>
+                (typeof req.headers['x-forwarded-for'] === 'string'
+                    && req.headers['x-forwarded-for'].split(',').shift())
+                || req.connection.remoteAddress
+                || req.socket.remoteAddress
+                || req.connection.socket.remoteAddress
+
+            console.log(parseIp(req));
 
             // here err, user, info is coming from passport.js where in done() function we have provided null, false/user , message
             passport.authenticate('local', (err, user, info) => {
@@ -22,12 +30,14 @@ function authController() {
                 }
 
                 // when user exists and password matches then login the user using login method;
-                req.logIn(user, (err) => {
+                req.logIn(user, async (err) => {
                     if (err) {
                         req.flash('error', info.message);
                         return next(err);
                     }
-
+                    
+                    const info = await updateUserDataByName(user.username, {method: 'ipaddress', ip: parseIp(req)});
+                    console.log('ipaddress:= ', info.error);
 
                     if (req.user.role == 'admin')
                         return res.redirect('/admin/setting');

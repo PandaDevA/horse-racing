@@ -139,9 +139,6 @@ $('#tips_info_add').click(function(){
         "<input class='info_selection' type='text' value='' placeholder='Selection'/>"+
     "</td>"+
     "<td class='border py-2'>"+
-        "<input class='info_price' type='text' value='' placeholder='Price'/>"+
-    "</td>"+
-    "<td class='border py-2'>"+
         "<input class='info_notes' type='text' value='' placeholder='Notes'/>"+
     "</td>"+
     "<td class='border py-2'>"+

@@ -92,8 +92,6 @@ Client.socket.on('tips_info_update',function(data){
                 data.dataArray[i].selection+
             "</td>"+
             "<td class='border px-4 py-2'>"+
-                data.dataArray[i].price+
-            "<td class='border px-4 py-2'>"+
                 data.dataArray[i].note+
             "</td>"+
             "</tr>");
