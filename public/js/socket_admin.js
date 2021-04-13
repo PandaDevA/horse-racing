@@ -165,9 +165,6 @@ $('#tips_info_save').click(function(){
     $('#tips_info_table').find(".info_selection").each(function( index ) {
         selection.push($( this ).val());
     });
-    $('#tips_info_table').find(".info_price").each(function( index ) {
-        price.push($( this ).val());
-    });
     $('#tips_info_table').find(".info_notes").each(function( index ) {
         note.push($( this ).val());
     });
