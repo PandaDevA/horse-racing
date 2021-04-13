@@ -17,6 +17,8 @@ $('#cur_race_info_save').click(function(){
     Client.socket.emit('cur_race_save', {tabledata: tabledata, time:$('#cur_race_time').val(), name:$('#cur_race_name').val()});
 });
 
+
+
 Client.socket.on('cur_race_save', function(data){
     if(data.result){
         $('#message-box').first().removeClass('message-error').addClass('message-succeed').addClass('show').html('Update Succeed');
@@ -29,10 +31,10 @@ Client.socket.on('cur_race_save', function(data){
                     (i+1 )+
                 "</td>"+
                 "<td class='border px-4 py-2'>"+
-                    "<input class='info_name' name='name' type='text' value='" + data.dataArray[i].name + "' placeholder='Name'/>"+
+                    '<input class="info_name" name="name" type="text" value="' + data.dataArray[i].name + '" placeholder="Name"/>'+
                 "</td>"+
                 "<td class='border px-4 py-2'>"+
-                    "<input class='info_sp' name='sp' type='text' value='" + data.dataArray[i].sp +  "' placeholder='SP'/>"+
+                    '<input class="info_sp" name="sp" type="text" value="' + data.dataArray[i].sp +  '" placeholder="SP"/>'+
                 "</td>"+
                 "<td class='border px-4 py-2'>"+
                     "<select class='info_color'>"+
