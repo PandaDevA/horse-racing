@@ -92,6 +92,7 @@
                                             <th class="border usercell py-2 ">UserName</th>
                                             <th class="border usercell py-2 ">Company</th>
                                             <th class="border usercell py-2 ">IP</th>
+                                            <th class="border usercell py-2 ">RegisterTime</th>
                                             <th class="border usercell py-2 ">Access</th>
                                             <th class="border usercell py-2 ">Action</th>
                                         </tr>
@@ -113,6 +114,9 @@
                                                 </td>
                                                 <td class="border usercell py-2">
                                                     <%= users.result[i].ipaddress %>
+                                                </td>
+                                                <td class="border usercell py-2">
+                                                    <%= users.result[i].createdAt.toLocaleString() %>
                                                 </td>
                                                 <td class="border usercell py-2" data-username="<%= users.result[i].username %>">
                                                     <div style="width: 92px;">

@@ -197,7 +197,8 @@ function update_user(filter, page, count){
             }
             $('#user_table').empty();
             for(var i=0; i<data.result.length; i++) {
-                $('#user_table').append("<tr>"+
+                var createDate = new Date(data.result[i].createdAt);
+                $('#user_table').append("<tr class='"+ (data.result[i].status ? 'online' : 'offline')+"'>"+
                     "<td class='border usercell py-2'>"+
                         data.result[i].name+
                     "</td>"+
@@ -213,22 +214,25 @@ function update_user(filter, page, count){
                     "<td class='border usercell py-2'>"+
                         data.result[i].ipaddress+
                     "</td>"+ 
+                    '<td class="border usercell py-2">'+
+                        createDate.toLocaleString()+
+                    '</td>'+
                     "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
-                    "<div style='width: 80px;'>" +
+                    "<div style='width: 92px;'>" +
                         "<input type='checkbox' name='cards' value='cards' " + (data.result[i].access.includes('cards')? 'checked':'') + " >"+
-                        "<label for='cards'>Cards</label>"+
+                        "<label for='cards'>&nbspCards</label>"+
                     "</div>"+
-                    "<div style='width: 80px;'>"+
+                    "<div style='width: 92px;'>"+
                         "<input type='checkbox' name='odds' value='odds' " + (data.result[i].access.includes('odds')? 'checked':'') + ">" +
-                        "<label for='odds'>Odds</label>"+
+                        "<label for='odds'>&nbspOdds</label>"+
                     "</div>"+
-                    "<div style='width: 80px;'>"+
+                    "<div style='width: 92px;'>"+
                         "<input type='checkbox' name='tips' value='tips' " + (data.result[i].access.includes('tips')? 'checked':'') + ">" +
-                        "<label for='tips'>Tips</label>"+
+                        "<label for='tips'>&nbspTips</label>"+
                     "</div>"+
-                    "<div style='width: 80px;'>"+
+                    "<div style='width: 92px;'>"+
                         "<input type='checkbox' name='next_race' value='next_race' " + (data.result[i].access.includes('next_race')? 'checked':'') + ">" +
-                        "<label for='next_race'>Next Race</label>"+
+                        "<label for='next_race'>&nbspNext Race</label>"+
                     "</div>"+
                     "</td>"+
                     "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+

@@ -312,7 +312,7 @@ button{
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
 }
-
+/* 
 @media screen and (max-width: 1500px) {
     .usercell{
         padding-left: .5rem !important;
@@ -332,12 +332,14 @@ button{
         padding-left: .1rem !important;
         padding-right: .1rem !important;
     }
-}
+} */
 
 tr.online{
     background-color: #0000ffaa;
+    color: white;
 }
 
 tr.offline{
     background-color: #ff0000aa;
+    color: white;
 }
