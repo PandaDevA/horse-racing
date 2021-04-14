@@ -320,7 +320,7 @@ button{
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     .usercell{
         padding-left: .1rem !important;
         padding-right: .1rem !important;
@@ -348,3 +348,13 @@ tr.offline{
     max-width: 130px;
     overflow-wrap: break-word;
 }
+
+.response_area {
+    overflow-x: visible;
+}
+
+@media screen and (max-width: 950px) {
+    .response_area{
+        overflow-x: auto;
+    }
+} 
