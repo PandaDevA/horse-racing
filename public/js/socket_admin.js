@@ -1,3 +1,12 @@
+Client.socket.on('online_capture', function(data) {
+    console.log(data);
+    $('#user_table').find("tr > td:last").each(function( index ) {
+        if($( this ).data('username') == data.username) {
+            $(this).closest('tr').removeClass('online').removeClass('offline').addClass(data.status?'online':'offline');
+        }
+    });
+});
+
 $('#cur_race_info_save').click(function(){
     var tabledata = [];
     var name = [];

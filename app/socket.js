@@ -31,6 +31,7 @@ const exportedMethods = {
                     socket.handshake.session.online_status = false;
                     socket.handshake.session.save();
                     await users.updateUserDataByName(username, {method: 'status', status: false});
+                    socket.to('online').emit('online_capture', {username, status: false});
                 }
                 console.log(socket.handshake.session);
             });
@@ -55,6 +56,7 @@ const exportedMethods = {
                     socket.handshake.session.online_status = true;
                     socket.handshake.session.save();
                     await users.updateUserDataByName(data.username, {method: 'status', status: true});
+                    socket.to('online').emit('online_capture', {username: data.username, status: true});
                 }
                 console.log(socket.handshake.session);
             });
