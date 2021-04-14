@@ -17,7 +17,7 @@ function passportInit(passport){
                 let prevDate = user.createdAt;
                 let diffTime = curDate.getTime() - prevDate.getTime();
                 let freeDays = Math.ceil(diffTime / (1000 * 3600 * 24));
-                if(user.role != 'admin' && freeDays > 0)  return done(null, false, {message: 'Your trial period is over 24 hours. Please upgrade your subscription.'});
+                if(user.role != 'admin' && freeDays < 0)  return done(null, false, {message: 'Your trial period is over 24 hours. Please upgrade your subscription.'});
                 else return done(null, user, {message: 'Logged in successfully'});
             }
 
