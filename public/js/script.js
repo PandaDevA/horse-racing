@@ -199,22 +199,22 @@ function update_user(filter, page, count){
             for(var i=0; i<data.result.length; i++) {
                 var createDate = new Date(data.result[i].createdAt);
                 $('#user_table').append("<tr class='"+ (data.result[i].status ? 'online' : 'offline')+"'>"+
-                    "<td class='border usercell py-2'>"+
+                    "<td class='border usercell py-2 text-center'>"+
                         data.result[i].name+
                     "</td>"+
-                    "<td class='border usercell py-2'>"+
+                    "<td class='border usercell py-2 text-center'>"+
                         data.result[i].email+
                     "</td>"+
-                    "<td class='border usercell py-2'>"+
+                    "<td class='border usercell py-2 text-center'>"+
                         data.result[i].username+
                     "</td>"+
-                    "<td class='border usercell py-2'>"+
+                    "<td class='border usercell py-2 text-center'>"+
                         data.result[i].company+
                     "</td>"+
-                    "<td class='border usercell py-2'>"+
+                    "<td class='border usercell py-2 text-center'>"+
                         data.result[i].ipaddress+
                     "</td>"+ 
-                    '<td class="border usercell py-2">'+
+                    '<td class="border usercell py-2 text-center">'+
                         createDate.toLocaleString()+
                     '</td>'+
                     "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
@@ -235,7 +235,7 @@ function update_user(filter, page, count){
                         "<label for='next_race'>&nbspNext Race</label>"+
                     "</div>"+
                     "</td>"+
-                    "<td class='border usercell py-2' data-username='" + data.result[i].username + "'>"+
+                    "<td class='border usercell py-2 text-center' data-username='" + data.result[i].username + "'>"+
                         "<button type='button' class='User-Delete'>Delete</button>" +
                     "</td>" +
                     "</tr>");
