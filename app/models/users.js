@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: 'customer' },
     company: { type: String, default: '' },
     ipaddress: { type: String, default: '0.0.0.0' },
-    access: { type: Array, default: ['cards', 'odds', 'tips', 'next_race'] },
+    access: { type: Array, default: [] },//'cards', 'odds', 'tips', 'next_race'] },
     status: { type: Boolean, default: false},
 }, { timestamps: true });
 
