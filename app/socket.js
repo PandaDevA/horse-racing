@@ -18,7 +18,11 @@ const users = require('./methods/users');
 const exportedMethods = {
     
     async useSocket(io) {
+        try {
         await Sessions.deleteMany({});
+        } catch(e) {
+            console.log(e.message);
+        }
 
         io.on('connection', socket => {
             console.log('a user connected');
